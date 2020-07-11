@@ -69,6 +69,8 @@ static void _test_init()
 	bg->orgHeight = 100;
 	bg->orgWidth = 50;
 	ituBackgroundInit(bg);
+	((ITUWidget *)bg)->visible = 1;
+
 	printf("wudan\n");
 	return;
 }
