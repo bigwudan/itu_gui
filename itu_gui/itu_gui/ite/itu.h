@@ -23,7 +23,7 @@
 extern "C"
 {
 #endif
-#define inline   __inline
+#define inline __inline
 #define T_WIDTH 854
 #define T_HEIGHT 480
 

@@ -7,11 +7,12 @@
 /** @addtogroup ith_utility Utility
  *  @{
  */
+#include <stdint.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
+#define inline __inline
 // Macros
 /**
  * Assertion at compile time.
@@ -115,7 +116,7 @@ extern "C" {
  * @param value The value.
  * @return The converted value.
  */
-static inline uint16_t ithBswap16(uint16_t value)
+static  uint16_t ithBswap16(uint16_t value)
 {
     return ((value & 0x00FF) << 8) |
            ((value & 0xFF00) >> 8);
@@ -127,7 +128,7 @@ static inline uint16_t ithBswap16(uint16_t value)
  * @param value The value.
  * @return The converted value.
  */
-static inline uint32_t ithBswap32(uint32_t value)
+static  uint32_t ithBswap32(uint32_t value)
 {
     return ((value & 0x000000FF) << 24) |
            ((value & 0x0000FF00) << 8) |
@@ -141,7 +142,7 @@ static inline uint32_t ithBswap32(uint32_t value)
  * @param value The value.
  * @return The converted value.
  */
-static inline uint64_t ithBswap64(uint64_t value)
+static  uint64_t ithBswap64(uint64_t value)
 {
     return ((value & 0xff00000000000000ull) >> 56) |
            ((value & 0x00ff000000000000ull) >> 40) |
@@ -207,7 +208,7 @@ static inline uint64_t ithBswap64(uint64_t value)
  * @param val Value to be set. The value is passed as an int, but the function fills the block of memory using the uint16_t conversion of this value.
  * @param len Number of words (16-bits) to be set to the value.
  */
-static inline void ithMemset16(void *dst, int val, size_t len)
+static  void ithMemset16(void *dst, int val, size_t len)
 {
     uint16_t *p = (uint16_t *)dst;
 

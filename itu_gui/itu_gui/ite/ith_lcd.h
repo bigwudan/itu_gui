@@ -3,6 +3,7 @@
 
 #include "itu.h"
 #include "stdbool.h"
+#include "ith_defs.h"
 /** @addtogroup ith ITE Hardware Library
  *  @{
  */
@@ -78,7 +79,7 @@ static inline uint32_t ithLcdGetBaseAddrA(void)
 {
     // this function must be an inline function, because lcd_clear.c will use it.
     // don't modify it.
-    return 0;
+	return (ithReadRegA(ITH_LCD_BASE + ITH_LCD_BASEA_REG) & ITH_LCD_BASEA_MASK);
 }
 
 /**

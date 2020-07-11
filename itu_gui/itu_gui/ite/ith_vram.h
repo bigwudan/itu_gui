@@ -10,7 +10,7 @@
  */
 #ifndef ITH_VRAM_H
 #define ITH_VRAM_H
-
+#include <stdint.h>
 #include "ith_utility.h"
 
 /** @addtogroup ith ITE Hardware Library

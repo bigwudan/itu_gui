@@ -74,12 +74,14 @@
     <ClCompile Include="ite\itu_lcd.c" />
     <ClCompile Include="ite\itu_scene.c" />
     <ClCompile Include="ite\itu_surface.c" />
+    <ClCompile Include="ite\itu_sw.c" />
     <ClCompile Include="ite\itu_utility.c" />
     <ClCompile Include="ite\itu_widget.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ite\itc.h" />
+    <ClInclude Include="ite\ith_defs.h" />
     <ClInclude Include="ite\ith_lcd.h" />
     <ClInclude Include="ite\ith_utility.h" />
     <ClInclude Include="ite\ith_vram.h" />

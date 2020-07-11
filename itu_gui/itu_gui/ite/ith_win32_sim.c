@@ -7,7 +7,7 @@
 #define MMIO_BASE 0xB0000000
 #define MMIO_SIZE 0x3000000
 static uint8_t mmio[MMIO_SIZE];
-static __declspec(align(4096)) uint8_t vram[4096];
+static __declspec(align(4096)) uint8_t vram[0x4000000];
 
 int SpiOpen(DWORD dwClockRate)
 {
@@ -28,15 +28,21 @@ void ithWriteRegH(uint16_t addr, uint16_t data)
 
 static uint32_t ToMmioAddr(uint32_t addr)
 {
+	uint32_t addrHi = addr & 0xFFFF0000;
+	uint32_t addrLo = addr & 0x0000FFFF;
+	assert(addr >= MMIO_BASE);
 
+	addr = ((addrHi - MMIO_BASE) >> 4) | addrLo;
+	assert(addr < MMIO_SIZE);
 
-    return 0;
+	return addr;
 }
 
 uint32_t ithReadRegA(uint32_t addr)
 {
-
-    return 0;
+	uint32_t addr2 = ToMmioAddr(addr);
+	uint32_t data = *(uint32_t*)&mmio[addr2];
+	return data;
 }
 
 void ithWriteRegA(uint32_t addr, uint32_t data)

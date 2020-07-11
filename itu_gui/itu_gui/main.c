@@ -57,7 +57,7 @@ static void _test_init()
 {
 	// init itu
 	ituLcdInit();
-
+	ituSWInit();
 	ITUBackground* bg = calloc(1, sizeof(ITUBackground));
 	if (!bg) return;
 	screenSurf = ituGetDisplaySurface();
@@ -70,6 +70,16 @@ static void _test_init()
 	bg->orgWidth = 50;
 	ituBackgroundInit(bg);
 	((ITUWidget *)bg)->visible = 1;
+
+	ITUWidget* widget = (ITUWidget*)bg;
+
+	widget->rect.height = 100;
+	widget->rect.width = 50;
+
+
+	widget->color.alpha = 255;
+	widget->color.red = 255;
+	widget->alpha = 255;
 
 	printf("wudan\n");
 	return;
