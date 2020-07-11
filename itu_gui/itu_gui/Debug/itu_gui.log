@@ -1,40 +1,21 @@
-﻿Build started 7/11/2020 11:09:27 AM.
+﻿Build started 7/11/2020 1:55:38 PM.
      1>Project "d:\itu_gui\itu_gui\itu_gui\itu_gui.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D _CRT_NONSTDC_NO_DEPRECATE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt ite\itu_utility.c
          itu_utility.c
-     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_utility.c(461): warning C4013: 'pthread_equal' undefined; assuming extern returning int
-     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_utility.c(461): warning C4013: 'pthread_self' undefined; assuming extern returning int
-     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_utility.c(464): warning C4013: 'sleep' undefined; assuming extern returning int
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_utility.c(385): warning C4101: 'var' : unreferenced local variable
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"d:\itu_gui\itu_gui\Debug\itu_gui.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"d:\itu_gui\itu_gui\Debug\itu_gui.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"d:\itu_gui\itu_gui\Debug\itu_gui.lib" /MACHINE:X86 Debug\itc_tree.obj
          Debug\ith_lcd.obj
+         Debug\ith_win32_sim.obj
          Debug\itu_base.obj
          Debug\itu_surface.obj
          Debug\itu_utility.obj
          Debug\itu_widget.obj
          Debug\main.obj
-     1>itu_utility.obj : error LNK2019: unresolved external symbol _ituJpegSaveFile referenced in function _ituScreenshot
-     1>itu_utility.obj : error LNK2019: unresolved external symbol _ituPngSaveFile referenced in function _ituScreenshot
-     1>itu_utility.obj : error LNK2019: unresolved external symbol _ituButtonSetPressed referenced in function _ituUnPressWidgetImpl
-     1>itu_utility.obj : error LNK2019: unresolved external symbol _ituCheckBoxSetChecked referenced in function _ituUnPressWidgetImpl
-     1>itu_utility.obj : error LNK2019: unresolved external symbol _ituCheckBoxIsChecked referenced in function _ituUnPressWidgetImpl
-     1>itu_utility.obj : error LNK2019: unresolved external symbol _ituSceneFindWidget referenced in function _ituGetVarTarget
-     1>itu_utility.obj : error LNK2019: unresolved external symbol _ithMapVram referenced in function _ituScreenshot
-     1>itu_utility.obj : error LNK2019: unresolved external symbol _pthread_equal referenced in function _ituAssertThread
-     1>itu_utility.obj : error LNK2019: unresolved external symbol _pthread_self referenced in function _ituAssertThread
-     1>itu_utility.obj : error LNK2019: unresolved external symbol _sleep referenced in function _ituAssertThread
-     1>itu_widget.obj : error LNK2019: unresolved external symbol _ituFadeEffectInit referenced in function _ituWidgetSetVisibleImpl
-     1>itu_widget.obj : error LNK2019: unresolved external symbol _ituScrollEffectInit referenced in function _ituWidgetSetVisibleImpl
-     1>itu_widget.obj : error LNK2019: unresolved external symbol _ituScrollFadeEffectInit referenced in function _ituWidgetSetVisibleImpl
-     1>itu_widget.obj : error LNK2019: unresolved external symbol _ituScaleEffectInit referenced in function _ituWidgetSetVisibleImpl
-     1>itu_widget.obj : error LNK2019: unresolved external symbol _ituScaleFadeEffectInit referenced in function _ituWidgetSetVisibleImpl
-     1>itu_widget.obj : error LNK2019: unresolved external symbol _ituWipeEffectInit referenced in function _ituWidgetSetVisibleImpl
-     1>itu_widget.obj : error LNK2019: unresolved external symbol _ituSceneExecuteCommand referenced in function _ituWidgetOnActionImpl
-     1>itu_widget.obj : error LNK2019: unresolved external symbol _strtok_r referenced in function _ituWidgetOnActionImpl
-     1>d:\itu_gui\itu_gui\Debug\itu_gui.exe : fatal error LNK1120: 18 unresolved externals
-     1>Done Building Project "d:\itu_gui\itu_gui\itu_gui\itu_gui.vcxproj" (Build target(s)) -- FAILED.
+         itu_gui.vcxproj -> d:\itu_gui\itu_gui\Debug\itu_gui.exe
+     1>Done Building Project "d:\itu_gui\itu_gui\itu_gui\itu_gui.vcxproj" (Build target(s)).
 
-Build FAILED.
+Build succeeded.
 
-Time Elapsed 00:00:00.28
+Time Elapsed 00:00:00.35

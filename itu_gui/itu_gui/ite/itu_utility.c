@@ -80,31 +80,31 @@ void ituDirtyWidgetImpl(ITUWidget *widget, bool dirty)
 
 void ituUnPressWidgetImpl(ITUWidget *widget)
 {
-    ITCTree *node;
-    //ITU_ASSERT_THREAD();
+    //ITCTree *node;
+    ////ITU_ASSERT_THREAD();
 
-    for (node = widget->tree.child; node; node = node->sibling)
-    {
-        ITUWidget *child = (ITUWidget *)node;
-        ituUnPressWidgetImpl(child);
-    }
-    if (widget->type == ITU_BUTTON || widget->type == ITU_CHECKBOX || widget->type == ITU_RADIOBOX || widget->type == ITU_POPUPBUTTON)
-    {
-        ituWidgetSetActive(widget, false);
+    //for (node = widget->tree.child; node; node = node->sibling)
+    //{
+    //    ITUWidget *child = (ITUWidget *)node;
+    //    ituUnPressWidgetImpl(child);
+    //}
+    //if (widget->type == ITU_BUTTON || widget->type == ITU_CHECKBOX || widget->type == ITU_RADIOBOX || widget->type == ITU_POPUPBUTTON)
+    //{
+    //    ituWidgetSetActive(widget, false);
 
-        if (ituButtonIsPressed(widget))
-            ituButtonSetPressed((ITUButton *)widget, false);
+    //    if (ituButtonIsPressed(widget))
+    //        ituButtonSetPressed((ITUButton *)widget, false);
 
-        if (widget->type == ITU_CHECKBOX || widget->type == ITU_RADIOBOX)
-        {
-            ituCheckBoxSetChecked((ITUCheckBox *)widget, ituCheckBoxIsChecked((ITUCheckBox *)widget));
-        }
-    }
-    else if (widget->type == ITU_SPRITEBUTTON)
-    {
-        ITUSpriteButton *sb = (ITUSpriteButton *) widget;
-        sb->pressed = false;
-    }
+    //    if (widget->type == ITU_CHECKBOX || widget->type == ITU_RADIOBOX)
+    //    {
+    //        ituCheckBoxSetChecked((ITUCheckBox *)widget, ituCheckBoxIsChecked((ITUCheckBox *)widget));
+    //    }
+    //}
+    //else if (widget->type == ITU_SPRITEBUTTON)
+    //{
+    //    ITUSpriteButton *sb = (ITUSpriteButton *) widget;
+    //    sb->pressed = false;
+    //}
 }
 
 ITUWidget *ituFindWidgetChildImpl(ITUWidget *widget, const char *name)
@@ -125,154 +125,154 @@ ITUWidget *ituFindWidgetChildImpl(ITUWidget *widget, const char *name)
 
 void ituScreenshot(ITUSurface *surf, char *filepath)
 {
-    int pos, w, h;
+    //int pos, w, h;
 
-    //ITU_ASSERT_THREAD();
+    ////ITU_ASSERT_THREAD();
 
-    pos = strlen(filepath) - 3;
-    if (pos < 0)
-        pos = 0;
+    //pos = strlen(filepath) - 3;
+    //if (pos < 0)
+    //    pos = 0;
 
-    w   = surf->width;
-    h   = surf->height;
+    //w   = surf->width;
+    //h   = surf->height;
 
-    if (ituScene->rotation == ITU_ROT_90 || ituScene->rotation == ITU_ROT_270)
-    {
-        surf->width     = h;
-        surf->height    = w;
-    }
+    //if (ituScene->rotation == ITU_ROT_90 || ituScene->rotation == ITU_ROT_270)
+    //{
+    //    surf->width     = h;
+    //    surf->height    = w;
+    //}
 
-    if (stricmp(&filepath[pos], "jpg") == 0)
-    {
-        ituJpegSaveFile(surf, filepath);
-    }
-    else if (stricmp(&filepath[pos], "png") == 0)
-    {
-        ituPngSaveFile(surf, filepath);
-    }
-    else
-    {
-        FILE *fp = fopen(filepath, "wb");
-        if (fp)
-        {
-            int     size    = surf->width * surf->height * 3;
-            uint8_t *dest   = malloc(size);
-            if (dest)
-            {
-                int     h;
-                uint8_t *src = ituLockSurface(surf, 0, 0, surf->width, surf->height);
-                assert(src);
+    //if (stricmp(&filepath[pos], "jpg") == 0)
+    //{
+    //    ituJpegSaveFile(surf, filepath);
+    //}
+    //else if (stricmp(&filepath[pos], "png") == 0)
+    //{
+    //    ituPngSaveFile(surf, filepath);
+    //}
+    //else
+    //{
+    //    FILE *fp = fopen(filepath, "wb");
+    //    if (fp)
+    //    {
+    //        int     size    = surf->width * surf->height * 3;
+    //        uint8_t *dest   = malloc(size);
+    //        if (dest)
+    //        {
+    //            int     h;
+    //            uint8_t *src = ituLockSurface(surf, 0, 0, surf->width, surf->height);
+    //            assert(src);
 
-                if (surf == ituGetDisplaySurface())
-                {
-                    uint32_t addr;
+    //            if (surf == ituGetDisplaySurface())
+    //            {
+    //                uint32_t addr;
 
-                    switch (ithLcdGetFlip())
-                    {
-                    case 0:
-                        addr = ithLcdGetBaseAddrA();
-                        break;
+    //                switch (ithLcdGetFlip())
+    //                {
+    //                case 0:
+    //                    addr = ithLcdGetBaseAddrA();
+    //                    break;
 
-                    case 1:
-                        addr = ithLcdGetBaseAddrB();
-                        break;
+    //                case 1:
+    //                    addr = ithLcdGetBaseAddrB();
+    //                    break;
 
-                    default:
-                        addr = ithLcdGetBaseAddrC();
-                        break;
-                    }
-                    src = ithMapVram(addr, surf->lockSize, ITH_VRAM_READ);
-                }
+    //                default:
+    //                    addr = ithLcdGetBaseAddrC();
+    //                    break;
+    //                }
+    //                src = ithMapVram(addr, surf->lockSize, ITH_VRAM_READ);
+    //            }
 
-                sprintf(dest, "P6\n%d\n%d\n255\n", surf->width, surf->height);
-                fwrite(dest, 1, strlen(dest), fp);
+    //            sprintf(dest, "P6\n%d\n%d\n255\n", surf->width, surf->height);
+    //            fwrite(dest, 1, strlen(dest), fp);
 
-                if (surf->format == ITU_ARGB8888)
-                {
-                    for (h = 0; h < surf->height; h++)
-                    {
-                        int     i, j;
-                        uint8_t *ptr = src + surf->width * 4 * h;
+    //            if (surf->format == ITU_ARGB8888)
+    //            {
+    //                for (h = 0; h < surf->height; h++)
+    //                {
+    //                    int     i, j;
+    //                    uint8_t *ptr = src + surf->width * 4 * h;
 
-                        // color trasform from ARGB8888 to RGB888
-                        for (i = (surf->width - 1) * 4, j = (surf->width - 1) * 3; i >= 0 && j >= 0; i -= 4, j -= 3)
-                        {
-                            dest[surf->width * h * 3 + j + 0]   = ptr[i + 2];
-                            dest[surf->width * h * 3 + j + 1]   = ptr[i + 1];
-                            dest[surf->width * h * 3 + j + 2]   = ptr[i + 0];
-                        }
-                    }
-                }
-                else if (surf->format == ITU_RGB565)
-                {
-                    for (h = 0; h < surf->height; h++)
-                    {
-                        int     i, j;
-                        uint8_t *ptr = src + surf->width * 2 * h;
+    //                    // color trasform from ARGB8888 to RGB888
+    //                    for (i = (surf->width - 1) * 4, j = (surf->width - 1) * 3; i >= 0 && j >= 0; i -= 4, j -= 3)
+    //                    {
+    //                        dest[surf->width * h * 3 + j + 0]   = ptr[i + 2];
+    //                        dest[surf->width * h * 3 + j + 1]   = ptr[i + 1];
+    //                        dest[surf->width * h * 3 + j + 2]   = ptr[i + 0];
+    //                    }
+    //                }
+    //            }
+    //            else if (surf->format == ITU_RGB565)
+    //            {
+    //                for (h = 0; h < surf->height; h++)
+    //                {
+    //                    int     i, j;
+    //                    uint8_t *ptr = src + surf->width * 2 * h;
 
-                        // color trasform from RGB565 to RGB888
-                        for (i = (surf->width - 1) * 2, j = (surf->width - 1) * 3; i >= 0 && j >= 0; i -= 2, j -= 3)
-                        {
-                            dest[surf->width * h * 3 + j + 0]   = ((ptr[i + 1]) & 0xf8) + ((ptr[i + 1] >> 5) & 0x07);
-                            dest[surf->width * h * 3 + j + 1]   = ((ptr[i + 0] >> 3) & 0x1c) + ((ptr[i + 1] << 5) & 0xe0) + ((ptr[i + 1] >> 1) & 0x3);
-                            dest[surf->width * h * 3 + j + 2]   = ((ptr[i + 0] << 3) & 0xf8) + ((ptr[i + 0] >> 2) & 0x07);
-                        }
-                    }
-                }
-                fwrite(dest, 1, size, fp);
-                ituUnlockSurface(surf);
-                free(dest);
-            }
-            else
-            {
-                LOG_ERR "out of memory: %d.\n", size LOG_END
-            }
-            fclose(fp);
-        }
-        else
-        {
-            LOG_ERR "open %s fail.\n", filepath LOG_END
-        }
-    }
-    surf->width     = w;
-    surf->height    = h;
+    //                    // color trasform from RGB565 to RGB888
+    //                    for (i = (surf->width - 1) * 2, j = (surf->width - 1) * 3; i >= 0 && j >= 0; i -= 2, j -= 3)
+    //                    {
+    //                        dest[surf->width * h * 3 + j + 0]   = ((ptr[i + 1]) & 0xf8) + ((ptr[i + 1] >> 5) & 0x07);
+    //                        dest[surf->width * h * 3 + j + 1]   = ((ptr[i + 0] >> 3) & 0x1c) + ((ptr[i + 1] << 5) & 0xe0) + ((ptr[i + 1] >> 1) & 0x3);
+    //                        dest[surf->width * h * 3 + j + 2]   = ((ptr[i + 0] << 3) & 0xf8) + ((ptr[i + 0] >> 2) & 0x07);
+    //                    }
+    //                }
+    //            }
+    //            fwrite(dest, 1, size, fp);
+    //            ituUnlockSurface(surf);
+    //            free(dest);
+    //        }
+    //        else
+    //        {
+    //            LOG_ERR "out of memory: %d.\n", size LOG_END
+    //        }
+    //        fclose(fp);
+    //    }
+    //    else
+    //    {
+    //        LOG_ERR "open %s fail.\n", filepath LOG_END
+    //    }
+    //}
+    //surf->width     = w;
+    //surf->height    = h;
 }
 
 void ituScreenshotRect(ITUSurface *surf, int x, int y, int w, int h, char *filepath)
 {
-    int         pos;
-    ITUSurface  *tempSurf = NULL;
-
-    //ITU_ASSERT_THREAD();
-
-    pos = strlen(filepath) - 3;
-    if (pos < 0)
-        pos = 0;
-
-    if (w == 0)
-        w = surf->width;
-
-    if (h == 0)
-        h = surf->height;
-
-    tempSurf = ituCreateSurface(w, h, 0, surf->format, NULL, 0);
-    if (!tempSurf)
-        goto end;
-
-    ituBitBlt(tempSurf, 0, 0, tempSurf->width, tempSurf->height, surf, x, y);
-
-    if (stricmp(&filepath[pos], "jpg") == 0)
-    {
-        ituJpegSaveFile(tempSurf, filepath);
-    }
-    else if (stricmp(&filepath[pos], "png") == 0)
-    {
-        ituPngSaveFile(tempSurf, filepath);
-    }
-
-end:
-    if (tempSurf)
-        ituDestroySurface(tempSurf);
+//    int         pos;
+//    ITUSurface  *tempSurf = NULL;
+//
+//    //ITU_ASSERT_THREAD();
+//
+//    pos = strlen(filepath) - 3;
+//    if (pos < 0)
+//        pos = 0;
+//
+//    if (w == 0)
+//        w = surf->width;
+//
+//    if (h == 0)
+//        h = surf->height;
+//
+//    tempSurf = ituCreateSurface(w, h, 0, surf->format, NULL, 0);
+//    if (!tempSurf)
+//        goto end;
+//
+//    ituBitBlt(tempSurf, 0, 0, tempSurf->width, tempSurf->height, surf, x, y);
+//
+//    if (stricmp(&filepath[pos], "jpg") == 0)
+//    {
+//        ituJpegSaveFile(tempSurf, filepath);
+//    }
+//    else if (stricmp(&filepath[pos], "png") == 0)
+//    {
+//        ituPngSaveFile(tempSurf, filepath);
+//    }
+//
+//end:
+//    if (tempSurf)
+//        ituDestroySurface(tempSurf);
 }
 
 ITULayer *ituGetLayer(ITUWidget *widget)
@@ -384,24 +384,24 @@ ITUWidget *ituGetVarTarget(int index)
 {
     ITUVariable *var;
     ITUWidget   *target = NULL;
-    assert(ituScene);
-    //ITU_ASSERT_THREAD();
+    //assert(ituScene);
+    ////ITU_ASSERT_THREAD();
 
-    var = &ituScene->variables[index];
+    //var = &ituScene->variables[index];
 
-    if (var->cachedTarget)
-    {
-        target = var->cachedTarget;
-    }
-    else if (var->target[0] != '\0')
-    {
-        ITUWidget *widget = ituSceneFindWidget(ituScene, var->target);
-        if (widget)
-        {
-            target              = widget;
-            var->cachedTarget   = (void *)target;
-        }
-    }
+    //if (var->cachedTarget)
+    //{
+    //    target = var->cachedTarget;
+    //}
+    //else if (var->target[0] != '\0')
+    //{
+    //    ITUWidget *widget = ituSceneFindWidget(ituScene, var->target);
+    //    if (widget)
+    //    {
+    //        target              = widget;
+    //        var->cachedTarget   = (void *)target;
+    //    }
+    //}
     return target;
 }
 
@@ -457,13 +457,13 @@ char *ituGetVarParam(int index)
 
 void ituAssertThread(const char *file)
 {
-    assert(ituScene);
-    if (!pthread_equal(ituScene->threadID, pthread_self()))
-    {
-        LOG_ERR "itu thread assertion fail: %s\n", file LOG_END
-        sleep(1);
-        abort();
-    }
+    //assert(ituScene);
+    //if (!pthread_equal(ituScene->threadID, pthread_self()))
+    //{
+    //    LOG_ERR "itu thread assertion fail: %s\n", file LOG_END
+    //    sleep(1);
+    //    abort();
+    //}
 }
 
 void ituSetClipping(ITUSurface* surf, int x, int y, int width, int height, ITURectangle* prevClip)

@@ -67,6 +67,7 @@
   <ItemGroup>
     <ClCompile Include="ite\itc_tree.c" />
     <ClCompile Include="ite\ith_lcd.c" />
+    <ClCompile Include="ite\ith_win32_sim.c" />
     <ClCompile Include="ite\itu_base.c" />
     <ClCompile Include="ite\itu_surface.c" />
     <ClCompile Include="ite\itu_utility.c" />
