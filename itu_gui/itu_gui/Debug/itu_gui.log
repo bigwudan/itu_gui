@@ -1,37 +1,19 @@
-﻿Build started 7/11/2020 10:40:46 AM.
+﻿Build started 7/11/2020 11:09:27 AM.
      1>Project "d:\itu_gui\itu_gui\itu_gui\itu_gui.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D _CRT_NONSTDC_NO_DEPRECATE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt ite\itc_tree.c ite\itu_base.c ite\itu_utility.c ite\itu_widget.c main.c
-         main.c
-     1>d:\itu_gui\itu_gui\itu_gui\main.c(57): warning C4101: 'bitmapDc' : unreferenced local variable
-         itu_widget.c
-     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_widget.c(328): warning C4013: 'strtok_r' undefined; assuming extern returning int
-     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_widget.c(328): warning C4047: 'function' : 'const char *' differs in levels of indirection from 'int'
-     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_widget.c(328): warning C4024: 'atoi' : different types for formal and actual parameter 1
-     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_widget.c(333): warning C4047: '=' : 'char *' differs in levels of indirection from 'int'
-     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_widget.c(377): warning C4047: 'function' : 'const char *' differs in levels of indirection from 'int'
-     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_widget.c(377): warning C4024: 'atoi' : different types for formal and actual parameter 1
-     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_widget.c(378): warning C4047: '=' : 'char *' differs in levels of indirection from 'int'
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D _CRT_NONSTDC_NO_DEPRECATE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt ite\itu_utility.c
          itu_utility.c
-     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_utility.c(169): warning C4013: 'ithLcdGetFlip' undefined; assuming extern returning int
-     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_utility.c(172): warning C4013: 'ithLcdGetBaseAddrA' undefined; assuming extern returning int
-     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_utility.c(176): warning C4013: 'ithLcdGetBaseAddrB' undefined; assuming extern returning int
-     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_utility.c(180): warning C4013: 'ithLcdGetBaseAddrC' undefined; assuming extern returning int
-     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_utility.c(460): warning C4013: 'pthread_equal' undefined; assuming extern returning int
-     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_utility.c(460): warning C4013: 'pthread_self' undefined; assuming extern returning int
-     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_utility.c(463): warning C4013: 'sleep' undefined; assuming extern returning int
-         itu_base.c
-     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_base.c(154): warning C4113: 'void (__cdecl *)(ITUSurface *,int,int,ITUSurface *,int,int,int,int,int,int,int,int,int,int,int,int,bool,ITUPageFlowType)' differs in parameter lists from 'void (__cdecl *)(ITUSurface *,int,int,ITUSurface *,int,int,int,int,int,int,int,int,int,int,int,int,bool,ITUPageFlowType,ITUTransformType)'
-         itc_tree.c
-         Generating Code...
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_utility.c(461): warning C4013: 'pthread_equal' undefined; assuming extern returning int
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_utility.c(461): warning C4013: 'pthread_self' undefined; assuming extern returning int
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_utility.c(464): warning C4013: 'sleep' undefined; assuming extern returning int
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"d:\itu_gui\itu_gui\Debug\itu_gui.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"d:\itu_gui\itu_gui\Debug\itu_gui.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"d:\itu_gui\itu_gui\Debug\itu_gui.lib" /MACHINE:X86 Debug\itc_tree.obj
+         Debug\ith_lcd.obj
          Debug\itu_base.obj
+         Debug\itu_surface.obj
          Debug\itu_utility.obj
          Debug\itu_widget.obj
          Debug\main.obj
-     1>itu_utility.obj : error LNK2019: unresolved external symbol _ituSurfaceSetClipping referenced in function _ituSetClipping
-     1>itu_widget.obj : error LNK2001: unresolved external symbol _ituSurfaceSetClipping
      1>itu_utility.obj : error LNK2019: unresolved external symbol _ituJpegSaveFile referenced in function _ituScreenshot
      1>itu_utility.obj : error LNK2019: unresolved external symbol _ituPngSaveFile referenced in function _ituScreenshot
      1>itu_utility.obj : error LNK2019: unresolved external symbol _ituButtonSetPressed referenced in function _ituUnPressWidgetImpl
@@ -39,10 +21,6 @@
      1>itu_utility.obj : error LNK2019: unresolved external symbol _ituCheckBoxIsChecked referenced in function _ituUnPressWidgetImpl
      1>itu_utility.obj : error LNK2019: unresolved external symbol _ituSceneFindWidget referenced in function _ituGetVarTarget
      1>itu_utility.obj : error LNK2019: unresolved external symbol _ithMapVram referenced in function _ituScreenshot
-     1>itu_utility.obj : error LNK2019: unresolved external symbol _ithLcdGetFlip referenced in function _ituScreenshot
-     1>itu_utility.obj : error LNK2019: unresolved external symbol _ithLcdGetBaseAddrA referenced in function _ituScreenshot
-     1>itu_utility.obj : error LNK2019: unresolved external symbol _ithLcdGetBaseAddrB referenced in function _ituScreenshot
-     1>itu_utility.obj : error LNK2019: unresolved external symbol _ithLcdGetBaseAddrC referenced in function _ituScreenshot
      1>itu_utility.obj : error LNK2019: unresolved external symbol _pthread_equal referenced in function _ituAssertThread
      1>itu_utility.obj : error LNK2019: unresolved external symbol _pthread_self referenced in function _ituAssertThread
      1>itu_utility.obj : error LNK2019: unresolved external symbol _sleep referenced in function _ituAssertThread
@@ -54,9 +32,9 @@
      1>itu_widget.obj : error LNK2019: unresolved external symbol _ituWipeEffectInit referenced in function _ituWidgetSetVisibleImpl
      1>itu_widget.obj : error LNK2019: unresolved external symbol _ituSceneExecuteCommand referenced in function _ituWidgetOnActionImpl
      1>itu_widget.obj : error LNK2019: unresolved external symbol _strtok_r referenced in function _ituWidgetOnActionImpl
-     1>d:\itu_gui\itu_gui\Debug\itu_gui.exe : fatal error LNK1120: 23 unresolved externals
+     1>d:\itu_gui\itu_gui\Debug\itu_gui.exe : fatal error LNK1120: 18 unresolved externals
      1>Done Building Project "d:\itu_gui\itu_gui\itu_gui\itu_gui.vcxproj" (Build target(s)) -- FAILED.
 
 Build FAILED.
 
-Time Elapsed 00:00:00.61
+Time Elapsed 00:00:00.28

@@ -7,6 +7,7 @@
 #include "itu_cfg.h"
 #include "itu_private.h"
 #include "ith_vram.h"
+#include "ith_lcd.h"
 unsigned int ituFormat2Bpp(ITUPixelFormat format)
 {
     switch (format)
@@ -39,7 +40,7 @@ unsigned int ituFormat2Bpp(ITUPixelFormat format)
 void ituFocusWidgetImpl(ITUWidget *widget)
 {
     assert(ituScene);
-    ITU_ASSERT_THREAD();
+   // ITU_ASSERT_THREAD();
 
     if (widget)
     {
@@ -67,7 +68,7 @@ void ituFocusWidgetImpl(ITUWidget *widget)
 void ituDirtyWidgetImpl(ITUWidget *widget, bool dirty)
 {
     ITCTree *node;
-    ITU_ASSERT_THREAD();
+    //ITU_ASSERT_THREAD();
 
     for (node = widget->tree.child; node; node = node->sibling)
     {
@@ -80,7 +81,7 @@ void ituDirtyWidgetImpl(ITUWidget *widget, bool dirty)
 void ituUnPressWidgetImpl(ITUWidget *widget)
 {
     ITCTree *node;
-    ITU_ASSERT_THREAD();
+    //ITU_ASSERT_THREAD();
 
     for (node = widget->tree.child; node; node = node->sibling)
     {
@@ -126,7 +127,7 @@ void ituScreenshot(ITUSurface *surf, char *filepath)
 {
     int pos, w, h;
 
-    ITU_ASSERT_THREAD();
+    //ITU_ASSERT_THREAD();
 
     pos = strlen(filepath) - 3;
     if (pos < 0)
@@ -242,7 +243,7 @@ void ituScreenshotRect(ITUSurface *surf, int x, int y, int w, int h, char *filep
     int         pos;
     ITUSurface  *tempSurf = NULL;
 
-    ITU_ASSERT_THREAD();
+    //ITU_ASSERT_THREAD();
 
     pos = strlen(filepath) - 3;
     if (pos < 0)
@@ -278,7 +279,7 @@ ITULayer *ituGetLayer(ITUWidget *widget)
 {
     ITUWidget *parent = (ITUWidget *)widget->tree.parent;
 
-    ITU_ASSERT_THREAD();
+    //ITU_ASSERT_THREAD();
 
     while (parent)
     {
@@ -295,7 +296,7 @@ void ituPreloadFontCache(ITUWidget *widget, ITUSurface *surf)
 #ifdef CFG_ITU_FT_CACHE_SIZE
     ITCTree *node;
 
-    ITU_ASSERT_THREAD();
+    //ITU_ASSERT_THREAD();
 
     for (node = widget->tree.child; node; node = node->sibling)
     {
@@ -384,7 +385,7 @@ ITUWidget *ituGetVarTarget(int index)
     ITUVariable *var;
     ITUWidget   *target = NULL;
     assert(ituScene);
-    ITU_ASSERT_THREAD();
+    //ITU_ASSERT_THREAD();
 
     var = &ituScene->variables[index];
 
@@ -448,7 +449,7 @@ char *ituGetVarParam(int index)
 {
     ITUVariable *var;
     assert(ituScene);
-    ITU_ASSERT_THREAD();
+    //ITU_ASSERT_THREAD();
 
     var = &ituScene->variables[index];
     return var->param;
@@ -470,7 +471,7 @@ void ituSetClipping(ITUSurface* surf, int x, int y, int width, int height, ITURe
     int cx, cy, cw, ch;
     assert(surf);
     assert(prevClip);
-    ITU_ASSERT_THREAD();
+    //ITU_ASSERT_THREAD();
 
     memcpy(prevClip, &surf->clipping, sizeof(ITURectangle));
 

@@ -30,6 +30,12 @@
     <ClCompile Include="ite\itu_utility.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ite\itu_surface.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ite\ith_lcd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ite\itu_private.h">
@@ -48,6 +54,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ite\ith_utility.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ite\ith_lcd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ite\stdbool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
