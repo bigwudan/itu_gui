@@ -39,6 +39,12 @@
     <ClCompile Include="ite\ith_win32_sim.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ite\itu_background.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ite\itu_clipper.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ite\itu_private.h">
