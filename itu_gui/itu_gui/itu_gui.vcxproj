@@ -71,6 +71,8 @@
     <ClCompile Include="ite\itu_background.c" />
     <ClCompile Include="ite\itu_base.c" />
     <ClCompile Include="ite\itu_clipper.c" />
+    <ClCompile Include="ite\itu_lcd.c" />
+    <ClCompile Include="ite\itu_scene.c" />
     <ClCompile Include="ite\itu_surface.c" />
     <ClCompile Include="ite\itu_utility.c" />
     <ClCompile Include="ite\itu_widget.c" />

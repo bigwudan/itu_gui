@@ -6,8 +6,10 @@
 
 #include <stdint.h>
 #include <assert.h>
-
-
+#include "ite\itu.h"
+//
+ITUScene            theScene;
+static ITUSurface   *screenSurf;
 
 static HWND hWnd;
 
@@ -48,6 +50,29 @@ LPARAM lparam)
 	}
 	return DefWindowProc(hwnd, msg, wparam, lparam);
 }
+
+
+//初始化头结点
+static void _test_init()
+{
+	// init itu
+	ituLcdInit();
+
+	ITUBackground* bg = calloc(1, sizeof(ITUBackground));
+	if (!bg) return;
+	screenSurf = ituGetDisplaySurface();
+
+	theScene.root = bg;
+
+
+
+	bg->orgHeight = 100;
+	bg->orgWidth = 50;
+	ituBackgroundInit(bg);
+	printf("wudan\n");
+	return;
+}
+
 
 int main(void)
 {
@@ -102,8 +127,8 @@ int main(void)
 		WS_OVERLAPPEDWINDOW & ~WS_THICKFRAME & ~WS_MAXIMIZEBOX,
 		CW_USEDEFAULT,
 		CW_USEDEFAULT,
-		800,
-		600,
+		T_WIDTH,
+		T_HEIGHT,
 		NULL,
 		NULL,
 		wc.hInstance,
@@ -120,24 +145,26 @@ int main(void)
 
 
 
-
+	_test_init();
 
 	// message loop
 	while (GetMessage(&msg, NULL, 0, 0))
 	{
-		count++;
-		Sleep(1000);
-		for (int i = 0; i < uiTotalBytes; i++){
-			if (count % 2 == 1){
-				pArray[i] = 0xcc;
-			}
-			else{
-				pArray[i] = 0xff;
-			}
+		ituSceneDraw(&theScene, screenSurf);
 
-		}
-		SelectObject(hdcMem, hbmp);
-		BitBlt(hdc, 0, 0, 1030, 629, hdcMem, 0, 0, SRCCOPY);
+		//count++;
+		//Sleep(1000);
+		//for (int i = 0; i < uiTotalBytes; i++){
+		//	if (count % 2 == 1){
+		//		pArray[i] = 0xcc;
+		//	}
+		//	else{
+		//		pArray[i] = 0xff;
+		//	}
+
+		//}
+		//SelectObject(hdcMem, hbmp);
+		//BitBlt(hdc, 0, 0, 1030, 629, hdcMem, 0, 0, SRCCOPY);
 
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);

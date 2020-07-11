@@ -45,6 +45,12 @@
     <ClCompile Include="ite\itu_clipper.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ite\itu_lcd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ite\itu_scene.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ite\itu_private.h">

@@ -1,6 +1,8 @@
 #ifndef ITH_LCD_H
 #define ITH_LCD_H
 
+#include "itu.h"
+#include "stdbool.h"
 /** @addtogroup ith ITE Hardware Library
  *  @{
  */
@@ -12,6 +14,17 @@
 extern "C" {
 #endif
 #define inline   __inline
+
+typedef struct
+{
+	ITUSurface surf;
+#ifdef CFG_M2D_ENABLE    
+	GFXSurface *m2dSurf;
+#endif    
+} M2dSurface;
+
+#define LcdSurface M2dSurface
+
 typedef enum
 {
     ITH_LCD_RGB565   = 0,    ///< RGB565 format
@@ -130,7 +143,7 @@ ITHLcdFormat ithLcdGetFormat(void);
  */
 static inline unsigned int ithLcdGetWidth(void)
 {
-    return 0;
+    return T_WIDTH;
 }
 
 /**
@@ -149,7 +162,7 @@ static inline unsigned int ithLcdGetHeight(void)
 {
     // this function must be an inline function, because lcd_clear.c will use it.
     // don't modify it.
-    return 0;
+    return T_HEIGHT;
 }
 
 /**
@@ -168,7 +181,7 @@ static inline unsigned int ithLcdGetPitch(void)
 {
     // this function must be an inline function, because lcd_clear.c will use it.
     // don't modify it.
-    return 0;
+	return 2 * T_WIDTH;
 }
 
 /**

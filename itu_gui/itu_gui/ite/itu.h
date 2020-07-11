@@ -24,6 +24,9 @@ extern "C"
 {
 #endif
 #define inline   __inline
+#define T_WIDTH 854
+#define T_HEIGHT 480
+
 	// Definitions
 #define ITU_STRINGSET_SIZE          32      ///< Maximum number of strings in ITUStringSet.
 #define ITU_ACTIONS_SIZE            15      ///< Maximum number of actions in input type of widgets.

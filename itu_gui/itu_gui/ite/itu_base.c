@@ -1,6 +1,6 @@
 ﻿#include "itu_cfg.h"
 #include "itu.h"
-
+#include "ith_lcd.h"
 ITUScene* ituScene = NULL;
 
 static ITUSurface* GetDisplaySurfaceDefault(void)
