@@ -52,71 +52,65 @@ LPARAM lparam)
 }
 
 
+
+static ITUBackground* _create_widget(ITURectangle *rect, ITUColor *color)
+{
+	ITUBackground* bg = calloc(1, sizeof(ITUBackground));
+	ituBackgroundInit(bg);
+	((ITUWidget *)bg)->visible = 1;
+	ITUWidget* widget = (ITUWidget*)bg;
+	memmove(&widget->rect, rect, sizeof(ITURectangle));
+	memmove(&widget->color, color, sizeof(ITUColor));
+	widget->alpha = 255;
+	return bg;
+}
+
 //初始化头结点
 static void _test_init()
 {
 	// init itu
 	ituLcdInit();
 	ituSWInit();
-	ITUBackground* bg = calloc(1, sizeof(ITUBackground));
-	if (!bg) return;
+	ITUBackground* bg1 = NULL;
+	ITUBackground* bg2 = NULL;
 	screenSurf = ituGetDisplaySurface();
+	ITURectangle rect;
+	memset(&rect, 0, sizeof(ITURectangle));
+	ITUColor color; 
+	memset(&color, 0, sizeof(ITUColor));
+	rect.height = 200;
+	rect.width = 400;
+	rect.x = 0;
+	rect.y = 0;
+	color.red = 255;
+	color.alpha = 255;
+	bg1 = _create_widget(&rect, &color);
+	theScene.root = bg1;
 
-	theScene.root = bg;
+	memset(&rect, 0, sizeof(ITURectangle));
+	memset(&color, 0, sizeof(ITUColor));
+	rect.height = 60;
+	rect.width = 80;
+	rect.x = 10;
+	rect.y = 20;
+	color.green = 255;
+	color.alpha = 255;
+	bg2 = _create_widget(&rect, &color);
 
 
-
-	bg->orgHeight = 100;
-	bg->orgWidth = 50;
-	ituBackgroundInit(bg);
-	((ITUWidget *)bg)->visible = 1;
-
-	ITUWidget* widget = (ITUWidget*)bg;
-
-	widget->rect.height = 200;
-	widget->rect.width = 400;
-
-
-	widget->color.alpha = 255;
-	widget->color.red = 255;
-	widget->alpha = 255;
-
-	printf("wudan\n");
+	itcTreePushFront(bg1, bg2);
 	return;
+
+	
 }
 
 
 int main(void)
 {
-	uint8_t *pArray;
+
 	WNDCLASS wc;
 	MSG msg;
-	HDC     hdc, bitmapDc;
-	BITMAPINFOHEADER *bmiHeader;
-	DWORD            *colors;
-	int uiTotalBytes = 1000;
-	int count = 0;
-	bmiHeader = (BITMAPINFOHEADER *)calloc(1, sizeof(BITMAPINFOHEADER) + sizeof(DWORD) * 3);
 
-	assert(bmiHeader);
-
-	bmiHeader->biSize = sizeof(BITMAPINFOHEADER);
-	bmiHeader->biWidth = 20;
-	bmiHeader->biHeight = -5;
-	bmiHeader->biPlanes = 1;
-	bmiHeader->biBitCount = 16;
-	bmiHeader->biCompression = BI_BITFIELDS;
-	bmiHeader->biSizeImage = 0;
-	bmiHeader->biXPelsPerMeter = 0;
-	bmiHeader->biYPelsPerMeter = 0;
-	bmiHeader->biClrUsed = 3;
-	bmiHeader->biClrImportant = 0;
-
-	colors = (DWORD *)(bmiHeader + 1);
-
-	colors[0] = 0xF800;
-	colors[1] = 0x07E0;
-	colors[2] = 0x001F;
 
 
 	// create window
@@ -148,9 +142,7 @@ int main(void)
 	if (hWnd == NULL)
 		return -1;
 
-	hdc = GetDC(hWnd);
-	HDC hdcMem = CreateCompatibleDC(hdc);
-	HBITMAP hbmp = CreateDIBSection(hdc, (BITMAPINFO *)bmiHeader, DIB_RGB_COLORS, (void **)&pArray, NULL, 0);//创建DIB
+
 
 	ShowWindow(hWnd, SW_SHOW);
 	UpdateWindow(hWnd);
@@ -164,19 +156,7 @@ int main(void)
 	{
 		ituSceneDraw(&theScene, screenSurf);
 		ituFlip(screenSurf);
-		//count++;
-		//Sleep(1000);
-		//for (int i = 0; i < uiTotalBytes; i++){
-		//	if (count % 2 == 1){
-		//		pArray[i] = 0xcc;
-		//	}
-		//	else{
-		//		pArray[i] = 0xff;
-		//	}
 
-		//}
-		//SelectObject(hdcMem, hbmp);
-		//BitBlt(hdc, 0, 0, 1030, 629, hdcMem, 0, 0, SRCCOPY);
 
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
