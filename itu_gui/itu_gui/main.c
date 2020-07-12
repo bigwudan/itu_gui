@@ -163,7 +163,7 @@ int main(void)
 	while (GetMessage(&msg, NULL, 0, 0))
 	{
 		ituSceneDraw(&theScene, screenSurf);
-
+		ituFlip(screenSurf);
 		//count++;
 		//Sleep(1000);
 		//for (int i = 0; i < uiTotalBytes; i++){

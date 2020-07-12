@@ -42,7 +42,7 @@ uint32_t ithReadRegA(uint32_t addr)
 {
 	uint32_t addr2 = ToMmioAddr(addr);
 	uint32_t data = *(uint32_t*)&mmio[addr2];
-	return data;
+	return mmio;
 }
 
 void ithWriteRegA(uint32_t addr, uint32_t data)
@@ -80,7 +80,7 @@ uint16_t ithReadShortRegA(uint32_t addr)
 
 void *ithMapVram(uint32_t addr, uint32_t size, uint32_t flags)
 {
-    return NULL;
+	return addr;
 }
 
 void ithUnmapVram(void *ptr, uint32_t size)

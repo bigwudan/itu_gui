@@ -1,8 +1,97 @@
-﻿Build started 7/11/2020 11:15:18 PM.
+﻿Build started 7/12/2020 11:35:55 AM.
      1>Project "d:\itu_gui\itu_gui\itu_gui\itu_gui.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D _CRT_NONSTDC_NO_DEPRECATE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt ite\ith_win32_sim.c
-         ith_win32_sim.c
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D _CRT_NONSTDC_NO_DEPRECATE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt ite\itc_tree.c ite\ith_lcd.c ite\itu_background.c ite\itu_base.c ite\itu_clipper.c ite\itu_lcd.c ite\itu_scene.c ite\itu_surface.c ite\itu_sw.c ite\itu_utility.c ite\itu_widget.c main.c
+         main.c
+     1>d:\itu_gui\itu_gui\itu_gui\main.c(65): warning C4133: '=' : incompatible types - from 'ITUBackground *' to 'ITUWidget *'
+     1>d:\itu_gui\itu_gui\itu_gui\main.c(94): warning C4101: 'bitmapDc' : unreferenced local variable
+         itu_widget.c
+         itu_utility.c
+     1>d:\itu_gui\itu_gui\itu_gui\ite\ith_lcd.h(82): warning C4013: 'ithReadRegA' undefined; assuming extern returning int
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_utility.c(385): warning C4101: 'var' : unreferenced local variable
+         itu_sw.c
+     1>d:\itu_gui\itu_gui\itu_gui\ite\ith_lcd.h(82): warning C4013: 'ithReadRegA' undefined; assuming extern returning int
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(1930): warning C4244: 'function' : conversion from 'double' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(1952): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(1955): warning C4244: 'function' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(1993): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(1996): warning C4244: 'function' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2037): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2040): warning C4244: 'function' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2081): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2084): warning C4244: 'function' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2615): warning C4244: 'function' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2653): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2654): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2659): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2660): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2665): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2666): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2671): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2672): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2703): warning C4244: 'function' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2704): warning C4244: 'function' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2705): warning C4244: 'function' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2706): warning C4244: 'function' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2707): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2708): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2721): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2722): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2727): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2728): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2733): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2734): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2739): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2740): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2773): warning C4244: 'function' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2774): warning C4244: 'function' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2775): warning C4244: 'function' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2776): warning C4244: 'function' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2777): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2778): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2800): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2801): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2806): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2807): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2812): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2813): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2818): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2819): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2851): warning C4244: 'function' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2852): warning C4244: 'function' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2853): warning C4244: 'function' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2854): warning C4244: 'function' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2855): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2856): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2879): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2880): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2885): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2886): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2891): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2892): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2897): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2898): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2930): warning C4244: 'function' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2931): warning C4244: 'function' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2932): warning C4244: 'function' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2933): warning C4244: 'function' : conversion from 'int' to 'float', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2934): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_sw.c(2935): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+         itu_surface.c
+         itu_scene.c
+         itu_lcd.c
+     1>d:\itu_gui\itu_gui\itu_gui\ite\ith_lcd.h(82): warning C4013: 'ithReadRegA' undefined; assuming extern returning int
+         itu_clipper.c
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_clipper.c(38): warning C4013: 'memcpy' undefined; assuming extern returning int
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_clipper.c(145): warning C4013: 'memset' undefined; assuming extern returning int
+         itu_base.c
+     1>d:\itu_gui\itu_gui\itu_gui\ite\ith_lcd.h(82): warning C4013: 'ithReadRegA' undefined; assuming extern returning int
+     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_base.c(154): warning C4113: 'void (__cdecl *)(ITUSurface *,int,int,ITUSurface *,int,int,int,int,int,int,int,int,int,int,int,int,bool,ITUPageFlowType)' differs in parameter lists from 'void (__cdecl *)(ITUSurface *,int,int,ITUSurface *,int,int,int,int,int,int,int,int,int,int,int,int,bool,ITUPageFlowType,ITUTransformType)'
+         itu_background.c
+         ith_lcd.c
+     1>d:\itu_gui\itu_gui\itu_gui\ite\ith_lcd.h(82): warning C4013: 'ithReadRegA' undefined; assuming extern returning int
+         itc_tree.c
+         Generating Code...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"d:\itu_gui\itu_gui\Debug\itu_gui.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"d:\itu_gui\itu_gui\Debug\itu_gui.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"d:\itu_gui\itu_gui\Debug\itu_gui.lib" /MACHINE:X86 Debug\itc_tree.obj
          Debug\ith_lcd.obj
@@ -22,4 +111,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.62
+Time Elapsed 00:00:01.36

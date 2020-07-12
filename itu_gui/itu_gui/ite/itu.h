@@ -23,6 +23,8 @@
 extern "C"
 {
 #endif
+#define	CFG_WIN32_SIMULATOR
+
 #define inline __inline
 #define T_WIDTH 854
 #define T_HEIGHT 480
