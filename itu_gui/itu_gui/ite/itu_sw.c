@@ -2563,18 +2563,18 @@ static void SWFlip(ITUSurface *surf)
         DeleteDC(bitmapDc);
         ReleaseDC(win, dc);
 
-        if (lcdSurf->addr == ithLcdGetBaseAddrA() || lcdSurf->addr == ithLcdGetBaseAddrB())
-        {
-            if (swLcdAddr == ithLcdGetBaseAddrA())
-            {
-                swLcdAddr = ithLcdGetBaseAddrB();
-            }
-            else
-            {
-                swLcdAddr = ithLcdGetBaseAddrA();
-            }
-            lcdSurf->addr = swLcdAddr;
-        }
+        //if (lcdSurf->addr == ithLcdGetBaseAddrA() || lcdSurf->addr == ithLcdGetBaseAddrB())
+        //{
+        //    if (swLcdAddr == ithLcdGetBaseAddrA())
+        //    {
+        //        swLcdAddr = ithLcdGetBaseAddrB();
+        //    }
+        //    else
+        //    {
+        //        swLcdAddr = ithLcdGetBaseAddrA();
+        //    }
+        //    lcdSurf->addr = swLcdAddr;
+        //}
     }
 #endif // CFG_WIN32_SIMULATOR
 }

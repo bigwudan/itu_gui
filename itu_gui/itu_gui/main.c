@@ -73,8 +73,8 @@ static void _test_init()
 
 	ITUWidget* widget = (ITUWidget*)bg;
 
-	widget->rect.height = 100;
-	widget->rect.width = 50;
+	widget->rect.height = 200;
+	widget->rect.width = 400;
 
 
 	widget->color.alpha = 255;
