@@ -53,7 +53,7 @@ LPARAM lparam)
 
 
 
-static ITUBackground* _create_widget(ITURectangle *rect, ITUColor *color)
+static ITUBackground* _create_widget(ITURectangle *rect, ITUColor *color, char *name)
 {
 	ITUBackground* bg = calloc(1, sizeof(ITUBackground));
 	ituBackgroundInit(bg);
@@ -61,6 +61,10 @@ static ITUBackground* _create_widget(ITURectangle *rect, ITUColor *color)
 	ITUWidget* widget = (ITUWidget*)bg;
 	memmove(&widget->rect, rect, sizeof(ITURectangle));
 	memmove(&widget->color, color, sizeof(ITUColor));
+	
+	strcpy(widget->name, name);
+
+
 	widget->alpha = 255;
 	return bg;
 }
@@ -80,11 +84,11 @@ static void _test_init()
 	memset(&color, 0, sizeof(ITUColor));
 	rect.height = 200;
 	rect.width = 400;
-	rect.x = 0;
-	rect.y = 0;
+	rect.x = 20;
+	rect.y = 30;
 	color.red = 255;
 	color.alpha = 255;
-	bg1 = _create_widget(&rect, &color);
+	bg1 = _create_widget(&rect, &color, "wudan1");
 	theScene.root = bg1;
 
 	memset(&rect, 0, sizeof(ITURectangle));
@@ -95,7 +99,7 @@ static void _test_init()
 	rect.y = 20;
 	color.green = 255;
 	color.alpha = 255;
-	bg2 = _create_widget(&rect, &color);
+	bg2 = _create_widget(&rect, &color, "wudan2");
 
 
 	itcTreePushFront(bg1, bg2);
