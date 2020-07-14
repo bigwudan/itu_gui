@@ -1,17 +1,17 @@
-﻿Build started 7/12/2020 4:39:13 PM.
+﻿Build started 7/14/2020 10:34:05 PM.
      1>Project "d:\itu_gui\itu_gui\itu_gui\itu_gui.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D _CRT_NONSTDC_NO_DEPRECATE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt main.c
-         main.c
-     1>d:\itu_gui\itu_gui\itu_gui\main.c(92): warning C4133: '=' : incompatible types - from 'ITUBackground *' to 'ITUWidget *'
-     1>d:\itu_gui\itu_gui\itu_gui\main.c(105): warning C4133: 'function' : incompatible types - from 'ITUBackground *' to 'ITCTree *'
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D _CRT_NONSTDC_NO_DEPRECATE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt ite\itu_action.c
+         itu_action.c
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"d:\itu_gui\itu_gui\Debug\itu_gui.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"d:\itu_gui\itu_gui\Debug\itu_gui.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"d:\itu_gui\itu_gui\Debug\itu_gui.lib" /MACHINE:X86 Debug\itc_tree.obj
          Debug\ith_lcd.obj
          Debug\ith_win32_sim.obj
+         Debug\itu_action.obj
          Debug\itu_background.obj
          Debug\itu_base.obj
          Debug\itu_clipper.obj
+         Debug\itu_layer.obj
          Debug\itu_lcd.obj
          Debug\itu_scene.obj
          Debug\itu_surface.obj
@@ -24,4 +24,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.48
+Time Elapsed 00:00:00.55

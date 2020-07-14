@@ -54,6 +54,12 @@
     <ClCompile Include="ite\itu_sw.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ite\itu_layer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ite\itu_action.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ite\itu_private.h">
