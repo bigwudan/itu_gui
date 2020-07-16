@@ -2468,6 +2468,7 @@ static void SWTransform(ITUSurface* dest, int dx, int dy, int dw, int dh, ITUSur
     }
 }
 extern uint8_t *map_buf;
+extern uint32_t len_t;
 static void SWFlip(ITUSurface *surf)
 {
     ITUSurface *lcdSurf = ituGetDisplaySurface();
@@ -2556,7 +2557,7 @@ static void SWFlip(ITUSurface *surf)
 
         ptr = ithMapVram(swLcdAddr, ithLcdGetPitch() * ithLcdGetHeight(), ITH_VRAM_READ | ITH_VRAM_WRITE);
         //memcpy(bits, ptr, ithLcdGetPitch() * ithLcdGetHeight());
-		//memcpy(bits, map_buf, 1632);
+		memcpy(bits, map_buf, ithLcdGetPitch() * ithLcdGetHeight());
         ithUnmapVram(ptr, ithLcdGetPitch() * ithLcdGetHeight());
 
         BitBlt(dc, 0, 0, ithLcdGetWidth(), ithLcdGetHeight(), bitmapDc, 0, 0, SRCCOPY);

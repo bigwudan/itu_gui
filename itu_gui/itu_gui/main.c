@@ -133,6 +133,7 @@ static void _test_init()
 }
 
 uint8_t *map_buf = NULL;
+uint32_t len_t = 0;
 void test_readfile()
 {
 	bmpfileinfo fileheader;
@@ -217,19 +218,19 @@ void test_readfile()
 
 	map_buf = calloc(1, infoheader.biSizeImage);
 	len = fread(map_buf, 1, infoheader.biSizeImage, p_file);
-
+	len_t = infoheader.biSizeImage;
 	uint8_t *p_line = calloc(1, iLineByteCnt);
 
-	for (int i = 0; i < infoheader.biHeight ; i++){
-		printf("<<<<<<<<<<<<<<<<<<<<<<<\n");
-		int act_len = iLineByteCnt -skip ;
-		memmove(p_line, map_buf + i*iLineByteCnt, iLineByteCnt);
-		for (int j = 1; j < act_len+1; j++){
-			printf("0x%2X ", p_line[j-1]);
-			if (j % 3 == 0) printf("\r\n");
-		}
+	//for (int i = 0; i < infoheader.biHeight ; i++){
+	//	printf("<<<<<<<<<<<<<<<<<<<<<<<\n");
+	//	int act_len = iLineByteCnt -skip ;
+	//	memmove(p_line, map_buf + i*iLineByteCnt, iLineByteCnt);
+	//	for (int j = 1; j < act_len+1; j++){
+	//		printf("0x%2X ", p_line[j-1]);
+	//		if (j % 3 == 0) printf("\r\n");
+	//	}
 
-	}
+	//}
 
 	printf("wudan\n");
 
