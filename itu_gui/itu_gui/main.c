@@ -13,6 +13,30 @@ static ITUSurface   *screenSurf;
 
 static HWND hWnd;
 
+
+typedef struct 
+{
+	uint16_t bfType;
+	uint32_t bfSize;
+	uint16_t bfReserved1;
+	uint16_t bfReserved2;
+	uint32_t bfOffBits;
+} bmpfileinfo;
+
+typedef struct {
+	uint32_t      biSize;
+	uint32_t      biWidth;
+	uint32_t      biHeight;
+	uint16_t      biPlanes;
+	uint16_t      biBitCount;
+	uint32_t      biCompression;
+	uint32_t      biSizeImage;
+	uint32_t      biXPelsPerMeter;
+	uint32_t      biYPelsPerMeter;
+	uint32_t      biClrUsed;
+	uint32_t      biClrImportant;
+}bmpinfo;
+
 static LRESULT CALLBACK
 WndProc(
 HWND hwnd,
@@ -108,10 +132,113 @@ static void _test_init()
 	
 }
 
+uint8_t *map_buf = NULL;
+void test_readfile()
+{
+	bmpfileinfo fileheader;
+	bmpinfo infoheader;
+	memset(&fileheader, 0, sizeof(bmpfileinfo));
+	memset(&infoheader, 0, sizeof(bmpinfo));
+
+	FILE *p_file;
+	uint8_t buf[100];
+	uint32_t len = 0;
+	uint32_t idx = 0;
+	memset(buf, 0, sizeof(buf));
+	
+
+	p_file = fopen("1.bmp", "r");
+
+	if (p_file){
+	
+		printf("ok\n");
+	}
+	else{
+		return -1;
+		printf("no\n");
+	}
+
+	//∂¡»°fileinfo
+	len = fread(buf, 1, 14+40, p_file);
+	
+	if (len < 14){
+		printf("err! read info\n");
+		return -1;
+	}
+
+	memmove(&fileheader.bfType, buf, 2);
+	memmove(&fileheader.bfSize, buf + 2, 4);
+	memmove(&fileheader.bfReserved1, buf + 2 + 4, 2);
+	memmove(&fileheader.bfReserved2, buf + 2 + 2 + 4, 2);
+	memmove(&fileheader.bfOffBits, buf + 2 + 2 + 2 + 4, 4);
+	idx = 2 + 2 + 2 + 4+4;
+
+	memmove(&infoheader.biSize, buf + idx, 4);
+	idx += 4;
+
+	memmove(&infoheader.biWidth, buf + idx, 4);
+	idx += 4;
+
+	memmove(&infoheader.biHeight, buf + idx, 4);
+	idx += 4;
+
+	memmove(&infoheader.biPlanes, buf + idx, 2);
+	idx += 2;
+
+	memmove(&infoheader.biBitCount, buf + idx, 2);
+	idx += 2;
+
+	memmove(&infoheader.biCompression, buf + idx, 4);
+	idx += 4;
+
+	memmove(&infoheader.biSizeImage, buf + idx, 4);
+	idx += 4;
+
+	memmove(&infoheader.biXPelsPerMeter, buf + idx, 4);
+	idx += 4;
+
+	memmove(&infoheader.biYPelsPerMeter, buf + idx, 4);
+	idx += 4;
+
+	memmove(&infoheader.biClrUsed, buf + idx, 4);
+	idx += 4;
+
+	memmove(&infoheader.biClrImportant, buf + idx, 4);
+	idx += 4;
+
+
+	int iLineByteCnt = (((infoheader.biWidth * infoheader.biBitCount) + 31) >> 5) << 2;
+
+
+	int m_iImageDataSize = iLineByteCnt * infoheader.biHeight;
+
+	int skip = 4 - ((infoheader.biWidth * 24) >> 3) & 3;
+
+
+	map_buf = calloc(1, infoheader.biSizeImage);
+	len = fread(map_buf, 1, infoheader.biSizeImage, p_file);
+
+	uint8_t *p_line = calloc(1, iLineByteCnt);
+
+	for (int i = 0; i < infoheader.biHeight ; i++){
+		printf("<<<<<<<<<<<<<<<<<<<<<<<\n");
+		int act_len = iLineByteCnt -skip ;
+		memmove(p_line, map_buf + i*iLineByteCnt, iLineByteCnt);
+		for (int j = 1; j < act_len+1; j++){
+			printf("0x%2X ", p_line[j-1]);
+			if (j % 3 == 0) printf("\r\n");
+		}
+
+	}
+
+	printf("wudan\n");
+
+	return;
+}
 
 int main(void)
 {
-
+	test_readfile();
 	WNDCLASS wc;
 	MSG msg;
 
