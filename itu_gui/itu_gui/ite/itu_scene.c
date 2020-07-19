@@ -39,232 +39,232 @@ void ituSceneExit(ITUScene *scene)
 bool ituSceneUpdate(ITUScene *scene, ITUEvent ev, int arg1, int arg2, int arg3)
 {
     bool    result = false;
-   // ITCTree *node;
-   // int     i, childCount;
-   // ITUWidget* children[ITU_WIDGET_CHILD_MAX];
+    ITCTree *node;
+    int     i, childCount;
+    ITUWidget* children[ITU_WIDGET_CHILD_MAX];
 
-   // assert(scene);
-   // assert(scene->root);
-   // ITU_ASSERT_THREAD();
+    assert(scene);
+    assert(scene->root);
+    ITU_ASSERT_THREAD();
 
-   // if (ev == ITU_EVENT_MOUSELONGPRESS && scene->dragged)
-   //     return false;
+    if (ev == ITU_EVENT_MOUSELONGPRESS && scene->dragged)
+        return false;
 
-   // if (ev == ITU_EVENT_MOUSEDOWN
-   //     || ev == ITU_EVENT_MOUSEUP
-   //     || ev == ITU_EVENT_MOUSEDOUBLECLICK
-   //     || ev == ITU_EVENT_MOUSEMOVE
-   //     || ev == ITU_EVENT_MOUSELONGPRESS
-   //     || ev == ITU_EVENT_TOUCHSLIDELEFT
-   //     || ev == ITU_EVENT_TOUCHSLIDEUP
-   //     || ev == ITU_EVENT_TOUCHSLIDERIGHT
-   //     || ev == ITU_EVENT_TOUCHSLIDEDOWN
-   //     || ev == ITU_EVENT_TOUCHPINCH)
-   // {
-   //     if (scene->rotation == ITU_ROT_0)
-   //     {
-   //         scene->lastMouseX = arg2;
-   //         scene->lastMouseY = arg3;
-   //     }
-   //     else
-   //     {
-   //         int x, y;
+    if (ev == ITU_EVENT_MOUSEDOWN
+        || ev == ITU_EVENT_MOUSEUP
+        || ev == ITU_EVENT_MOUSEDOUBLECLICK
+        || ev == ITU_EVENT_MOUSEMOVE
+        || ev == ITU_EVENT_MOUSELONGPRESS
+        || ev == ITU_EVENT_TOUCHSLIDELEFT
+        || ev == ITU_EVENT_TOUCHSLIDEUP
+        || ev == ITU_EVENT_TOUCHSLIDERIGHT
+        || ev == ITU_EVENT_TOUCHSLIDEDOWN
+        || ev == ITU_EVENT_TOUCHPINCH)
+    {
+        if (scene->rotation == ITU_ROT_0)
+        {
+            scene->lastMouseX = arg2;
+            scene->lastMouseY = arg3;
+        }
+        else
+        {
+            int x, y;
 
-   //         if (scene->rotation == ITU_ROT_90)
-   //         {
-   //             x = arg3;
-   //             y = scene->screenWidth - arg2;
+            if (scene->rotation == ITU_ROT_90)
+            {
+                x = arg3;
+                y = scene->screenWidth - arg2;
 
-   //             //wudan add 2020-5-21
-   //             /*switch (ev)
-   //             {
-   //             case ITU_EVENT_TOUCHSLIDELEFT:
-   //                 ev = ITU_EVENT_TOUCHSLIDEDOWN;
-   //                 break;
+                //wudan add 2020-5-21
+                /*switch (ev)
+                {
+                case ITU_EVENT_TOUCHSLIDELEFT:
+                    ev = ITU_EVENT_TOUCHSLIDEDOWN;
+                    break;
 
-   //             case ITU_EVENT_TOUCHSLIDEUP:
-   //                 ev = ITU_EVENT_TOUCHSLIDELEFT;
-   //                 break;
+                case ITU_EVENT_TOUCHSLIDEUP:
+                    ev = ITU_EVENT_TOUCHSLIDELEFT;
+                    break;
 
-   //             case ITU_EVENT_TOUCHSLIDERIGHT:
-   //                 ev = ITU_EVENT_TOUCHSLIDEUP;
-   //                 break;
+                case ITU_EVENT_TOUCHSLIDERIGHT:
+                    ev = ITU_EVENT_TOUCHSLIDEUP;
+                    break;
 
-   //             case ITU_EVENT_TOUCHSLIDEDOWN:
-   //                 ev = ITU_EVENT_TOUCHSLIDERIGHT;
-   //                 break;
-   //             }*/
-   //         }
-   //         else if (scene->rotation == ITU_ROT_180)
-   //         {
-   //             x = scene->screenWidth - arg2;
-   //             y = scene->screenHeight - arg3;
+                case ITU_EVENT_TOUCHSLIDEDOWN:
+                    ev = ITU_EVENT_TOUCHSLIDERIGHT;
+                    break;
+                }*/
+            }
+            else if (scene->rotation == ITU_ROT_180)
+            {
+                x = scene->screenWidth - arg2;
+                y = scene->screenHeight - arg3;
 
-   //             switch (ev)
-   //             {
-   //             case ITU_EVENT_TOUCHSLIDELEFT:
-   //                 ev = ITU_EVENT_TOUCHSLIDERIGHT;
-   //                 break;
+                switch (ev)
+                {
+                case ITU_EVENT_TOUCHSLIDELEFT:
+                    ev = ITU_EVENT_TOUCHSLIDERIGHT;
+                    break;
 
-   //             case ITU_EVENT_TOUCHSLIDEUP:
-   //                 ev = ITU_EVENT_TOUCHSLIDEDOWN;
-   //                 break;
+                case ITU_EVENT_TOUCHSLIDEUP:
+                    ev = ITU_EVENT_TOUCHSLIDEDOWN;
+                    break;
 
-   //             case ITU_EVENT_TOUCHSLIDERIGHT:
-   //                 ev = ITU_EVENT_TOUCHSLIDELEFT;
-   //                 break;
+                case ITU_EVENT_TOUCHSLIDERIGHT:
+                    ev = ITU_EVENT_TOUCHSLIDELEFT;
+                    break;
 
-   //             case ITU_EVENT_TOUCHSLIDEDOWN:
-   //                 ev = ITU_EVENT_TOUCHSLIDEUP;
-   //                 break;
-   //             }
-   //         }
-   //         else // if (scene->rotation == ITU_ROT_270)
-   //         {
-   //             x = scene->screenHeight - arg3;
-   //             y = arg2;
+                case ITU_EVENT_TOUCHSLIDEDOWN:
+                    ev = ITU_EVENT_TOUCHSLIDEUP;
+                    break;
+                }
+            }
+            else // if (scene->rotation == ITU_ROT_270)
+            {
+                x = scene->screenHeight - arg3;
+                y = arg2;
 
-   //             switch (ev)
-   //             {
-   //             case ITU_EVENT_TOUCHSLIDELEFT:
-   //                 ev = ITU_EVENT_TOUCHSLIDEUP;
-   //                 break;
+                switch (ev)
+                {
+                case ITU_EVENT_TOUCHSLIDELEFT:
+                    ev = ITU_EVENT_TOUCHSLIDEUP;
+                    break;
 
-   //             case ITU_EVENT_TOUCHSLIDEUP:
-   //                 ev = ITU_EVENT_TOUCHSLIDERIGHT;
-   //                 break;
+                case ITU_EVENT_TOUCHSLIDEUP:
+                    ev = ITU_EVENT_TOUCHSLIDERIGHT;
+                    break;
 
-   //             case ITU_EVENT_TOUCHSLIDERIGHT:
-   //                 ev = ITU_EVENT_TOUCHSLIDEDOWN;
-   //                 break;
+                case ITU_EVENT_TOUCHSLIDERIGHT:
+                    ev = ITU_EVENT_TOUCHSLIDEDOWN;
+                    break;
 
-   //             case ITU_EVENT_TOUCHSLIDEDOWN:
-   //                 ev = ITU_EVENT_TOUCHSLIDELEFT;
-   //                 break;
-   //             }
-   //         }
-   //         // modify by meizhen start 20200513
-   //         //scene->lastMouseX = arg2 = x;
-   //         //scene->lastMouseY = arg3 = y;
-   //         
-   //         // modify by meizhen end 20200513
-   //         scene->lastMouseX = arg2;
-   //         scene->lastMouseY = arg3;
-   //     }
-   //     scene->lastMouseEvent = ev;
+                case ITU_EVENT_TOUCHSLIDEDOWN:
+                    ev = ITU_EVENT_TOUCHSLIDELEFT;
+                    break;
+                }
+            }
+            // modify by meizhen start 20200513
+            //scene->lastMouseX = arg2 = x;
+            //scene->lastMouseY = arg3 = y;
+            
+            // modify by meizhen end 20200513
+            scene->lastMouseX = arg2;
+            scene->lastMouseY = arg3;
+        }
+        scene->lastMouseEvent = ev;
 
-   //     if (ev == ITU_EVENT_TOUCHPINCH)
-   //         scene->lastMouseDist = arg1;
-   // }
-   // 
-   // childCount = 0;
-   // for (node = &scene->root->tree; node; node = node->sibling)
-   //     children[childCount++] = (ITUWidget *)node;
+        if (ev == ITU_EVENT_TOUCHPINCH)
+            scene->lastMouseDist = arg1;
+    }
+    
+    childCount = 0;
+    for (node = &scene->root->tree; node; node = node->sibling)
+        children[childCount++] = (ITUWidget *)node;
 
-   // switch (ev)
-   // {
-   // case ITU_EVENT_LANGUAGE:
-   // case ITU_EVENT_LOAD_IMAGE:
-   //     while (--childCount >= 0)
-   //     {
-   //         ITUWidget *widget = children[childCount];
-   //         result |= ituWidgetUpdate(widget, ev, arg1, arg2, arg3);
-   //     }
-   //     break;
+    switch (ev)
+    {
+    case ITU_EVENT_LANGUAGE:
+    case ITU_EVENT_LOAD_IMAGE:
+        while (--childCount >= 0)
+        {
+            ITUWidget *widget = children[childCount];
+            result |= ituWidgetUpdate(widget, ev, arg1, arg2, arg3);
+        }
+        break;
 
-   // case ITU_EVENT_PRESS:
-   // case ITU_EVENT_KEYDOWN:
-   // case ITU_EVENT_MOUSEDOWN:
-   // case ITU_EVENT_MOUSEDOUBLECLICK:
-   // case ITU_EVENT_MOUSEMOVE:
-   // case ITU_EVENT_TOUCHSLIDELEFT:
-   // case ITU_EVENT_TOUCHSLIDEUP:
-   // case ITU_EVENT_TOUCHSLIDERIGHT:
-   // case ITU_EVENT_TOUCHSLIDEDOWN:
-   // case ITU_EVENT_MOUSELONGPRESS:
-   //     while (--childCount >= 0)
-   //     {
-   //         ITUWidget *widget = children[childCount];
-   //         if (widget->visible)
-   //         {
-   //             result |= ituWidgetUpdate(widget, ev, arg1, arg2, arg3);
-   //             if (result)
-   //                 break;
-   //         }
-   //     }
-   //     break;
+    case ITU_EVENT_PRESS:
+    case ITU_EVENT_KEYDOWN:
+    case ITU_EVENT_MOUSEDOWN:
+    case ITU_EVENT_MOUSEDOUBLECLICK:
+    case ITU_EVENT_MOUSEMOVE:
+    case ITU_EVENT_TOUCHSLIDELEFT:
+    case ITU_EVENT_TOUCHSLIDEUP:
+    case ITU_EVENT_TOUCHSLIDERIGHT:
+    case ITU_EVENT_TOUCHSLIDEDOWN:
+    case ITU_EVENT_MOUSELONGPRESS:
+        while (--childCount >= 0)
+        {
+            ITUWidget *widget = children[childCount];
+            if (widget->visible)
+            {
+                result |= ituWidgetUpdate(widget, ev, arg1, arg2, arg3);
+                if (result)
+                    break;
+            }
+        }
+        break;
 
-   // case ITU_EVENT_KEYUP:
-   // case ITU_EVENT_MOUSEUP:
-   //     while (--childCount >= 0)
-   //     {
-   //         ITUWidget *widget = children[childCount];
-			////wudan 2020/06/15
-			//if (widget->visible){
-			//	result |= ituWidgetUpdate(widget, ev, arg1, arg2, arg3);
-			//	if (result)
-			//		break;
-			//}
-			////old
-   //         //result |= ituWidgetUpdate(widget, ev, arg1, arg2, arg3);
-   //         //if (result)
-   //         //    break;
-   //     }
-   //     break;
+    case ITU_EVENT_KEYUP:
+    case ITU_EVENT_MOUSEUP:
+        while (--childCount >= 0)
+        {
+            ITUWidget *widget = children[childCount];
+			//wudan 2020/06/15
+			if (widget->visible){
+				result |= ituWidgetUpdate(widget, ev, arg1, arg2, arg3);
+				if (result)
+					break;
+			}
+			//old
+            //result |= ituWidgetUpdate(widget, ev, arg1, arg2, arg3);
+            //if (result)
+            //    break;
+        }
+        break;
 
 
-   // default:
-   //     for (node = &scene->root->tree; node; node = node->sibling)
-   //     {
-   //         ITUWidget *widget = (ITUWidget *)node;
-   //         if (widget->visible)
-   //             result |= ituWidgetUpdate(widget, ev, arg1, arg2, arg3);
-   //     }
-   //     break;
-   // }
+    default:
+        for (node = &scene->root->tree; node; node = node->sibling)
+        {
+            ITUWidget *widget = (ITUWidget *)node;
+            if (widget->visible)
+                result |= ituWidgetUpdate(widget, ev, arg1, arg2, arg3);
+        }
+        break;
+    }
 
-   // if (scene->focused && (ev == ITU_EVENT_KEYUP || ev == ITU_EVENT_MOUSEUP || ev == ITU_EVENT_TOUCHSLIDEUP))
-   // {
-   //     ITUWidget *focused = scene->focused;
-   //     if (focused->type == ITU_BUTTON
-   //         || focused->type == ITU_CHECKBOX
-   //         || focused->type == ITU_RADIOBOX)
-   //     {
-   //         if (ituButtonIsPressed(focused))
-   //         {
-   //             ituWidgetUpdate(focused, ev, arg1, arg2, arg3);
-   //         }
-   //     }
-   // }
+    if (scene->focused && (ev == ITU_EVENT_KEYUP || ev == ITU_EVENT_MOUSEUP || ev == ITU_EVENT_TOUCHSLIDEUP))
+    {
+        ITUWidget *focused = scene->focused;
+        if (focused->type == ITU_BUTTON
+            || focused->type == ITU_CHECKBOX
+            || focused->type == ITU_RADIOBOX)
+        {
+            if (ituButtonIsPressed(focused))
+            {
+                ituWidgetUpdate(focused, ev, arg1, arg2, arg3);
+            }
+        }
+    }
 
-   // if (ev < ITU_EVENT_CUSTOM)
-   // {
-   //     // execute delay queue
-   //     if (ev == ITU_EVENT_TIMER)
-   //     {
-   //         ituExecDelayQueue(scene->delayQueue);
+    if (ev < ITU_EVENT_CUSTOM)
+    {
+        // execute delay queue
+        if (ev == ITU_EVENT_TIMER)
+        {
+            ituExecDelayQueue(scene->delayQueue);
 
-   //         // execute delayed commands
-   //         for (i = 0; i < ITU_COMMAND_SIZE; i++)
-   //         {
-   //             ITUCommand *cmd = &scene->commands[i];
-   //             if (cmd->delay > 0)
-   //             {
-   //                 if (--cmd->delay == 0)
-   //                 {
-   //                     cmd->func(cmd->arg);
-   //                     result = true;
-   //                 }
-   //             }
-   //         }
-   //     }
+            // execute delayed commands
+            for (i = 0; i < ITU_COMMAND_SIZE; i++)
+            {
+                ITUCommand *cmd = &scene->commands[i];
+                if (cmd->delay > 0)
+                {
+                    if (--cmd->delay == 0)
+                    {
+                        cmd->func(cmd->arg);
+                        result = true;
+                    }
+                }
+            }
+        }
 
-   //     // flush action queue
-   //     result |= ituFlushActionQueue(scene->actionQueue, &scene->actionQueueLen);
-   // }
+        // flush action queue
+        result |= ituFlushActionQueue(scene->actionQueue, &scene->actionQueueLen);
+    }
 
-   // if (ev == ITU_EVENT_MOUSEUP)
-   //     scene->dragged = NULL;
+    if (ev == ITU_EVENT_MOUSEUP)
+        scene->dragged = NULL;
 
     return result;
 }

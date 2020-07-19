@@ -3,7 +3,7 @@
 
 
 #include <windows.h>
-
+#include <windowsx.h>
 #include <stdint.h>
 #include <assert.h>
 #include "ite\itu.h"
@@ -44,8 +44,37 @@ UINT msg,
 WPARAM wparam,
 LPARAM lparam)
 {
+	int xPos;
+	int yPos;
 	switch (msg)
 	{
+	case WM_LBUTTONDOWN:
+		xPos = GET_X_LPARAM(lparam);
+		yPos = GET_Y_LPARAM(lparam);
+		printf("x=%d,y=%d\n", xPos, yPos);
+		printf("down\n");
+		break;
+
+	case WM_LBUTTONUP:
+		printf("UP\n");
+		break;
+
+	case WM_MOUSEMOVE:
+		switch (wparam)
+		{
+		case MK_LBUTTON:
+			xPos = GET_X_LPARAM(lparam);
+			yPos = GET_Y_LPARAM(lparam);
+			printf("x=%d,y=%d\n", xPos, yPos);
+			printf("ok\n");
+			break;
+		case MK_MBUTTON:
+			printf("ok\n");
+			break;
+		default:
+			break;
+		}
+		break;
 	case WM_KEYDOWN:
 		switch (wparam)
 		{
@@ -110,7 +139,7 @@ void test_readfile()
 	memset(buf, 0, sizeof(buf));
 
 
-	p_file = fopen("222.bmp", "rb");
+	p_file = fopen("33.bmp", "rb");
 
 	if (p_file){
 
@@ -221,10 +250,12 @@ static void _test_init()
 	memset(&rect, 0, sizeof(ITURectangle));
 	ITUColor color; 
 	memset(&color, 0, sizeof(ITUColor));
-	rect.height = 480;
-	rect.width = 854;
-	rect.x = 0;
-	rect.y = 0;
+
+	rect.width = 300;
+	rect.height = 200;
+	
+	rect.x = 50;
+	rect.y = 60;
 	color.red = 255;
 	color.alpha = 255;
 
@@ -239,8 +270,9 @@ static void _test_init()
 
 	bg1_icon->surf = calloc(1, sizeof(ITUSurface));
 
-	bg1_icon->surf->height = 480;
-	bg1_icon->surf->width = 854;
+	bg1_icon->surf->width = 300;
+	bg1_icon->surf->height = 200;
+	//bg1_icon->surf->pitch = 300 * 2;
 	bg1_icon->surf->size = len_t;
 
 	bg1_icon->surf->addr = map_buf;
@@ -329,6 +361,9 @@ int main(void)
 	// message loop
 	while (GetMessage(&msg, NULL, 0, 0))
 	{
+		ituSceneUpdate(&theScene, ITU_EVENT_TIMER, 0, 0, 0);
+		
+
 		ituSceneDraw(&theScene, screenSurf);
 		ituFlip(screenSurf);
 

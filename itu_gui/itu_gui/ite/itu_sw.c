@@ -3156,14 +3156,14 @@ void ituSWInit(void)
 
             bmiHeader->biSize = sizeof(BITMAPINFOHEADER);
             bmiHeader->biWidth = ithLcdGetWidth();
-            bmiHeader->biHeight = (LONG)ithLcdGetHeight();
+            bmiHeader->biHeight = -(LONG)ithLcdGetHeight();
             bmiHeader->biPlanes = 1;
             bmiHeader->biBitCount = 16;//16
 			bmiHeader->biCompression = BI_BITFIELDS;// BI_BITFIELDS;
             bmiHeader->biSizeImage = 0;
             bmiHeader->biXPelsPerMeter = 0;
             bmiHeader->biYPelsPerMeter = 0;
-            bmiHeader->biClrUsed = 3;
+            bmiHeader->biClrUsed = 0;
             bmiHeader->biClrImportant = 0;
 
             colors = (DWORD *)(bmiHeader + 1);
