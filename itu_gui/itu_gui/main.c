@@ -277,6 +277,9 @@ static void _test_init()
 
 	bg1_icon->surf->addr = map_buf;
 
+	ITULayer *layer = calloc(1, sizeof(ITULayer));
+
+	//theScene.root = layer;
 	theScene.root = bg1;
 
 	//memset(&rect, 0, sizeof(ITURectangle));
@@ -290,7 +293,7 @@ static void _test_init()
 	//bg2 = _create_widget(&rect, &color, "wudan2");
 
 
-	//itcTreePushFront(bg1, bg2);
+	//itcTreePushFront(layer, bg1);
 	return;
 
 	
@@ -313,6 +316,10 @@ int main(void)
 
 	//test_wudan();
 	
+	//初始化时间
+	SDL_StartTicks();
+	uint32_t curr_time = 0;
+
 	WNDCLASS wc;
 	MSG msg;
 
@@ -361,8 +368,10 @@ int main(void)
 	// message loop
 	while (GetMessage(&msg, NULL, 0, 0))
 	{
-		ituSceneUpdate(&theScene, ITU_EVENT_TIMER, 0, 0, 0);
+		//ituSceneUpdate(&theScene, ITU_EVENT_TIMER, 0, 0, 0);
 		
+		curr_time = SDL_GetTicks();
+		printf("curr_time=%d\n", curr_time);
 
 		ituSceneDraw(&theScene, screenSurf);
 		ituFlip(screenSurf);

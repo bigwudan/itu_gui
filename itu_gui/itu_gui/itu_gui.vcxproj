@@ -79,6 +79,7 @@
     <ClCompile Include="ite\itu_sw.c" />
     <ClCompile Include="ite\itu_utility.c" />
     <ClCompile Include="ite\itu_widget.c" />
+    <ClCompile Include="ite\SDL_systimer.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>
@@ -90,6 +91,7 @@
     <ClInclude Include="ite\itu.h" />
     <ClInclude Include="ite\itu_cfg.h" />
     <ClInclude Include="ite\itu_private.h" />
+    <ClInclude Include="ite\SDL_timer.h" />
     <ClInclude Include="ite\stdbool.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
