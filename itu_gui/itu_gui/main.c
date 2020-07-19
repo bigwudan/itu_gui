@@ -93,45 +93,6 @@ static ITUBackground* _create_widget(ITURectangle *rect, ITUColor *color, char *
 	return bg;
 }
 
-//初始化头结点
-static void _test_init()
-{
-	// init itu
-	ituLcdInit();
-	ituSWInit();
-	ITUBackground* bg1 = NULL;
-	ITUBackground* bg2 = NULL;
-	screenSurf = ituGetDisplaySurface();
-	ITURectangle rect;
-	memset(&rect, 0, sizeof(ITURectangle));
-	ITUColor color; 
-	memset(&color, 0, sizeof(ITUColor));
-	rect.height = 200;
-	rect.width = 400;
-	rect.x = 20;
-	rect.y = 30;
-	color.red = 255;
-	color.alpha = 255;
-	bg1 = _create_widget(&rect, &color, "wudan1");
-	theScene.root = bg1;
-
-	memset(&rect, 0, sizeof(ITURectangle));
-	memset(&color, 0, sizeof(ITUColor));
-	rect.height = 60;
-	rect.width = 80;
-	rect.x = 10;
-	rect.y = 20;
-	color.green = 255;
-	color.alpha = 255;
-	bg2 = _create_widget(&rect, &color, "wudan2");
-
-
-	itcTreePushFront(bg1, bg2);
-	return;
-
-	
-}
-
 uint8_t *map_buf = NULL;
 uint32_t len_t = 0;
 void test_readfile()
@@ -145,13 +106,14 @@ void test_readfile()
 	uint8_t buf[100];
 	uint32_t len = 0;
 	uint32_t idx = 0;
+	uint32_t color_idx[3] = { 0 };
 	memset(buf, 0, sizeof(buf));
-	
 
-	p_file = fopen("1.bmp", "r");
+
+	p_file = fopen("222.bmp", "rb");
 
 	if (p_file){
-	
+
 		printf("ok\n");
 	}
 	else{
@@ -160,8 +122,8 @@ void test_readfile()
 	}
 
 	//读取fileinfo
-	len = fread(buf, 1, 14+40, p_file);
-	
+	len = fread(buf, 1, 14 + 40, p_file);
+
 	if (len < 14){
 		printf("err! read info\n");
 		return -1;
@@ -172,7 +134,7 @@ void test_readfile()
 	memmove(&fileheader.bfReserved1, buf + 2 + 4, 2);
 	memmove(&fileheader.bfReserved2, buf + 2 + 2 + 4, 2);
 	memmove(&fileheader.bfOffBits, buf + 2 + 2 + 2 + 4, 4);
-	idx = 2 + 2 + 2 + 4+4;
+	idx = 2 + 2 + 2 + 4 + 4;
 
 	memmove(&infoheader.biSize, buf + idx, 4);
 	idx += 4;
@@ -208,6 +170,15 @@ void test_readfile()
 	idx += 4;
 
 
+
+	//读取掩码
+	//len = fread(buf, 1, 12, p_file);
+	len = fread(&color_idx[0], 1, 4, p_file);
+	len = fread(&color_idx[1], 1, 4, p_file);
+	len = fread(&color_idx[2], 1, 4, p_file);
+
+
+
 	int iLineByteCnt = (((infoheader.biWidth * infoheader.biBitCount) + 31) >> 5) << 2;
 
 
@@ -216,9 +187,9 @@ void test_readfile()
 	int skip = 4 - ((infoheader.biWidth * 24) >> 3) & 3;
 
 
-	map_buf = calloc(1, infoheader.biSizeImage);
-	len = fread(map_buf, 1, infoheader.biSizeImage, p_file);
-	len_t = infoheader.biSizeImage;
+	map_buf = calloc(1, m_iImageDataSize);
+	len = fread(map_buf, 1, m_iImageDataSize, p_file);
+	len_t = m_iImageDataSize;
 	uint8_t *p_line = calloc(1, iLineByteCnt);
 
 	//for (int i = 0; i < infoheader.biHeight ; i++){
@@ -237,9 +208,79 @@ void test_readfile()
 	return;
 }
 
+//初始化头结点
+static void _test_init()
+{
+	// init itu
+	ituLcdInit();
+	ituSWInit();
+	ITUBackground* bg1 = NULL;
+	ITUBackground* bg2 = NULL;
+	screenSurf = ituGetDisplaySurface();
+	ITURectangle rect;
+	memset(&rect, 0, sizeof(ITURectangle));
+	ITUColor color; 
+	memset(&color, 0, sizeof(ITUColor));
+	rect.height = 480;
+	rect.width = 854;
+	rect.x = 0;
+	rect.y = 0;
+	color.red = 255;
+	color.alpha = 255;
+
+
+	
+
+
+	bg1 = _create_widget(&rect, &color, "wudan1");
+
+
+	ITUIcon *bg1_icon = (ITUIcon  *)bg1;
+
+	bg1_icon->surf = calloc(1, sizeof(ITUSurface));
+
+	bg1_icon->surf->height = 480;
+	bg1_icon->surf->width = 854;
+	bg1_icon->surf->size = len_t;
+
+	bg1_icon->surf->addr = map_buf;
+
+	theScene.root = bg1;
+
+	//memset(&rect, 0, sizeof(ITURectangle));
+	//memset(&color, 0, sizeof(ITUColor));
+	//rect.height = 60;
+	//rect.width = 80;
+	//rect.x = 10;
+	//rect.y = 20;
+	//color.green = 255;
+	//color.alpha = 255;
+	//bg2 = _create_widget(&rect, &color, "wudan2");
+
+
+	//itcTreePushFront(bg1, bg2);
+	return;
+
+	
+}
+
+
+
+
+void test_wudan()
+{
+
+	HBITMAP hbitmap = LoadImage(NULL, "1.bmp", IMAGE_BITMAP, 0, 0, LR_DEFAULTCOLOR | LR_DEFAULTSIZE | LR_LOADFROMFILE);
+	assert(hbitmap);
+
+	printf("wudan\n");
+}
+
 int main(void)
 {
-	test_readfile();
+
+	//test_wudan();
+	
 	WNDCLASS wc;
 	MSG msg;
 
@@ -281,8 +322,10 @@ int main(void)
 
 
 
-	_test_init();
+	
 
+	test_readfile();
+	_test_init();
 	// message loop
 	while (GetMessage(&msg, NULL, 0, 0))
 	{

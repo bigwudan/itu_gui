@@ -2556,8 +2556,8 @@ static void SWFlip(ITUSurface *surf)
         SelectObject(bitmapDc, bitmap);
 
         ptr = ithMapVram(swLcdAddr, ithLcdGetPitch() * ithLcdGetHeight(), ITH_VRAM_READ | ITH_VRAM_WRITE);
-        //memcpy(bits, ptr, ithLcdGetPitch() * ithLcdGetHeight());
-		memcpy(bits, map_buf, ithLcdGetPitch() * ithLcdGetHeight());
+        memcpy(bits, ptr, ithLcdGetPitch() * ithLcdGetHeight());
+		//memcpy(bits, map_buf, len_t);
         ithUnmapVram(ptr, ithLcdGetPitch() * ithLcdGetHeight());
 
         BitBlt(dc, 0, 0, ithLcdGetWidth(), ithLcdGetHeight(), bitmapDc, 0, 0, SRCCOPY);
@@ -3156,10 +3156,10 @@ void ituSWInit(void)
 
             bmiHeader->biSize = sizeof(BITMAPINFOHEADER);
             bmiHeader->biWidth = ithLcdGetWidth();
-            bmiHeader->biHeight = -(LONG)ithLcdGetHeight();
+            bmiHeader->biHeight = (LONG)ithLcdGetHeight();
             bmiHeader->biPlanes = 1;
-            bmiHeader->biBitCount = 16;
-            bmiHeader->biCompression = BI_BITFIELDS;
+            bmiHeader->biBitCount = 16;//16
+			bmiHeader->biCompression = BI_BITFIELDS;// BI_BITFIELDS;
             bmiHeader->biSizeImage = 0;
             bmiHeader->biXPelsPerMeter = 0;
             bmiHeader->biYPelsPerMeter = 0;
@@ -3179,7 +3179,7 @@ void ituSWInit(void)
         bitmap                     = CreateDIBSection(dc, (BITMAPINFO *) bmiHeader, DIB_RGB_COLORS, &bits, NULL, 0);
         assert(bitmap);
         assert(bits);
-
+		
         ReleaseDC(win, dc);
         free(bmiHeader);
     }
