@@ -6,6 +6,7 @@
 #include <windowsx.h>
 #include <stdint.h>
 #include <assert.h>
+#include "ite\SDL_events.h"
 #include "ite\itu.h"
 //
 ITUScene            theScene;
@@ -44,6 +45,7 @@ UINT msg,
 WPARAM wparam,
 LPARAM lparam)
 {
+	SDL_Event event_ev;
 	int xPos;
 	int yPos;
 	switch (msg)
@@ -51,12 +53,19 @@ LPARAM lparam)
 	case WM_LBUTTONDOWN:
 		xPos = GET_X_LPARAM(lparam);
 		yPos = GET_Y_LPARAM(lparam);
-		printf("x=%d,y=%d\n", xPos, yPos);
-		printf("down\n");
+		event_ev.type = SDL_MOUSEBUTTONDOWN;
+		event_ev.button.x = xPos;
+		event_ev.button.y = yPos;
+		SDL_PushEvent(&event_ev);
 		break;
 
 	case WM_LBUTTONUP:
-		printf("UP\n");
+		xPos = GET_X_LPARAM(lparam);
+		yPos = GET_Y_LPARAM(lparam);
+		event_ev.type = SDL_MOUSEBUTTONUP;
+		event_ev.button.x = xPos;
+		event_ev.button.y = yPos;
+		SDL_PushEvent(&event_ev);
 		break;
 
 	case WM_MOUSEMOVE:
@@ -65,8 +74,10 @@ LPARAM lparam)
 		case MK_LBUTTON:
 			xPos = GET_X_LPARAM(lparam);
 			yPos = GET_Y_LPARAM(lparam);
-			printf("x=%d,y=%d\n", xPos, yPos);
-			printf("ok\n");
+			event_ev.type = SDL_MOUSEMOTION;
+			event_ev.button.x = xPos;
+			event_ev.button.y = yPos;
+			SDL_PushEvent(&event_ev);
 			break;
 		case MK_MBUTTON:
 			printf("ok\n");
@@ -315,16 +326,17 @@ int main(void)
 {
 
 	//test_wudan();
-	
+	int flag = 0;
 	//初始化时间
 	SDL_StartTicks();
-	uint32_t curr_time = 0;
+
+	//初始化事件循环
+	flag = SDL_StartEventLoop();
+
+
 
 	WNDCLASS wc;
 	MSG msg;
-
-
-
 	// create window
 	wc.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
 	wc.lpfnWndProc = WndProc;
@@ -361,7 +373,7 @@ int main(void)
 
 
 
-	
+	SDL_Event ev;
 
 	test_readfile();
 	_test_init();
@@ -369,9 +381,29 @@ int main(void)
 	while (GetMessage(&msg, NULL, 0, 0))
 	{
 		//ituSceneUpdate(&theScene, ITU_EVENT_TIMER, 0, 0, 0);
+
+
+
+		flag = SDL_PollEvent(&ev);
+		if (flag > 0){
+			switch (ev.type){
+				case SDL_MOUSEMOTION:
+					printf("mouse move...x=%d,y=%d\n", ev.button.x, ev.button.y);
+					break;
+				case SDL_MOUSEBUTTONDOWN:
+					printf("mouse down...x=%d,y=%d\n", ev.button.x, ev.button.y);
+					break;
+				case SDL_MOUSEBUTTONUP:
+					printf("mouse up...x=%d,y=%d\n", ev.button.x, ev.button.y);
+					break;
+			}
 		
-		curr_time = SDL_GetTicks();
-		printf("curr_time=%d\n", curr_time);
+		
+		}
+
+
+
+
 
 		ituSceneDraw(&theScene, screenSurf);
 		ituFlip(screenSurf);
