@@ -63,9 +63,6 @@
     <ClCompile Include="ite\SDL_systimer.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ite\SDL_events.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ite\itu_private.h">
@@ -96,9 +93,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ite\SDL_timer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ite\SDL_events.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
