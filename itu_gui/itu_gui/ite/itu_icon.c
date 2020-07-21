@@ -103,6 +103,7 @@ static void IconLoadImage(ITUIcon* icon, char* path)
 bool ituIconUpdate(ITUWidget* widget, ITUEvent ev, int arg1, int arg2, int arg3)
 {
     bool result = false;
+	result |= ituWidgetUpdateImpl(widget, ev, arg1, arg2, arg3);
     return result;
 }
 

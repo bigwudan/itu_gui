@@ -157,7 +157,7 @@ static ITUButton* _create_button(ITURectangle *rect, ITUColor *color, char *name
 
 	btn->actions[0].action = ITU_ACTION_HIDE;
 	btn->actions[0].ev = ITU_EVENT_PRESS;
-	strcpy(btn->actions[0].target, "bk_wudan1");
+	strcpy(btn->actions[0].target, "bk_wudan2");
 	//strcpy(btn->actions[0].param, "tst");
 	
 
@@ -311,8 +311,10 @@ static void _test_init()
 #define ADD_WIDGET(W,H,X,Y,R,G,B) do{memset(&rect, 0, sizeof(ITURectangle));memset(&color, 0, sizeof(ITUColor));\
 rect.width = W;rect.height = H; rect.x=X;rect.y=Y;color.red=R;color.green=G;color.blue=B;color.alpha=255;}while (0)
 	ITUBackground* bg1 = NULL;
+	ITUBackground* bg2 = NULL;
 	ITULayer *layer1 = NULL;
 	ITUButton* btn1 = NULL;
+	
 	
 	ITURectangle rect;
 	ITUColor color;
@@ -321,16 +323,22 @@ rect.width = W;rect.height = H; rect.x=X;rect.y=Y;color.red=R;color.green=G;colo
 	layer1 = _create_layer(&rect, &color, "layer1");
 	theScene.root = layer1;
 
-	//建立btn
-	ADD_WIDGET(150, 100, 50, 60, 255, 0, 0);
+	//建立back
+	ADD_WIDGET(T_WIDTH, T_HEIGHT, 0, 0, 255, 0, 0);
 	bg1 = _create_background(&rect, &color, "bk_wudan1");
 	itcTreePushFront(layer1, bg1);
 
 
+	//建立back
+	ADD_WIDGET(150, 100, 10, 10, 255, 255, 0);
+	bg2 = _create_background(&rect, &color, "bk_wudan2");
+	itcTreePushFront(bg1, bg2);
+
+
 	//建立btn
-	ADD_WIDGET(60, 60, 220, 200, 255, 0, 0);
-	btn1 = _create_button(&rect, &color, "btn_wudan1");
-	itcTreePushFront(layer1, btn1);
+	ADD_WIDGET(60, 60, 220, 200, 255, 255, 0);
+	btn1 = _create_button(&rect, &color, "btn_wudan2");
+	itcTreePushFront(bg1, btn1);
 
 
 
