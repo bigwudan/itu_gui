@@ -66,6 +66,15 @@
     <ClCompile Include="ite\SDL_events.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ite\itp_posix_win32.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ite\itu_button.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ite\itu_icon.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ite\itu_private.h">

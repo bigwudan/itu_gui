@@ -518,7 +518,7 @@ void ituBackgroundInit(ITUBackground* bg)
     memset(bg, 0, sizeof (ITUBackground));
 
     //(&bg->icon);
-    
+	ituIconInit(&bg->icon);
     ituWidgetSetType(bg, ITU_BACKGROUND);
     ituWidgetSetName(bg, bgName);
     ituWidgetSetClone(bg, ituBackgroundClone);

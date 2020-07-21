@@ -31,3 +31,9 @@ void ituSurfaceRelease(ITUSurface *surf)
 	else
 		ituDestroySurface(surf);
 }
+
+ITUSurface *ituSurfaceDecompress(ITUSurface *surf)
+{
+	ITUSurface   *retSurf = NULL;
+	return retSurf;
+}

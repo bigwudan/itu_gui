@@ -117,7 +117,7 @@ LPARAM lparam)
 
 
 
-static ITUBackground* _create_widget(ITURectangle *rect, ITUColor *color, char *name)
+static ITUBackground* _create_background(ITURectangle *rect, ITUColor *color, char *name)
 {
 	ITUBackground* bg = calloc(1, sizeof(ITUBackground));
 	ituBackgroundInit(bg);
@@ -125,13 +125,67 @@ static ITUBackground* _create_widget(ITURectangle *rect, ITUColor *color, char *
 	ITUWidget* widget = (ITUWidget*)bg;
 	memmove(&widget->rect, rect, sizeof(ITURectangle));
 	memmove(&widget->color, color, sizeof(ITUColor));
-
 	strcpy(widget->name, name);
-
-
 	widget->alpha = 255;
 	return bg;
 }
+
+static ITULayer* _create_layer(ITURectangle *rect, ITUColor *color, char *name)
+{
+	ITULayer* layer = NULL;
+	layer = calloc(1, sizeof(ITULayer));
+	ituLayerInit(layer);
+	((ITUWidget *)layer)->visible = 1;
+	ITUWidget* widget = (ITUWidget*)layer;
+	memmove(&widget->rect, rect, sizeof(ITURectangle));
+	memmove(&widget->color, color, sizeof(ITUColor));
+	strcpy(widget->name, name);
+	widget->alpha = 255;
+	return layer;
+}
+//建立button
+static ITUButton* _create_button(ITURectangle *rect, ITUColor *color, char *name)
+{
+	ITUButton* btn = calloc(1, sizeof(ITUButton));
+	ituButtonInit(btn);
+	((ITUWidget *)btn)->visible = 1;
+	ITUWidget* widget = (ITUWidget*)btn;
+	memmove(&widget->rect, rect, sizeof(ITURectangle));
+	memmove(&widget->color, color, sizeof(ITUColor));
+	strcpy(widget->name, name);
+	widget->alpha = 255;
+
+	btn->actions[0].action = ITU_ACTION_HIDE;
+	btn->actions[0].ev = ITU_EVENT_PRESS;
+	strcpy(btn->actions[0].target, "bk_wudan1");
+	//strcpy(btn->actions[0].param, "tst");
+	
+
+	
+
+
+	//ITURectangle rect;
+	//memset(&rect, 0, sizeof(ITURectangle));
+	//ITUColor color;
+	//memset(&color, 0, sizeof(ITUColor));
+	//rect.width = 80;
+	//rect.height = 80;
+	//rect.x = 250;
+	//rect.y = 200;
+	//color.red = 255;
+	//color.alpha = 255;
+	//((ITUWidget *)btn)->visible = 1;
+	//ITUWidget* widget = (ITUWidget*)btn;
+	//memmove(&widget->rect, &rect, sizeof(ITURectangle));
+	//memmove(&widget->color, &color, sizeof(ITUColor));
+	//strcpy(widget->name, name);
+	//widget->alpha = 255;
+
+	return btn;
+}
+
+
+
 
 uint8_t *map_buf = NULL;
 uint32_t len_t = 0;
@@ -248,50 +302,55 @@ void test_readfile()
 	return;
 }
 
+
+
+
 //初始化头结点
 static void _test_init()
 {
-	// init itu
-	ituLcdInit();
-	ituSWInit();
+#define ADD_WIDGET(W,H,X,Y,R,G,B) do{memset(&rect, 0, sizeof(ITURectangle));memset(&color, 0, sizeof(ITUColor));\
+rect.width = W;rect.height = H; rect.x=X;rect.y=Y;color.red=R;color.green=G;color.blue=B;color.alpha=255;}while (0)
 	ITUBackground* bg1 = NULL;
-	ITUBackground* bg2 = NULL;
-	screenSurf = ituGetDisplaySurface();
+	ITULayer *layer1 = NULL;
+	ITUButton* btn1 = NULL;
+	
 	ITURectangle rect;
-	memset(&rect, 0, sizeof(ITURectangle));
 	ITUColor color;
-	memset(&color, 0, sizeof(ITUColor));
+	//建立layer
+	ADD_WIDGET(T_WIDTH, T_HEIGHT, 0, 0, 0, 0, 0);
+	layer1 = _create_layer(&rect, &color, "layer1");
+	theScene.root = layer1;
 
-	rect.width = 300;
-	rect.height = 200;
-
-	rect.x = 50;
-	rect.y = 60;
-	color.red = 255;
-	color.alpha = 255;
-
-
+	//建立btn
+	ADD_WIDGET(150, 100, 50, 60, 255, 0, 0);
+	bg1 = _create_background(&rect, &color, "bk_wudan1");
+	itcTreePushFront(layer1, bg1);
 
 
+	//建立btn
+	ADD_WIDGET(60, 60, 220, 200, 255, 0, 0);
+	btn1 = _create_button(&rect, &color, "btn_wudan1");
+	itcTreePushFront(layer1, btn1);
 
-	bg1 = _create_widget(&rect, &color, "wudan1");
 
 
-	ITUIcon *bg1_icon = (ITUIcon  *)bg1;
+	//ITUIcon *bg1_icon = (ITUIcon  *)bg1;
+	//bg1_icon->surf = calloc(1, sizeof(ITUSurface));
+	//bg1_icon->surf->width = 300;
+	//bg1_icon->surf->height = 200;
+	//bg1_icon->surf->size = len_t;
+	//bg1_icon->surf->addr = map_buf;
 
-	bg1_icon->surf = calloc(1, sizeof(ITUSurface));
 
-	bg1_icon->surf->width = 300;
-	bg1_icon->surf->height = 200;
-	//bg1_icon->surf->pitch = 300 * 2;
-	bg1_icon->surf->size = len_t;
+	//ITUButton* btn1 = _create_button("btn1");
 
-	bg1_icon->surf->addr = map_buf;
+	//ITULayer *layer = calloc(1, sizeof(ITULayer));
+	//ituLayerInit(layer);
 
-	ITULayer *layer = calloc(1, sizeof(ITULayer));
 
 	//theScene.root = layer;
-	theScene.root = bg1;
+	//itcTreePushFront(layer, bg1);
+	//theScene.root = bg1;
 
 	//memset(&rect, 0, sizeof(ITURectangle));
 	//memset(&color, 0, sizeof(ITUColor));
@@ -374,14 +433,19 @@ int main(void)
 
 
 	SDL_Event ev;
+	// init itu
+	ituLcdInit();
+	ituSWInit();
+	ituSceneInit(&theScene, NULL);
+	screenSurf = ituGetDisplaySurface();
 
-	test_readfile();
+	
 	_test_init();
 	// message loop
 	while (GetMessage(&msg, NULL, 0, 0))
 	{
 		//ituSceneUpdate(&theScene, ITU_EVENT_TIMER, 0, 0, 0);
-
+		bool result = false;
 
 
 		flag = SDL_PollEvent(&ev);
@@ -395,6 +459,7 @@ int main(void)
 				break;
 			case SDL_MOUSEBUTTONUP:
 				printf("mouse up...x=%d,y=%d\n", ev.button.x, ev.button.y);
+				result = ituSceneUpdate(&theScene, ITU_EVENT_MOUSEDOWN, ev.button.button, ev.button.x, ev.button.y);
 				break;
 			}
 
