@@ -490,6 +490,635 @@ void ituWidgetSetNameImpl(ITUWidget* widget, const char* name)
 void ituWidgetSetVisibleImpl(ITUWidget* widget, bool visible)
 {
 	assert(widget);
+	ITU_ASSERT_THREAD();
+
+	if (!visible && (widget->flags & ITU_ALWAYS_VISIBLE))
+	{
+		return;
+	}
+	else if (widget->effect)
+	{
+		if (widget->state == ITU_STATE_HIDING)
+		{
+			widget->visible = false;
+			ituWidgetUpdate(widget, ITU_EVENT_RELEASE, 0, 0, 0);
+		}
+		ituEffectStop(widget->effect, widget);
+		ituEffectExit(widget->effect);
+		free(widget->effect);
+		widget->effect = NULL;
+		widget->state = ITU_STATE_NORMAL;
+		ituWidgetSetEffect(widget, ITU_STATE_NORMAL, 0);
+	}
+	else if (widget->visible == visible)
+	{
+		return;
+	}
+
+	if (visible)
+	{
+		switch (widget->effects[ITU_STATE_SHOWING])
+		{
+		case ITU_EFFECT_FADE:
+			widget->effect = malloc(sizeof(ITUFadeEffect));
+			if (widget->effect)
+			{
+				int step = widget->effects[ITU_STATE_NORMAL];
+
+				ituFadeEffectInit((ITUFadeEffect*)widget->effect, true);
+
+				if (step > 0)
+					ituEffectSetTotalStep(widget->effect, step);
+				else
+					ituEffectSetTotalStep(widget->effect, widget->effectSteps);
+
+				ituEffectStart(widget->effect, widget);
+				ituEffectUpdate(widget->effect, widget);
+				widget->state = ITU_STATE_SHOWING;
+			}
+			break;
+
+		case ITU_EFFECT_SCROLL_LEFT:
+			widget->effect = malloc(sizeof(ITUScrollEffect));
+			if (widget->effect)
+			{
+				int step = widget->effects[ITU_STATE_NORMAL];
+
+				ituScrollEffectInit((ITUScrollEffect*)widget->effect, ITU_SCROLL_IN_LEFT);
+
+				if (step > 0)
+					ituEffectSetTotalStep(widget->effect, step);
+				else
+					ituEffectSetTotalStep(widget->effect, widget->effectSteps);
+
+				ituEffectStart(widget->effect, widget);
+				ituEffectUpdate(widget->effect, widget);
+				widget->state = ITU_STATE_SHOWING;
+			}
+			break;
+
+		case ITU_EFFECT_SCROLL_UP:
+			widget->effect = malloc(sizeof(ITUScrollEffect));
+			if (widget->effect)
+			{
+				int step = widget->effects[ITU_STATE_NORMAL];
+
+				ituScrollEffectInit((ITUScrollEffect*)widget->effect, ITU_SCROLL_IN_UP);
+
+				if (step > 0)
+					ituEffectSetTotalStep(widget->effect, step);
+				else
+					ituEffectSetTotalStep(widget->effect, widget->effectSteps);
+
+				ituEffectStart(widget->effect, widget);
+				ituEffectUpdate(widget->effect, widget);
+				widget->state = ITU_STATE_SHOWING;
+			}
+			break;
+
+		case ITU_EFFECT_SCROLL_RIGHT:
+			widget->effect = malloc(sizeof(ITUScrollEffect));
+			if (widget->effect)
+			{
+				int step = widget->effects[ITU_STATE_NORMAL];
+
+				ituScrollEffectInit((ITUScrollEffect*)widget->effect, ITU_SCROLL_IN_RIGHT);
+
+				if (step > 0)
+					ituEffectSetTotalStep(widget->effect, step);
+				else
+					ituEffectSetTotalStep(widget->effect, widget->effectSteps);
+
+				ituEffectStart(widget->effect, widget);
+				ituEffectUpdate(widget->effect, widget);
+				widget->state = ITU_STATE_SHOWING;
+			}
+			break;
+
+		case ITU_EFFECT_SCROLL_DOWN:
+			widget->effect = malloc(sizeof(ITUScrollEffect));
+			if (widget->effect)
+			{
+				int step = widget->effects[ITU_STATE_NORMAL];
+
+				ituScrollEffectInit((ITUScrollEffect*)widget->effect, ITU_SCROLL_IN_DOWN);
+
+				if (step > 0)
+					ituEffectSetTotalStep(widget->effect, step);
+				else
+					ituEffectSetTotalStep(widget->effect, widget->effectSteps);
+
+				ituEffectStart(widget->effect, widget);
+				ituEffectUpdate(widget->effect, widget);
+				widget->state = ITU_STATE_SHOWING;
+			}
+			break;
+
+		case ITU_EFFECT_SCROLL_LEFT_FADE:
+			widget->effect = malloc(sizeof(ITUScrollFadeEffect));
+			if (widget->effect)
+			{
+				int step = widget->effects[ITU_STATE_NORMAL];
+
+				ituScrollFadeEffectInit((ITUScrollFadeEffect*)widget->effect, ITU_SCROLL_IN_LEFT, true);
+
+				if (step > 0)
+					ituEffectSetTotalStep(widget->effect, step);
+				else
+					ituEffectSetTotalStep(widget->effect, widget->effectSteps);
+
+				ituEffectStart(widget->effect, widget);
+				ituEffectUpdate(widget->effect, widget);
+				widget->state = ITU_STATE_SHOWING;
+			}
+			break;
+
+		case ITU_EFFECT_SCROLL_UP_FADE:
+			widget->effect = malloc(sizeof(ITUScrollFadeEffect));
+			if (widget->effect)
+			{
+				int step = widget->effects[ITU_STATE_NORMAL];
+
+				ituScrollFadeEffectInit((ITUScrollFadeEffect*)widget->effect, ITU_SCROLL_IN_UP, true);
+
+				if (step > 0)
+					ituEffectSetTotalStep(widget->effect, step);
+				else
+					ituEffectSetTotalStep(widget->effect, widget->effectSteps);
+
+				ituEffectStart(widget->effect, widget);
+				ituEffectUpdate(widget->effect, widget);
+				widget->state = ITU_STATE_SHOWING;
+			}
+			break;
+
+		case ITU_EFFECT_SCROLL_RIGHT_FADE:
+			widget->effect = malloc(sizeof(ITUScrollFadeEffect));
+			if (widget->effect)
+			{
+				int step = widget->effects[ITU_STATE_NORMAL];
+
+				ituScrollFadeEffectInit((ITUScrollFadeEffect*)widget->effect, ITU_SCROLL_IN_RIGHT, true);
+
+				if (step > 0)
+					ituEffectSetTotalStep(widget->effect, step);
+				else
+					ituEffectSetTotalStep(widget->effect, widget->effectSteps);
+
+				ituEffectStart(widget->effect, widget);
+				ituEffectUpdate(widget->effect, widget);
+				widget->state = ITU_STATE_SHOWING;
+			}
+			break;
+
+		case ITU_EFFECT_SCROLL_DOWN_FADE:
+			widget->effect = malloc(sizeof(ITUScrollFadeEffect));
+			if (widget->effect)
+			{
+				int step = widget->effects[ITU_STATE_NORMAL];
+
+				ituScrollFadeEffectInit((ITUScrollFadeEffect*)widget->effect, ITU_SCROLL_IN_DOWN, true);
+
+				if (step > 0)
+					ituEffectSetTotalStep(widget->effect, step);
+				else
+					ituEffectSetTotalStep(widget->effect, widget->effectSteps);
+
+				ituEffectStart(widget->effect, widget);
+				ituEffectUpdate(widget->effect, widget);
+				widget->state = ITU_STATE_SHOWING;
+			}
+			break;
+
+		case ITU_EFFECT_SCALE:
+			widget->effect = malloc(sizeof(ITUScaleEffect));
+			if (widget->effect)
+			{
+				int step = widget->effects[ITU_STATE_NORMAL];
+
+				ituScaleEffectInit((ITUScaleEffect*)widget->effect, true);
+
+				if (step > 0)
+					ituEffectSetTotalStep(widget->effect, step);
+				else
+					ituEffectSetTotalStep(widget->effect, widget->effectSteps);
+
+				ituEffectStart(widget->effect, widget);
+				ituEffectUpdate(widget->effect, widget);
+				widget->state = ITU_STATE_SHOWING;
+			}
+			break;
+
+		case ITU_EFFECT_SCALE_FADE:
+			widget->effect = malloc(sizeof(ITUScaleFadeEffect));
+			if (widget->effect)
+			{
+				int step = widget->effects[ITU_STATE_NORMAL];
+
+				ituScaleFadeEffectInit((ITUScaleFadeEffect*)widget->effect, true);
+
+				if (step > 0)
+					ituEffectSetTotalStep(widget->effect, step);
+				else
+					ituEffectSetTotalStep(widget->effect, widget->effectSteps);
+
+				ituEffectStart(widget->effect, widget);
+				ituEffectUpdate(widget->effect, widget);
+				widget->state = ITU_STATE_SHOWING;
+			}
+			break;
+
+		case ITU_EFFECT_WIPE_LEFT:
+			widget->effect = malloc(sizeof(ITUWipeEffect));
+			if (widget->effect)
+			{
+				int step = widget->effects[ITU_STATE_NORMAL];
+
+				ituWipeEffectInit((ITUWipeEffect*)widget->effect, ITU_WIPE_IN_LEFT);
+
+				if (step > 0)
+					ituEffectSetTotalStep(widget->effect, step);
+				else
+					ituEffectSetTotalStep(widget->effect, widget->effectSteps);
+
+				ituEffectStart(widget->effect, widget);
+				ituEffectUpdate(widget->effect, widget);
+				widget->state = ITU_STATE_SHOWING;
+			}
+			break;
+
+		case ITU_EFFECT_WIPE_UP:
+			widget->effect = malloc(sizeof(ITUWipeEffect));
+			if (widget->effect)
+			{
+				int step = widget->effects[ITU_STATE_NORMAL];
+
+				ituWipeEffectInit((ITUWipeEffect*)widget->effect, ITU_WIPE_IN_UP);
+
+				if (step > 0)
+					ituEffectSetTotalStep(widget->effect, step);
+				else
+					ituEffectSetTotalStep(widget->effect, widget->effectSteps);
+
+				ituEffectStart(widget->effect, widget);
+				ituEffectUpdate(widget->effect, widget);
+				widget->state = ITU_STATE_SHOWING;
+			}
+			break;
+
+		case ITU_EFFECT_WIPE_RIGHT:
+			widget->effect = malloc(sizeof(ITUWipeEffect));
+			if (widget->effect)
+			{
+				int step = widget->effects[ITU_STATE_NORMAL];
+
+				ituWipeEffectInit((ITUWipeEffect*)widget->effect, ITU_WIPE_IN_RIGHT);
+
+				if (step > 0)
+					ituEffectSetTotalStep(widget->effect, step);
+				else
+					ituEffectSetTotalStep(widget->effect, widget->effectSteps);
+
+				ituEffectStart(widget->effect, widget);
+				ituEffectUpdate(widget->effect, widget);
+				widget->state = ITU_STATE_SHOWING;
+			}
+			break;
+
+		case ITU_EFFECT_WIPE_DOWN:
+			widget->effect = malloc(sizeof(ITUWipeEffect));
+			if (widget->effect)
+			{
+				int step = widget->effects[ITU_STATE_NORMAL];
+
+				ituWipeEffectInit((ITUWipeEffect*)widget->effect, ITU_WIPE_IN_DOWN);
+
+				if (step > 0)
+					ituEffectSetTotalStep(widget->effect, step);
+				else
+					ituEffectSetTotalStep(widget->effect, widget->effectSteps);
+
+				ituEffectStart(widget->effect, widget);
+				ituEffectUpdate(widget->effect, widget);
+				widget->state = ITU_STATE_SHOWING;
+			}
+			break;
+
+		default:
+			break;
+		}
+		widget->visible = true;
+		ituWidgetUpdate(widget, ITU_EVENT_LAYOUT, 0, 0, 0);
+		ituWidgetUpdate(widget, ITU_EVENT_LOAD, 0, 0, 0);
+		ituWidgetUpdate(widget, ITU_EVENT_LOAD_EXTERNAL, 0, 0, 0);
+
+		if (widget->state != ITU_STATE_SHOWING && widget->hideDelay != -1)
+			ituSceneExecuteCommand(ituScene, widget->hideDelay, WidgetHide, (int)widget);
+	}
+	else
+	{
+		switch (widget->effects[ITU_STATE_HIDING])
+		{
+		case ITU_EFFECT_FADE:
+			widget->effect = malloc(sizeof(ITUFadeEffect));
+			if (widget->effect)
+			{
+				int step = widget->effects[ITU_STATE_NORMAL];
+
+				ituFadeEffectInit((ITUFadeEffect*)widget->effect, false);
+
+				if (step > 0)
+					ituEffectSetTotalStep(widget->effect, step);
+				else
+					ituEffectSetTotalStep(widget->effect, widget->effectSteps);
+
+				ituEffectStart(widget->effect, widget);
+				ituEffectUpdate(widget->effect, widget);
+				widget->state = ITU_STATE_HIDING;
+			}
+			break;
+
+		case ITU_EFFECT_SCROLL_LEFT:
+			widget->effect = malloc(sizeof(ITUScrollEffect));
+			if (widget->effect)
+			{
+				int step = widget->effects[ITU_STATE_NORMAL];
+
+				ituScrollEffectInit((ITUScrollEffect*)widget->effect, ITU_SCROLL_OUT_LEFT);
+
+				if (step > 0)
+					ituEffectSetTotalStep(widget->effect, step);
+				else
+					ituEffectSetTotalStep(widget->effect, widget->effectSteps);
+
+				ituEffectStart(widget->effect, widget);
+				ituEffectUpdate(widget->effect, widget);
+				widget->state = ITU_STATE_HIDING;
+			}
+			break;
+
+		case ITU_EFFECT_SCROLL_UP:
+			widget->effect = malloc(sizeof(ITUScrollEffect));
+			if (widget->effect)
+			{
+				int step = widget->effects[ITU_STATE_NORMAL];
+
+				ituScrollEffectInit((ITUScrollEffect*)widget->effect, ITU_SCROLL_OUT_UP);
+
+				if (step > 0)
+					ituEffectSetTotalStep(widget->effect, step);
+				else
+					ituEffectSetTotalStep(widget->effect, widget->effectSteps);
+
+				ituEffectStart(widget->effect, widget);
+				ituEffectUpdate(widget->effect, widget);
+				widget->state = ITU_STATE_HIDING;
+			}
+			break;
+
+		case ITU_EFFECT_SCROLL_RIGHT:
+			widget->effect = malloc(sizeof(ITUScrollEffect));
+			if (widget->effect)
+			{
+				int step = widget->effects[ITU_STATE_NORMAL];
+
+				ituScrollEffectInit((ITUScrollEffect*)widget->effect, ITU_SCROLL_OUT_RIGHT);
+
+				if (step > 0)
+					ituEffectSetTotalStep(widget->effect, step);
+				else
+					ituEffectSetTotalStep(widget->effect, widget->effectSteps);
+
+				ituEffectStart(widget->effect, widget);
+				ituEffectUpdate(widget->effect, widget);
+				widget->state = ITU_STATE_HIDING;
+			}
+			break;
+
+		case ITU_EFFECT_SCROLL_DOWN:
+			widget->effect = malloc(sizeof(ITUScrollEffect));
+			if (widget->effect)
+			{
+				int step = widget->effects[ITU_STATE_NORMAL];
+
+				ituScrollEffectInit((ITUScrollEffect*)widget->effect, ITU_SCROLL_OUT_DOWN);
+
+				if (step > 0)
+					ituEffectSetTotalStep(widget->effect, step);
+				else
+					ituEffectSetTotalStep(widget->effect, widget->effectSteps);
+
+				ituEffectStart(widget->effect, widget);
+				ituEffectUpdate(widget->effect, widget);
+				widget->state = ITU_STATE_HIDING;
+			}
+			break;
+
+		case ITU_EFFECT_SCROLL_LEFT_FADE:
+			widget->effect = malloc(sizeof(ITUScrollFadeEffect));
+			if (widget->effect)
+			{
+				int step = widget->effects[ITU_STATE_NORMAL];
+
+				ituScrollFadeEffectInit((ITUScrollFadeEffect*)widget->effect, ITU_SCROLL_OUT_LEFT, false);
+
+				if (step > 0)
+					ituEffectSetTotalStep(widget->effect, step);
+				else
+					ituEffectSetTotalStep(widget->effect, widget->effectSteps);
+
+				ituEffectStart(widget->effect, widget);
+				ituEffectUpdate(widget->effect, widget);
+				widget->state = ITU_STATE_HIDING;
+			}
+			break;
+
+		case ITU_EFFECT_SCROLL_UP_FADE:
+			widget->effect = malloc(sizeof(ITUScrollFadeEffect));
+			if (widget->effect)
+			{
+				int step = widget->effects[ITU_STATE_NORMAL];
+
+				ituScrollFadeEffectInit((ITUScrollFadeEffect*)widget->effect, ITU_SCROLL_OUT_UP, false);
+
+				if (step > 0)
+					ituEffectSetTotalStep(widget->effect, step);
+				else
+					ituEffectSetTotalStep(widget->effect, widget->effectSteps);
+
+				ituEffectStart(widget->effect, widget);
+				ituEffectUpdate(widget->effect, widget);
+				widget->state = ITU_STATE_HIDING;
+			}
+			break;
+
+		case ITU_EFFECT_SCROLL_RIGHT_FADE:
+			widget->effect = malloc(sizeof(ITUScrollFadeEffect));
+			if (widget->effect)
+			{
+				int step = widget->effects[ITU_STATE_NORMAL];
+
+				ituScrollFadeEffectInit((ITUScrollFadeEffect*)widget->effect, ITU_SCROLL_OUT_RIGHT, false);
+
+				if (step > 0)
+					ituEffectSetTotalStep(widget->effect, step);
+				else
+					ituEffectSetTotalStep(widget->effect, widget->effectSteps);
+
+				ituEffectStart(widget->effect, widget);
+				ituEffectUpdate(widget->effect, widget);
+				widget->state = ITU_STATE_HIDING;
+			}
+			break;
+
+		case ITU_EFFECT_SCROLL_DOWN_FADE:
+			widget->effect = malloc(sizeof(ITUScrollFadeEffect));
+			if (widget->effect)
+			{
+				int step = widget->effects[ITU_STATE_NORMAL];
+
+				ituScrollFadeEffectInit((ITUScrollFadeEffect*)widget->effect, ITU_SCROLL_OUT_DOWN, false);
+
+				if (step > 0)
+					ituEffectSetTotalStep(widget->effect, step);
+				else
+					ituEffectSetTotalStep(widget->effect, widget->effectSteps);
+
+				ituEffectStart(widget->effect, widget);
+				ituEffectUpdate(widget->effect, widget);
+				widget->state = ITU_STATE_HIDING;
+			}
+			break;
+
+		case ITU_EFFECT_SCALE:
+			widget->effect = malloc(sizeof(ITUScaleEffect));
+			if (widget->effect)
+			{
+				int step = widget->effects[ITU_STATE_NORMAL];
+
+				ituScaleEffectInit((ITUScaleEffect*)widget->effect, false);
+
+				if (step > 0)
+					ituEffectSetTotalStep(widget->effect, step);
+				else
+					ituEffectSetTotalStep(widget->effect, widget->effectSteps);
+
+				ituEffectStart(widget->effect, widget);
+				ituEffectUpdate(widget->effect, widget);
+				widget->state = ITU_STATE_HIDING;
+			}
+			break;
+
+		case ITU_EFFECT_SCALE_FADE:
+			widget->effect = malloc(sizeof(ITUScaleFadeEffect));
+			if (widget->effect)
+			{
+				int step = widget->effects[ITU_STATE_NORMAL];
+
+				ituScaleFadeEffectInit((ITUScaleFadeEffect*)widget->effect, false);
+
+				if (step > 0)
+					ituEffectSetTotalStep(widget->effect, step);
+				else
+					ituEffectSetTotalStep(widget->effect, widget->effectSteps);
+
+				ituEffectStart(widget->effect, widget);
+				ituEffectUpdate(widget->effect, widget);
+				widget->state = ITU_STATE_HIDING;
+			}
+			break;
+
+		case ITU_EFFECT_WIPE_LEFT:
+			widget->effect = malloc(sizeof(ITUWipeEffect));
+			if (widget->effect)
+			{
+				int step = widget->effects[ITU_STATE_NORMAL];
+
+				ituWipeEffectInit((ITUWipeEffect*)widget->effect, ITU_WIPE_OUT_LEFT);
+
+				if (step > 0)
+					ituEffectSetTotalStep(widget->effect, step);
+				else
+					ituEffectSetTotalStep(widget->effect, widget->effectSteps);
+
+				ituEffectStart(widget->effect, widget);
+				ituEffectUpdate(widget->effect, widget);
+				widget->state = ITU_STATE_HIDING;
+			}
+			break;
+
+		case ITU_EFFECT_WIPE_UP:
+			widget->effect = malloc(sizeof(ITUWipeEffect));
+			if (widget->effect)
+			{
+				int step = widget->effects[ITU_STATE_NORMAL];
+
+				ituWipeEffectInit((ITUWipeEffect*)widget->effect, ITU_WIPE_OUT_UP);
+
+				if (step > 0)
+					ituEffectSetTotalStep(widget->effect, step);
+				else
+					ituEffectSetTotalStep(widget->effect, widget->effectSteps);
+
+				ituEffectStart(widget->effect, widget);
+				ituEffectUpdate(widget->effect, widget);
+				widget->state = ITU_STATE_HIDING;
+			}
+			break;
+
+		case ITU_EFFECT_WIPE_RIGHT:
+			widget->effect = malloc(sizeof(ITUWipeEffect));
+			if (widget->effect)
+			{
+				int step = widget->effects[ITU_STATE_NORMAL];
+
+				ituWipeEffectInit((ITUWipeEffect*)widget->effect, ITU_WIPE_OUT_RIGHT);
+
+				if (step > 0)
+					ituEffectSetTotalStep(widget->effect, step);
+				else
+					ituEffectSetTotalStep(widget->effect, widget->effectSteps);
+
+				ituEffectStart(widget->effect, widget);
+				ituEffectUpdate(widget->effect, widget);
+				widget->state = ITU_STATE_HIDING;
+			}
+			break;
+
+		case ITU_EFFECT_WIPE_DOWN:
+			widget->effect = malloc(sizeof(ITUWipeEffect));
+			if (widget->effect)
+			{
+				int step = widget->effects[ITU_STATE_NORMAL];
+
+				ituWipeEffectInit((ITUWipeEffect*)widget->effect, ITU_WIPE_OUT_DOWN);
+
+				if (step > 0)
+					ituEffectSetTotalStep(widget->effect, step);
+				else
+					ituEffectSetTotalStep(widget->effect, widget->effectSteps);
+
+				ituEffectStart(widget->effect, widget);
+				ituEffectUpdate(widget->effect, widget);
+				widget->state = ITU_STATE_HIDING;
+			}
+			break;
+
+		default:
+			widget->visible = false;
+			ituWidgetUpdate(widget, ITU_EVENT_RELEASE, 0, 0, 0);
+			if (widget->tree.parent)
+				ituWidgetSetDirty(widget->tree.parent, true);
+			break;
+		}
+	}
+	widget->dirty = true;
+}
+
+
+void ituWidgetSetVisibleImpl_bk(ITUWidget* widget, bool visible)
+{
+	assert(widget);
 	//ITU_ASSERT_THREAD();
 
 	if (!visible && (widget->flags & ITU_ALWAYS_VISIBLE))

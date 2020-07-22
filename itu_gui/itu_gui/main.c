@@ -123,6 +123,7 @@ static ITUBackground* _create_background(ITURectangle *rect, ITUColor *color, ch
 	ituBackgroundInit(bg);
 	((ITUWidget *)bg)->visible = 1;
 	ITUWidget* widget = (ITUWidget*)bg;
+	widget->effectSteps = 10;
 	memmove(&widget->rect, rect, sizeof(ITURectangle));
 	memmove(&widget->color, color, sizeof(ITUColor));
 	strcpy(widget->name, name);
@@ -152,12 +153,16 @@ static ITUButton* _create_button(ITURectangle *rect, ITUColor *color, char *name
 	ITUWidget* widget = (ITUWidget*)btn;
 	memmove(&widget->rect, rect, sizeof(ITURectangle));
 	memmove(&widget->color, color, sizeof(ITUColor));
+
+	memmove(&btn->bgColor, color, sizeof(ITUColor));
+
 	strcpy(widget->name, name);
 	widget->alpha = 255;
 
 	btn->actions[0].action = ITU_ACTION_HIDE;
 	btn->actions[0].ev = ITU_EVENT_PRESS;
 	strcpy(btn->actions[0].target, "bk_wudan2");
+	strcpy(btn->actions[0].param, "2");
 	//strcpy(btn->actions[0].param, "tst");
 	
 

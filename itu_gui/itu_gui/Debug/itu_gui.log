@@ -1,10 +1,15 @@
-﻿Build started 7/22/2020 12:00:20 AM.
+﻿Build started 7/22/2020 11:54:21 PM.
      1>Project "d:\itu_gui\itu_gui\itu_gui\itu_gui.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D _CRT_NONSTDC_NO_DEPRECATE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt ite\itu_icon.c
-         itu_icon.c
-     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_icon.c(138): warning C4101: 'surf' : unreferenced local variable
-     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_icon.c(159): warning C4101: 'surf' : unreferenced local variable
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D _CRT_NONSTDC_NO_DEPRECATE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt main.c
+         main.c
+     1>d:\itu_gui\itu_gui\itu_gui\main.c(219): warning C4098: 'test_readfile' : 'void' function returning a value
+     1>d:\itu_gui\itu_gui\itu_gui\main.c(228): warning C4098: 'test_readfile' : 'void' function returning a value
+     1>d:\itu_gui\itu_gui\itu_gui\main.c(329): warning C4133: '=' : incompatible types - from 'ITULayer *' to 'ITUWidget *'
+     1>d:\itu_gui\itu_gui\itu_gui\main.c(334): warning C4133: 'function' : incompatible types - from 'ITULayer *' to 'ITCTree *'
+     1>d:\itu_gui\itu_gui\itu_gui\main.c(340): warning C4133: 'function' : incompatible types - from 'ITUBackground *' to 'ITCTree *'
+     1>d:\itu_gui\itu_gui\itu_gui\main.c(346): warning C4133: 'function' : incompatible types - from 'ITUBackground *' to 'ITCTree *'
+     1>d:\itu_gui\itu_gui\itu_gui\main.c(403): warning C4013: 'SDL_StartTicks' undefined; assuming extern returning int
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"d:\itu_gui\itu_gui\Debug\itu_gui.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"d:\itu_gui\itu_gui\Debug\itu_gui.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"d:\itu_gui\itu_gui\Debug\itu_gui.lib" /MACHINE:X86 Debug\itc_tree.obj
          Debug\ith_lcd.obj
@@ -15,14 +20,21 @@
          Debug\itu_base.obj
          Debug\itu_button.obj
          Debug\itu_clipper.obj
+         Debug\itu_effect.obj
+         Debug\itu_fadeeffect.obj
          Debug\itu_icon.obj
          Debug\itu_layer.obj
          Debug\itu_lcd.obj
+         Debug\itu_scaleeffect.obj
+         Debug\itu_scalefadeeffect.obj
          Debug\itu_scene.obj
+         Debug\itu_scrolleffect.obj
+         Debug\itu_scrollfadeeffect.obj
          Debug\itu_surface.obj
          Debug\itu_sw.obj
          Debug\itu_utility.obj
          Debug\itu_widget.obj
+         Debug\itu_wipeeffect.obj
          Debug\SDL_events.obj
          Debug\SDL_systimer.obj
          Debug\main.obj
@@ -31,4 +43,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.76
+Time Elapsed 00:00:00.70
