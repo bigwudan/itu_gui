@@ -96,6 +96,9 @@
     <ClCompile Include="ite\itu_wipeeffect.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ite\itu_meter.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ite\itu_private.h">

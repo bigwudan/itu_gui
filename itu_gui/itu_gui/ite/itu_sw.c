@@ -81,6 +81,8 @@ static ITUSurface *SWCreateSurface(int w, int h, int pitch, ITUPixelFormat forma
             size = surf->pitch * h;
 
         //surf->addr = itpVmemAlloc(size);
+		surf->addr = calloc(1, size);
+
         if (!surf->addr)
         {
             LOG_ERR "Out of VRAM: %d\n", size LOG_END

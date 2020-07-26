@@ -79,6 +79,7 @@
     <ClCompile Include="ite\itu_icon.c" />
     <ClCompile Include="ite\itu_layer.c" />
     <ClCompile Include="ite\itu_lcd.c" />
+    <ClCompile Include="ite\itu_meter.c" />
     <ClCompile Include="ite\itu_scaleeffect.c" />
     <ClCompile Include="ite\itu_scalefadeeffect.c" />
     <ClCompile Include="ite\itu_scene.c" />

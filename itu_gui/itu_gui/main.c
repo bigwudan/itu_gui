@@ -8,6 +8,11 @@
 #include <assert.h>
 #include "ite\SDL_events.h"
 #include "ite\itu.h"
+
+#define ITH_RGB565(r, g, b) \
+    ((((uint16_t)(r) >> 3) << 11) | (((uint16_t)(g) >> 2) << 5) | ((uint16_t)(b) >> 3))
+
+
 //
 ITUScene            theScene;
 static ITUSurface   *screenSurf;
@@ -89,13 +94,25 @@ LPARAM lparam)
 	case WM_KEYDOWN:
 		switch (wparam)
 		{
+		case 0x31:
+			event_ev.type = SDL_KEYDOWN;
+			event_ev.key.keysym = lparam;
+			SDL_PushEvent(&event_ev);
+			break;
 		case VK_ESCAPE:
 			DestroyWindow(hwnd);
 			return 0;
-
 		case VK_UP:
+			break;
 		case VK_DOWN:
+			break;
 		case VK_RETURN:
+			break;
+		case VK_PROCESSKEY:
+			event_ev.type = SDL_KEYDOWN;
+			event_ev.key.keysym = lparam;
+			SDL_PushEvent(&event_ev);
+			break;
 		default:
 			break;
 		}
@@ -188,12 +205,88 @@ static ITUButton* _create_button(ITURectangle *rect, ITUColor *color, char *name
 
 	return btn;
 }
-
-
-
-
 uint8_t *map_buf = NULL;
 uint32_t len_t = 0;
+//建立icon
+static ITUIcon* _create_icon(ITURectangle *rect, ITUColor *color, char *name)
+{
+	ITUIcon* icon = calloc(1, sizeof(ITUIcon));
+	ituIconInit(icon);
+	((ITUWidget *)icon)->visible = 1;
+	ITUWidget* widget = (ITUWidget*)icon;
+	memmove(&widget->rect, rect, sizeof(ITURectangle));
+	memmove(&widget->color, color, sizeof(ITUColor));
+	strcpy(widget->name, name);
+	widget->alpha = 255;
+	icon->surf = calloc(1, sizeof(ITUSurface));
+	icon->surf->width = 300;
+	icon->surf->height = 200;
+	icon->surf->size = len_t;
+	icon->surf->addr = map_buf;
+
+	return icon;
+}
+
+
+//建立icon
+static ITUIcon* _create_icon_color(ITURectangle *rect, ITUColor *color, char *name)
+{
+	ITUIcon* icon = calloc(1, sizeof(ITUIcon));
+	ituIconInit(icon);
+	((ITUWidget *)icon)->visible = 1;
+	ITUWidget* widget = (ITUWidget*)icon;
+	memmove(&widget->rect, rect, sizeof(ITURectangle));
+	memmove(&widget->color, color, sizeof(ITUColor));
+	strcpy(widget->name, name);
+	widget->alpha = 255;
+	icon->surf = calloc(1, sizeof(ITUSurface));
+
+	//生成内存空间
+	icon->surf->width = 16;
+	icon->surf->height = 16;
+	icon->surf->size = 2 * (icon->surf->width) * (icon->surf->height);
+
+	char *buf = calloc(1, icon->surf->size);
+	icon->surf->addr = buf;
+
+	uint16_t data = 0;
+	uint16_t *p_data = (uint16_t *)(icon->surf->addr);
+	for (int i = 0; i < (icon->surf->width) * (icon->surf->height); i++){
+		p_data[i] = ITH_RGB565(color->red, color->green, color->blue);
+	}
+
+
+
+	return icon;
+}
+
+
+//建立一个meter
+static ITUMeter* _create_meter(ITURectangle *rect, ITUColor *color, char *name, ITUIcon* icon)
+{
+	ITUMeter* meter = calloc(1, sizeof(ITUMeter));
+	ituMeterInit(meter);
+	((ITUWidget *)meter)->visible = 1;
+	ITUWidget* widget = (ITUWidget*)meter;
+	memmove(&widget->rect, rect, sizeof(ITURectangle));
+	memmove(&widget->color, color, sizeof(ITUColor));
+	strcpy(widget->name, name);
+	widget->alpha = 255;
+	meter->pointerX = 83;
+	meter->pointerY = -59;
+	meter->startAngle = 0;
+	meter->endAngle = 360;
+	meter->maxValue = 100;
+	meter->anifitcount = 1;
+	meter->pointerIcon = icon;
+
+	strcpy(meter->pointerName, "icon_1");
+
+
+
+	return meter;
+}
+
 void test_readfile()
 {
 	bmpfileinfo fileheader;
@@ -308,7 +401,43 @@ void test_readfile()
 }
 
 
+//初始化头结点
+static void _test_meter(){
+#define ADD_WIDGET(W,H,X,Y,R,G,B) do{memset(&rect, 0, sizeof(ITURectangle));memset(&color, 0, sizeof(ITUColor));\
+rect.width = W;rect.height = H; rect.x=X;rect.y=Y;color.red=R;color.green=G;color.blue=B;color.alpha=255;}while (0)
+	ITURectangle rect;
+	ITUColor color;
+	
+	ITUBackground* bg1 = NULL;
+	ITULayer *layer1 = NULL;
+	ITUIcon *icon_1 = NULL;
+	ITUMeter *meter_1 = NULL;
+	test_readfile();
+	//建立layer
+	ADD_WIDGET(T_WIDTH, T_HEIGHT, 0, 0, 0, 0, 0);
+	layer1 = _create_layer(&rect, &color, "layer1");
+	theScene.root = layer1;
 
+	//建立back
+	ADD_WIDGET(T_WIDTH, T_HEIGHT, 0, 0, 255, 0, 0);
+	bg1 = _create_background(&rect, &color, "bk_wudan1");
+	itcTreePushFront(layer1, bg1);
+
+	//建立一个icon
+	ADD_WIDGET(16, 16, 36, 179, 255, 255, 0);
+	icon_1 = _create_icon_color(&rect, &color, "icon_1");
+	//建立一个meter
+	ADD_WIDGET(242, 242, 0, 0, 255, 0, 0);
+	meter_1 = _create_meter(&rect, &color, "meter", icon_1);
+	itcTreePushFront(meter_1, icon_1);
+	itcTreePushFront(bg1, meter_1);
+
+	
+
+
+	return;
+#undef ADD_WIDGET(W,H,X,Y,R,G,B)
+}
 
 //初始化头结点
 static void _test_init()
@@ -379,26 +508,156 @@ rect.width = W;rect.height = H; rect.x=X;rect.y=Y;color.red=R;color.green=G;colo
 	//itcTreePushFront(layer, bg1);
 	return;
 
-
+#undef ADD_WIDGET(W,H,X,Y,R,G,B)
 }
-
-
 
 
 void test_wudan()
 {
-
 	HBITMAP hbitmap = LoadImage(NULL, "1.bmp", IMAGE_BITMAP, 0, 0, LR_DEFAULTCOLOR | LR_DEFAULTSIZE | LR_LOADFROMFILE);
 	assert(hbitmap);
-
 	printf("wudan\n");
 }
 
+static void _test(){
+	static int idx;
+	if (idx == 0){
+		idx = -5;
+	}
+	else{
+		idx = idx-15;
+	}
+	ITUWidget *t_widget = NULL;
+	t_widget = ituSceneFindWidget(&theScene, "bk_wudan2");
+	ituWidgetSetBound(t_widget, t_widget->rect.x, t_widget->rect.y, t_widget->rect.width, t_widget->rect.height);
+	printf("t_widget\n");
+	if (t_widget){
+		ITUBackground *t_bk = (ITUBackground *)t_widget;
+		t_widget->rect.x = idx;
+		t_widget->dirty = 1;
+		t_widget->visible = 1;
+
+		
+	}
+}
+
+
+
+
+//非阻塞轮询
+static int _nonblock_pool(){
+	int idx = 0;
+	int flag;
+	MSG msg;
+	SDL_Event ev;
+	while (1)
+	{
+		//接收消息
+		bool result = false;
+		flag = PeekMessage(&msg, NULL, 0, 0, PM_REMOVE);
+		if (flag){
+			flag = SDL_PollEvent(&ev);
+			if (flag > 0){
+				switch (ev.type){
+				case SDL_MOUSEMOTION:
+					//ituMeterSetValue(ituSceneFindWidget(&theScene, "meter"), idx++);
+					printf("mouse move...x=%d,y=%d\n", ev.button.x, ev.button.y);
+					break;
+				case SDL_MOUSEBUTTONDOWN:
+					printf("mouse down...x=%d,y=%d\n", ev.button.x, ev.button.y);
+					result = ituSceneUpdate(&theScene, ITU_EVENT_MOUSEDOWN, ev.button.button, ev.button.x, ev.button.y);
+					break;
+				case SDL_MOUSEBUTTONUP:
+					printf("mouse up...x=%d,y=%d\n", ev.button.x, ev.button.y);
+					//result = ituSceneUpdate(&theScene, ITU_EVENT_MOUSEDOWN, ev.button.button, ev.button.x, ev.button.y);
+					break;
+				case SDL_KEYDOWN:
+					switch (ev.key.keysym){
+					case 0x20001:
+						ituMeterSetValue(ituSceneFindWidget(&theScene, "meter"), idx++);
+						//_test();
+						//result = ituSceneUpdate(&theScene, ITU_EVENT_MOUSEDOWN, ev.button.button, ev.button.x, ev.button.y);
+						printf("key down 1\n");
+						break;
+					case 0x30001:
+						printf("key down 2\n");
+						break;
+					default:
+						break;
+					}
+				default:
+					break;
+				}
+
+			}
+		}
+		result |= ituSceneUpdate(&theScene, ITU_EVENT_TIMER, 0, 0, 0);
+		ituSceneDraw(&theScene, screenSurf);
+		ituFlip(screenSurf);
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+}
+
+//阻塞轮询
+static int _block_pool(){
+	int flag;
+	MSG msg;
+	SDL_Event ev;
+	while (GetMessage(&msg, NULL, 0, 0))
+	{
+		bool result = false;
+		flag = SDL_PollEvent(&ev);
+		printf("flag=%d\n", flag);
+		if (flag > 0){
+			switch (ev.type){
+			case SDL_MOUSEMOTION:
+				printf("mouse move...x=%d,y=%d\n", ev.button.x, ev.button.y);
+				break;
+			case SDL_MOUSEBUTTONDOWN:
+				printf("mouse down...x=%d,y=%d\n", ev.button.x, ev.button.y);
+				result = ituSceneUpdate(&theScene, ITU_EVENT_MOUSEDOWN, ev.button.button, ev.button.x, ev.button.y);
+				break;
+			case SDL_MOUSEBUTTONUP:
+				printf("mouse up...x=%d,y=%d\n", ev.button.x, ev.button.y);
+				//result = ituSceneUpdate(&theScene, ITU_EVENT_MOUSEDOWN, ev.button.button, ev.button.x, ev.button.y);
+				break;
+			case SDL_KEYDOWN:
+				switch (ev.key.keysym){
+				case 0x20001:
+					//_test();
+					//result = ituSceneUpdate(&theScene, ITU_EVENT_MOUSEDOWN, ev.button.button, ev.button.x, ev.button.y);
+					printf("key down 1\n");
+					break;
+				case 0x30001:
+					printf("key down 2\n");
+					break;
+				default:
+					break;
+				}
+			default:
+				break;
+			}
+
+		}
+		result |= ituSceneUpdate(&theScene, ITU_EVENT_TIMER, 0, 0, 0);
+		ituSceneDraw(&theScene, screenSurf);
+		ituFlip(screenSurf);
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+
+}
+
+
+
+//非阻塞
 int main(void)
 {
 
 	//test_wudan();
 	int flag = 0;
+	int t_idx = 0;
 	//初始化时间
 	SDL_StartTicks();
 
@@ -408,7 +667,7 @@ int main(void)
 
 
 	WNDCLASS wc;
-	MSG msg;
+	
 	// create window
 	wc.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
 	wc.lpfnWndProc = WndProc;
@@ -437,59 +696,17 @@ int main(void)
 		NULL);
 	if (hWnd == NULL)
 		return -1;
-
-
-
 	ShowWindow(hWnd, SW_SHOW);
 	UpdateWindow(hWnd);
-
-
-
-	SDL_Event ev;
+	
 	// init itu
 	ituLcdInit();
 	ituSWInit();
 	ituSceneInit(&theScene, NULL);
 	screenSurf = ituGetDisplaySurface();
-
+	//_test_init();
+	_test_meter();
+	_nonblock_pool();
 	
-	_test_init();
-	// message loop
-	while (GetMessage(&msg, NULL, 0, 0))
-	{
-		//ituSceneUpdate(&theScene, ITU_EVENT_TIMER, 0, 0, 0);
-		bool result = false;
-
-
-		flag = SDL_PollEvent(&ev);
-		if (flag > 0){
-			switch (ev.type){
-			case SDL_MOUSEMOTION:
-				printf("mouse move...x=%d,y=%d\n", ev.button.x, ev.button.y);
-				break;
-			case SDL_MOUSEBUTTONDOWN:
-				printf("mouse down...x=%d,y=%d\n", ev.button.x, ev.button.y);
-				break;
-			case SDL_MOUSEBUTTONUP:
-				printf("mouse up...x=%d,y=%d\n", ev.button.x, ev.button.y);
-				result = ituSceneUpdate(&theScene, ITU_EVENT_MOUSEDOWN, ev.button.button, ev.button.x, ev.button.y);
-				break;
-			}
-
-
-		}
-
-
-
-
-
-		ituSceneDraw(&theScene, screenSurf);
-		ituFlip(screenSurf);
-
-
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
-	}
-
-	return msg.wParam;
+	return ;
 }
