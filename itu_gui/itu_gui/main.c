@@ -12,7 +12,7 @@
 #define ITH_RGB565(r, g, b) \
     ((((uint16_t)(r) >> 3) << 11) | (((uint16_t)(g) >> 2) << 5) | ((uint16_t)(b) >> 3))
 
-
+#define GESTURE_THRESHOLD           40
 //
 ITUScene            theScene;
 static ITUSurface   *screenSurf;
@@ -550,6 +550,10 @@ static int _nonblock_pool(){
 	int flag;
 	MSG msg;
 	SDL_Event ev;
+	int         delay, frames, lastx, lasty;
+	uint32_t    tick, dblclk, lasttick, mouseDownTick;
+	uint32_t t_dur = 0;
+	dblclk = frames = lasttick = lastx = lasty = mouseDownTick = 0;
 	while (1)
 	{
 		//接收消息
@@ -564,12 +568,65 @@ static int _nonblock_pool(){
 					printf("mouse move...x=%d,y=%d\n", ev.button.x, ev.button.y);
 					break;
 				case SDL_MOUSEBUTTONDOWN:
+
+				
+					mouseDownTick = SDL_GetTicks();
+
+
+					if (mouseDownTick - dblclk <= 200)
+					{
+						result = ituSceneUpdate(&theScene, ITU_EVENT_MOUSEDOUBLECLICK, ev.button.button, ev.button.x, ev.button.y);
+						dblclk = 0;
+					}
+					else
+					{
+						result = ituSceneUpdate(&theScene, ITU_EVENT_MOUSEDOWN, ev.button.button, ev.button.x, ev.button.y);
+						dblclk = mouseDownTick;
+						lastx = ev.button.x;
+						lasty = ev.button.y;
+					}
+				
 					printf("mouse down...x=%d,y=%d\n", ev.button.x, ev.button.y);
-					result = ituSceneUpdate(&theScene, ITU_EVENT_MOUSEDOWN, ev.button.button, ev.button.x, ev.button.y);
+					//result = ituSceneUpdate(&theScene, ITU_EVENT_MOUSEDOWN, ev.button.button, ev.button.x, ev.button.y);
 					break;
 				case SDL_MOUSEBUTTONUP:
-					printf("mouse up...x=%d,y=%d\n", ev.button.x, ev.button.y);
-					//result = ituSceneUpdate(&theScene, ITU_EVENT_MOUSEDOWN, ev.button.button, ev.button.x, ev.button.y);
+					t_dur = SDL_GetTicks();
+					if (t_dur - dblclk <= 200)
+					{
+						int xdiff = abs(ev.button.x - lastx);
+						int ydiff = abs(ev.button.y - lasty);
+
+						if (xdiff >= GESTURE_THRESHOLD && xdiff > ydiff)
+						{
+							if (ev.button.x > lastx)
+							{
+								printf("mouse: slide to right\n");
+								result |= ituSceneUpdate(&theScene, ITU_EVENT_TOUCHSLIDERIGHT, xdiff, ev.button.x, ev.button.y);
+							}
+							else
+							{
+								printf("mouse: slide to left\n");
+								result |= ituSceneUpdate(&theScene, ITU_EVENT_TOUCHSLIDELEFT, xdiff, ev.button.x, ev.button.y);
+							}
+						}
+						else if (ydiff >= GESTURE_THRESHOLD)
+						{
+							if (ev.button.y > lasty)
+							{
+								printf("mouse: slide to down\n");
+								result |= ituSceneUpdate(&theScene, ITU_EVENT_TOUCHSLIDEDOWN, ydiff, ev.button.x, ev.button.y);
+							}
+							else
+							{
+								printf("mouse: slide to up\n");
+								result |= ituSceneUpdate(&theScene, ITU_EVENT_TOUCHSLIDEUP, ydiff, ev.button.x, ev.button.y);
+							}
+						}
+					}
+					result |= ituSceneUpdate(&theScene, ITU_EVENT_MOUSEUP, ev.button.button, ev.button.x, ev.button.y);
+					mouseDownTick = 0;
+					break;
+
 					break;
 				case SDL_KEYDOWN:
 					switch (ev.key.keysym){
@@ -601,30 +658,91 @@ static int _nonblock_pool(){
 
 //阻塞轮询
 static int _block_pool(){
+	int idx = 0;
 	int flag;
 	MSG msg;
 	SDL_Event ev;
+	int         delay, frames, lastx, lasty;
+	uint32_t    tick, dblclk, lasttick, mouseDownTick;
+	uint32_t t_dur = 0;
+	dblclk = frames = lasttick = lastx = lasty = mouseDownTick = 0;
+
 	while (GetMessage(&msg, NULL, 0, 0))
 	{
 		bool result = false;
 		flag = SDL_PollEvent(&ev);
-		printf("flag=%d\n", flag);
+		//printf("flag=%d\n", flag);
 		if (flag > 0){
 			switch (ev.type){
 			case SDL_MOUSEMOTION:
+				//ituMeterSetValue(ituSceneFindWidget(&theScene, "meter"), idx++);
 				printf("mouse move...x=%d,y=%d\n", ev.button.x, ev.button.y);
 				break;
 			case SDL_MOUSEBUTTONDOWN:
+
+
+				mouseDownTick = SDL_GetTicks();
+
+
+				if (mouseDownTick - dblclk <= 200)
+				{
+					result = ituSceneUpdate(&theScene, ITU_EVENT_MOUSEDOUBLECLICK, ev.button.button, ev.button.x, ev.button.y);
+					dblclk = 0;
+				}
+				else
+				{
+					result = ituSceneUpdate(&theScene, ITU_EVENT_MOUSEDOWN, ev.button.button, ev.button.x, ev.button.y);
+					dblclk = mouseDownTick;
+					lastx = ev.button.x;
+					lasty = ev.button.y;
+				}
+
 				printf("mouse down...x=%d,y=%d\n", ev.button.x, ev.button.y);
-				result = ituSceneUpdate(&theScene, ITU_EVENT_MOUSEDOWN, ev.button.button, ev.button.x, ev.button.y);
+				//result = ituSceneUpdate(&theScene, ITU_EVENT_MOUSEDOWN, ev.button.button, ev.button.x, ev.button.y);
 				break;
 			case SDL_MOUSEBUTTONUP:
-				printf("mouse up...x=%d,y=%d\n", ev.button.x, ev.button.y);
-				//result = ituSceneUpdate(&theScene, ITU_EVENT_MOUSEDOWN, ev.button.button, ev.button.x, ev.button.y);
+				t_dur = SDL_GetTicks();
+				if (t_dur - dblclk <= 200)
+				{
+					int xdiff = abs(ev.button.x - lastx);
+					int ydiff = abs(ev.button.y - lasty);
+
+					if (xdiff >= GESTURE_THRESHOLD && xdiff > ydiff)
+					{
+						if (ev.button.x > lastx)
+						{
+							printf("mouse: slide to right\n");
+							result |= ituSceneUpdate(&theScene, ITU_EVENT_TOUCHSLIDERIGHT, xdiff, ev.button.x, ev.button.y);
+						}
+						else
+						{
+							printf("mouse: slide to left\n");
+							result |= ituSceneUpdate(&theScene, ITU_EVENT_TOUCHSLIDELEFT, xdiff, ev.button.x, ev.button.y);
+						}
+					}
+					else if (ydiff >= GESTURE_THRESHOLD)
+					{
+						if (ev.button.y > lasty)
+						{
+							printf("mouse: slide to down\n");
+							result |= ituSceneUpdate(&theScene, ITU_EVENT_TOUCHSLIDEDOWN, ydiff, ev.button.x, ev.button.y);
+						}
+						else
+						{
+							printf("mouse: slide to up\n");
+							result |= ituSceneUpdate(&theScene, ITU_EVENT_TOUCHSLIDEUP, ydiff, ev.button.x, ev.button.y);
+						}
+					}
+				}
+				result |= ituSceneUpdate(&theScene, ITU_EVENT_MOUSEUP, ev.button.button, ev.button.x, ev.button.y);
+				mouseDownTick = 0;
+				break;
+
 				break;
 			case SDL_KEYDOWN:
 				switch (ev.key.keysym){
 				case 0x20001:
+					ituMeterSetValue(ituSceneFindWidget(&theScene, "meter"), idx++);
 					//_test();
 					//result = ituSceneUpdate(&theScene, ITU_EVENT_MOUSEDOWN, ev.button.button, ev.button.x, ev.button.y);
 					printf("key down 1\n");
@@ -706,7 +824,7 @@ int main(void)
 	screenSurf = ituGetDisplaySurface();
 	//_test_init();
 	_test_meter();
-	_nonblock_pool();
+	_block_pool();
 	
 	return ;
 }

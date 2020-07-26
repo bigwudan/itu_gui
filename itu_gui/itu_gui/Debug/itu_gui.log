@@ -1,13 +1,31 @@
-﻿Build started 7/26/2020 9:15:02 PM.
-     1>Project "D:\itu_gui\itu_gui\itu_gui\itu_gui.vcxproj" on node 2 (Build target(s)).
+﻿Build started 7/26/2020 10:37:28 PM.
+     1>Project "d:\itu_gui\itu_gui\itu_gui\itu_gui.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D _CRT_NONSTDC_NO_DEPRECATE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt ite\itu_meter.c ite\itu_scrollfadeeffect.c
-         itu_scrollfadeeffect.c
-         itu_meter.c
-     1>d:\itu_gui\itu_gui\itu_gui\ite\itu_meter.c(50): warning C4244: 'function' : conversion from 'int' to 'float', possible loss of data
-         Generating Code...
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D _CRT_NONSTDC_NO_DEPRECATE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt main.c
+         main.c
+     1>d:\itu_gui\itu_gui\itu_gui\main.c(225): warning C4047: '=' : 'uint32_t' differs in levels of indirection from 'uint8_t *'
+     1>d:\itu_gui\itu_gui\itu_gui\main.c(250): warning C4047: '=' : 'uint32_t' differs in levels of indirection from 'char *'
+     1>d:\itu_gui\itu_gui\itu_gui\main.c(312): warning C4098: 'test_readfile' : 'void' function returning a value
+     1>d:\itu_gui\itu_gui\itu_gui\main.c(321): warning C4098: 'test_readfile' : 'void' function returning a value
+     1>d:\itu_gui\itu_gui\itu_gui\main.c(419): warning C4133: '=' : incompatible types - from 'ITULayer *' to 'ITUWidget *'
+     1>d:\itu_gui\itu_gui\itu_gui\main.c(424): warning C4133: 'function' : incompatible types - from 'ITULayer *' to 'ITCTree *'
+     1>d:\itu_gui\itu_gui\itu_gui\main.c(432): warning C4133: 'function' : incompatible types - from 'ITUMeter *' to 'ITCTree *'
+     1>d:\itu_gui\itu_gui\itu_gui\main.c(433): warning C4133: 'function' : incompatible types - from 'ITUBackground *' to 'ITCTree *'
+     1>d:\itu_gui\itu_gui\itu_gui\main.c(439): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>d:\itu_gui\itu_gui\itu_gui\main.c(458): warning C4133: '=' : incompatible types - from 'ITULayer *' to 'ITUWidget *'
+     1>d:\itu_gui\itu_gui\itu_gui\main.c(463): warning C4133: 'function' : incompatible types - from 'ITULayer *' to 'ITCTree *'
+     1>d:\itu_gui\itu_gui\itu_gui\main.c(469): warning C4133: 'function' : incompatible types - from 'ITUBackground *' to 'ITCTree *'
+     1>d:\itu_gui\itu_gui\itu_gui\main.c(475): warning C4133: 'function' : incompatible types - from 'ITUBackground *' to 'ITCTree *'
+     1>d:\itu_gui\itu_gui\itu_gui\main.c(511): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>d:\itu_gui\itu_gui\itu_gui\main.c(573): warning C4013: 'SDL_GetTicks' undefined; assuming extern returning int
+     1>d:\itu_gui\itu_gui\itu_gui\main.c(554): warning C4101: 'tick' : unreferenced local variable
+     1>d:\itu_gui\itu_gui\itu_gui\main.c(553): warning C4101: 'delay' : unreferenced local variable
+     1>d:\itu_gui\itu_gui\itu_gui\main.c(666): warning C4101: 'tick' : unreferenced local variable
+     1>d:\itu_gui\itu_gui\itu_gui\main.c(665): warning C4101: 'delay' : unreferenced local variable
+     1>d:\itu_gui\itu_gui\itu_gui\main.c(780): warning C4013: 'SDL_StartTicks' undefined; assuming extern returning int
+     1>d:\itu_gui\itu_gui\itu_gui\main.c(768): warning C4716: '_block_pool' : must return a value
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\itu_gui\itu_gui\Debug\itu_gui.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\itu_gui\itu_gui\Debug\itu_gui.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\itu_gui\itu_gui\Debug\itu_gui.lib" /MACHINE:X86 Debug\itc_tree.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"d:\itu_gui\itu_gui\Debug\itu_gui.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"d:\itu_gui\itu_gui\Debug\itu_gui.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"d:\itu_gui\itu_gui\Debug\itu_gui.lib" /MACHINE:X86 Debug\itc_tree.obj
          Debug\ith_lcd.obj
          Debug\ith_win32_sim.obj
          Debug\itp_posix_win32.obj
@@ -35,9 +53,9 @@
          Debug\SDL_events.obj
          Debug\SDL_systimer.obj
          Debug\main.obj
-         itu_gui.vcxproj -> D:\itu_gui\itu_gui\Debug\itu_gui.exe
-     1>Done Building Project "D:\itu_gui\itu_gui\itu_gui\itu_gui.vcxproj" (Build target(s)).
+         itu_gui.vcxproj -> d:\itu_gui\itu_gui\Debug\itu_gui.exe
+     1>Done Building Project "d:\itu_gui\itu_gui\itu_gui\itu_gui.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.79
+Time Elapsed 00:00:00.75
