@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{138767FB-90DB-4DA5-875E-9851F558007A}</ProjectGuid>
+    <RootNamespace>itu_gui</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="ite\itc_tree.c" />
+    <ClCompile Include="ite\ith_lcd.c" />
+    <ClCompile Include="ite\ith_win32_sim.c" />
+    <ClCompile Include="ite\itp_posix_win32.c" />
+    <ClCompile Include="ite\itu_action.c" />
+    <ClCompile Include="ite\itu_background.c" />
+    <ClCompile Include="ite\itu_base.c" />
+    <ClCompile Include="ite\itu_button.c" />
+    <ClCompile Include="ite\itu_clipper.c" />
+    <ClCompile Include="ite\itu_effect.c" />
+    <ClCompile Include="ite\itu_fadeeffect.c" />
+    <ClCompile Include="ite\itu_icon.c" />
+    <ClCompile Include="ite\itu_layer.c" />
+    <ClCompile Include="ite\itu_lcd.c" />
+    <ClCompile Include="ite\itu_meter.c" />
+    <ClCompile Include="ite\itu_scaleeffect.c" />
+    <ClCompile Include="ite\itu_scalefadeeffect.c" />
+    <ClCompile Include="ite\itu_scene.c" />
+    <ClCompile Include="ite\itu_scrolleffect.c" />
+    <ClCompile Include="ite\itu_scrollfadeeffect.c" />
+    <ClCompile Include="ite\itu_surface.c" />
+    <ClCompile Include="ite\itu_sw.c" />
+    <ClCompile Include="ite\itu_utility.c" />
+    <ClCompile Include="ite\itu_widget.c" />
+    <ClCompile Include="ite\itu_wipeeffect.c" />
+    <ClCompile Include="ite\SDL_events.c" />
+    <ClCompile Include="ite\SDL_systimer.c" />
+    <ClCompile Include="main.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ite\itc.h" />
+    <ClInclude Include="ite\ith_defs.h" />
+    <ClInclude Include="ite\ith_lcd.h" />
+    <ClInclude Include="ite\ith_utility.h" />
+    <ClInclude Include="ite\ith_vram.h" />
+    <ClInclude Include="ite\itu.h" />
+    <ClInclude Include="ite\itu_cfg.h" />
+    <ClInclude Include="ite\itu_private.h" />
+    <ClInclude Include="ite\SDL_events.h" />
+    <ClInclude Include="ite\SDL_timer.h" />
+    <ClInclude Include="ite\stdbool.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

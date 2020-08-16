@@ -3,8 +3,8 @@
 #include <string.h>
 #include "itu.h"
 #include "itu_cfg.h"
+#include "itu_math.h"
 
-#define M_PI       3.14159265358979323846
 static const char meterName[] = "ITUMeter";
 
 static void ituMeterExit(ITUWidget* widget)
