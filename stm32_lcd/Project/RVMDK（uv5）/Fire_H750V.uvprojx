@@ -982,6 +982,16 @@
               <FileType>1</FileType>
               <FilePath>..\..\User\usart\bsp_debug_usart.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_i2c_touch.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\touch\bsp_i2c_touch.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_touch_gtxx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\touch\bsp_touch_gtxx.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

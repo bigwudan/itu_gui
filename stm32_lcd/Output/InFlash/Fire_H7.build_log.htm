@@ -27,6 +27,34 @@ Project File Date:  09/15/2020
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'd:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'Fire_H7'
+compiling bsp_i2c_touch.c...
+..\..\User\touch\bsp_i2c_touch.c(32): warning:  #177-D: function "Delay"  was declared but never referenced
+  static void Delay(__IO uint32_t nCount)	 //??????????????
+..\..\User\touch\bsp_i2c_touch.c(206): warning:  #177-D: function "I2C_Mode_Config"  was declared but never referenced
+  static void I2C_Mode_Config(void)
+..\..\User\touch\bsp_i2c_touch.c: 2 warnings, 0 errors
+compiling bsp_touch_gtxx.c...
+..\..\User\touch\bsp_touch_gtxx.c(739): warning:  #177-D: variable "i"  was declared but never referenced
+      int32_t i = 0;
+..\..\User\touch\bsp_touch_gtxx.c(740): warning:  #177-D: variable "check_sum"  was declared but never referenced
+      uint16_t check_sum = 0;
+..\..\User\touch\bsp_touch_gtxx.c(741): warning:  #177-D: variable "retry"  was declared but never referenced
+      int32_t retry = 0;
+..\..\User\touch\bsp_touch_gtxx.c(743): warning:  #177-D: variable "cfg_info"  was declared but never referenced
+      const uint8_t* cfg_info;
+..\..\User\touch\bsp_touch_gtxx.c(744): warning:  #177-D: variable "cfg_info_len"  was declared but never referenced
+      uint8_t cfg_info_len  ;
+..\..\User\touch\bsp_touch_gtxx.c(745): warning:  #177-D: variable "config"  was declared but never referenced
+  		uint8_t* config;
+..\..\User\touch\bsp_touch_gtxx.c(747): warning:  #177-D: variable "cfg_num"  was declared but never referenced
+      uint8_t cfg_num =0 ;		//????????????????????
+..\..\User\touch\bsp_touch_gtxx.c(189): warning:  #177-D: function "Delay"  was declared but never referenced
+  static void Delay(__IO uint32_t nCount)	 //??????????????
+..\..\User\touch\bsp_touch_gtxx.c(391): warning:  #550-D: variable "pre_x"  was set but never used
+  static int16_t pre_x[GTP_MAX_TOUCH] ={-1,-1,-1,-1,-1};
+..\..\User\touch\bsp_touch_gtxx.c(392): warning:  #550-D: variable "pre_y"  was set but never used
+  static int16_t pre_y[GTP_MAX_TOUCH] ={-1,-1,-1,-1,-1};
+..\..\User\touch\bsp_touch_gtxx.c: 10 warnings, 0 errors
 compiling main.c...
 ..\..\User\main.h(12): warning:  #1-D: last line of file ends without a newline
   #define malloc(s) pvPortMalloc((s))
@@ -34,17 +62,17 @@ compiling main.c...
   	int ituFrameFuncGetSurfWidth();
 ..\..\GUI\itu.h(330): warning:  #1295-D: Deprecated declaration ituFrameFuncGetSurfHeight - give arg types
   	int ituFrameFuncGetSurfHeight();
-..\..\User\main.c(96): warning:  #14-D: extra text after expected end of preprocessing directive
+..\..\User\main.c(99): warning:  #14-D: extra text after expected end of preprocessing directive
   #undef ADD_WIDGET(W,H,X,Y,R,G,B)
-..\..\User\main.c(74): warning:  #177-D: variable "btn1"  was declared but never referenced
+..\..\User\main.c(77): warning:  #177-D: variable "btn1"  was declared but never referenced
   	ITUButton* btn1 = NULL;
-..\..\User\main.c(179): warning:  #550-D: variable "flag"  was set but never used
+..\..\User\main.c(186): warning:  #550-D: variable "flag"  was set but never used
   	int flag = 0;
 ..\..\User\main.c: 6 warnings, 0 errors
 linking...
-Program Size: Code=100210 RO-data=17426 RW-data=248 ZI-data=537392  
+Program Size: Code=104774 RO-data=18810 RW-data=280 ZI-data=537392  
 FromELF: creating hex file...
-"..\..\Output\InFlash\Fire_H7.axf" - 0 Error(s), 6 Warning(s).
+"..\..\Output\InFlash\Fire_H7.axf" - 0 Error(s), 18 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -58,7 +86,7 @@ Package Vendor: Keil
   d:\Keil_v5\ARM\PACK\Keil\STM32H7xx_DFP\2.5.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:07
+Build Time Elapsed:  00:00:13
 </pre>
 </body>
 </html>

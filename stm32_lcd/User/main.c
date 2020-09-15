@@ -24,6 +24,9 @@
 #include "./usart/bsp_debug_usart.h"
 #include "./lcd/bsp_lcd.h"
 
+#include "./touch/bsp_i2c_touch.h"
+#include "./touch/bsp_touch_gtxx.h"
+
 #include "SDL_events.h"
 #include "itu.h"
 #define ITH_RGB565(r, g, b) \
@@ -137,6 +140,10 @@ int main(void)
 	printf("\r\n野火STM32H750 LTDC液晶显示英文测试例程\r\n");
 	/*蓝灯亮*/
 	LED_BLUE;
+	
+	  /* 初始化触摸屏 */
+	GTP_Init_Panel(); 
+	
 	/* LCD 端口初始化 */ 
 	LCD_Init();
 	/* LCD 第一层初始化 */ 

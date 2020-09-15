@@ -116,6 +116,8 @@
 "..\..\output\inflash\bsp_lcd.o"
 "..\..\output\inflash\bsp_sdram.o"
 "..\..\output\inflash\bsp_debug_usart.o"
+"..\..\output\inflash\bsp_i2c_touch.o"
+"..\..\output\inflash\bsp_touch_gtxx.o"
 "..\..\output\inflash\itc_tree.o"
 "..\..\output\inflash\ith_lcd.o"
 "..\..\output\inflash\ith_win32_sim.o"
