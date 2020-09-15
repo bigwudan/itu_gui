@@ -1,0 +1,9 @@
+..\..\output\inflash\itu_surface.o: ..\..\GUI\itu_surface.c
+..\..\output\inflash\itu_surface.o: ..\..\GUI\itu.h
+..\..\output\inflash\itu_surface.o: ..\..\GUI\itc.h
+..\..\output\inflash\itu_surface.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+..\..\output\inflash\itu_surface.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\..\output\inflash\itu_surface.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+..\..\output\inflash\itu_surface.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\limits.h
+..\..\output\inflash\itu_surface.o: ..\..\GUI\itu_cfg.h
+..\..\output\inflash\itu_surface.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\assert.h

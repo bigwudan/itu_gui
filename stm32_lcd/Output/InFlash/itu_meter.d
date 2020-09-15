@@ -1,0 +1,11 @@
+..\..\output\inflash\itu_meter.o: ..\..\GUI\itu_meter.c
+..\..\output\inflash\itu_meter.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\assert.h
+..\..\output\inflash\itu_meter.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+..\..\output\inflash\itu_meter.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+..\..\output\inflash\itu_meter.o: ..\..\GUI\itu.h
+..\..\output\inflash\itu_meter.o: ..\..\GUI\itc.h
+..\..\output\inflash\itu_meter.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+..\..\output\inflash\itu_meter.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\..\output\inflash\itu_meter.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+..\..\output\inflash\itu_meter.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\limits.h
+..\..\output\inflash\itu_meter.o: ..\..\GUI\itu_cfg.h

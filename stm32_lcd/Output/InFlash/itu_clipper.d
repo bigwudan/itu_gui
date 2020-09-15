@@ -1,0 +1,10 @@
+..\..\output\inflash\itu_clipper.o: ..\..\GUI\itu_clipper.c
+..\..\output\inflash\itu_clipper.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\assert.h
+..\..\output\inflash\itu_clipper.o: ..\..\GUI\itu.h
+..\..\output\inflash\itu_clipper.o: ..\..\GUI\itc.h
+..\..\output\inflash\itu_clipper.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+..\..\output\inflash\itu_clipper.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\..\output\inflash\itu_clipper.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+..\..\output\inflash\itu_clipper.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\limits.h
+..\..\output\inflash\itu_clipper.o: ..\..\GUI\itu_cfg.h
+..\..\output\inflash\itu_clipper.o: ..\..\GUI\itu_private.h

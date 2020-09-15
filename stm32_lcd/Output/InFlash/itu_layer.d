@@ -1,0 +1,13 @@
+..\..\output\inflash\itu_layer.o: ..\..\GUI\itu_layer.c
+..\..\output\inflash\itu_layer.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\assert.h
+..\..\output\inflash\itu_layer.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\..\output\inflash\itu_layer.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+..\..\output\inflash\itu_layer.o: ..\..\GUI\itu.h
+..\..\output\inflash\itu_layer.o: ..\..\GUI\itc.h
+..\..\output\inflash\itu_layer.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+..\..\output\inflash\itu_layer.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\..\output\inflash\itu_layer.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+..\..\output\inflash\itu_layer.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\limits.h
+..\..\output\inflash\itu_layer.o: ..\..\GUI\ith_utility.h
+..\..\output\inflash\itu_layer.o: ..\..\GUI\itu_cfg.h
+..\..\output\inflash\itu_layer.o: ..\..\GUI\itu_private.h
