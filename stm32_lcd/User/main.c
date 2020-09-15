@@ -23,6 +23,8 @@
 #include "./sdram/bsp_sdram.h" 
 #include "./usart/bsp_debug_usart.h"
 #include "./lcd/bsp_lcd.h"
+
+#include "SDL_events.h"
 #include "itu.h"
 #define ITH_RGB565(r, g, b) \
     ((((uint16_t)(r) >> 3) << 11) | (((uint16_t)(g) >> 2) << 5) | ((uint16_t)(b) >> 3))
@@ -94,6 +96,16 @@ rect.width = W;rect.height = H; rect.x=X;rect.y=Y;color.red=R;color.green=G;colo
 #undef ADD_WIDGET(W,H,X,Y,R,G,B)
 }
 
+
+void test_event(){
+	SDL_Event event_ev;
+	event_ev.type = SDL_MOUSEMOTION;
+	event_ev.button.x = 1;
+	event_ev.button.y = 20;
+	SDL_PushEvent(&event_ev);	
+
+}
+
 /**
   * @brief  主函数
   * @param  无
@@ -101,7 +113,7 @@ rect.width = W;rect.height = H; rect.x=X;rect.y=Y;color.red=R;color.green=G;colo
   */
 int main(void)
 {  
-	
+	SDL_Event ev;
 	/* 系统时钟初始化成480MHz */
 	SystemClock_Config();
   
@@ -164,6 +176,14 @@ int main(void)
 
 			//clear
 	memset((void *)screenSurf->addr, 0, 800*480*2);
+	int flag = 0;
+	SDL_StartEventLoop();
+	test_event();
+	flag = SDL_PollEvent(&ev);
+	
+	
+	printf("x=%d,y=%d\n", ev.button.x, ev.button.y);
+	
 	while(1)
 	{		
 

@@ -1,4 +1,4 @@
-﻿/* General event handling code for SDL */
+/* General event handling code for SDL */
 #include "SDL_events.h"
 #include "itu.h"
 #define SDL_arraysize(array)	(sizeof(array)/sizeof(array[0]))
@@ -19,7 +19,7 @@ typedef struct SDL_EventWatcher {
 
 static SDL_EventWatcher *SDL_event_watchers = NULL;
 /* Private data -- event queue */
-#define MAXEVENTS	128
+#define MAXEVENTS	40
 static struct
 {
 	SDL_mutex *lock;

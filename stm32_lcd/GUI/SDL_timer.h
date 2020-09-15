@@ -1,6 +1,6 @@
-﻿#ifndef _SDL_timer_h
+#ifndef _SDL_timer_h
 #define _SDL_timer_h
-
+#include <stdint.h>
 /* Set up for C function definitions, even when using C++ */
 #ifdef __cplusplus
 /* *INDENT-OFF* */
