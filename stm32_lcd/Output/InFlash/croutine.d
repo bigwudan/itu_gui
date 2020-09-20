@@ -1,0 +1,14 @@
+..\..\output\inflash\croutine.o: ..\..\FreeRTOS\Source\croutine.c
+..\..\output\inflash\croutine.o: ..\..\FreeRTOS\Source\include\FreeRTOS.h
+..\..\output\inflash\croutine.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+..\..\output\inflash\croutine.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\..\output\inflash\croutine.o: ..\..\FreeRTOS\FreeRTOSConfig.h
+..\..\output\inflash\croutine.o: ..\..\FreeRTOS\Source\include\projdefs.h
+..\..\output\inflash\croutine.o: ..\..\FreeRTOS\Source\include\portable.h
+..\..\output\inflash\croutine.o: ..\..\FreeRTOS\Source\include\deprecated_definitions.h
+..\..\output\inflash\croutine.o: ..\..\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h
+..\..\output\inflash\croutine.o: ..\..\FreeRTOS\Source\include\mpu_wrappers.h
+..\..\output\inflash\croutine.o: ..\..\FreeRTOS\Source\include\task.h
+..\..\output\inflash\croutine.o: ..\..\FreeRTOS\Source\include\list.h
+..\..\output\inflash\croutine.o: ..\..\FreeRTOS\Source\include\croutine.h
+..\..\output\inflash\croutine.o: ..\..\FreeRTOS\Source\include\list.h

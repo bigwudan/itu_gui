@@ -1,0 +1,15 @@
+..\..\output\inflash\event_groups.o: ..\..\FreeRTOS\Source\event_groups.c
+..\..\output\inflash\event_groups.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\..\output\inflash\event_groups.o: ..\..\FreeRTOS\Source\include\FreeRTOS.h
+..\..\output\inflash\event_groups.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+..\..\output\inflash\event_groups.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\..\output\inflash\event_groups.o: ..\..\FreeRTOS\FreeRTOSConfig.h
+..\..\output\inflash\event_groups.o: ..\..\FreeRTOS\Source\include\projdefs.h
+..\..\output\inflash\event_groups.o: ..\..\FreeRTOS\Source\include\portable.h
+..\..\output\inflash\event_groups.o: ..\..\FreeRTOS\Source\include\deprecated_definitions.h
+..\..\output\inflash\event_groups.o: ..\..\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h
+..\..\output\inflash\event_groups.o: ..\..\FreeRTOS\Source\include\mpu_wrappers.h
+..\..\output\inflash\event_groups.o: ..\..\FreeRTOS\Source\include\task.h
+..\..\output\inflash\event_groups.o: ..\..\FreeRTOS\Source\include\list.h
+..\..\output\inflash\event_groups.o: ..\..\FreeRTOS\Source\include\timers.h
+..\..\output\inflash\event_groups.o: ..\..\FreeRTOS\Source\include\event_groups.h

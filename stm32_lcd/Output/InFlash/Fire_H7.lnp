@@ -145,7 +145,16 @@
 "..\..\output\inflash\itu_wipeeffect.o"
 "..\..\output\inflash\sdl_events.o"
 "..\..\output\inflash\sdl_systimer.o"
-"..\..\output\inflash\heap_4.o"
+"..\..\output\inflash\croutine.o"
+"..\..\output\inflash\event_groups.o"
+"..\..\output\inflash\list.o"
+"..\..\output\inflash\queue.o"
+"..\..\output\inflash\stream_buffer.o"
+"..\..\output\inflash\tasks.o"
+"..\..\output\inflash\timers.o"
+"..\..\output\inflash\heap_4_1.o"
+"..\..\output\inflash\port.o"
+"..\..\output\inflash\cmsis_os.o"
 --strict --scatter "..\..\Output\InFlash\Fire_H7.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

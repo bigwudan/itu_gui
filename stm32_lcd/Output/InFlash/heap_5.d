@@ -1,0 +1,13 @@
+..\..\output\inflash\heap_5.o: ..\..\FreeRTOS\Source\portable\MemMang\heap_5.c
+..\..\output\inflash\heap_5.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\..\output\inflash\heap_5.o: ..\..\FreeRTOS\Source\include\FreeRTOS.h
+..\..\output\inflash\heap_5.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+..\..\output\inflash\heap_5.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\..\output\inflash\heap_5.o: ..\..\FreeRTOS\FreeRTOSConfig.h
+..\..\output\inflash\heap_5.o: ..\..\FreeRTOS\Source\include\projdefs.h
+..\..\output\inflash\heap_5.o: ..\..\FreeRTOS\Source\include\portable.h
+..\..\output\inflash\heap_5.o: ..\..\FreeRTOS\Source\include\deprecated_definitions.h
+..\..\output\inflash\heap_5.o: ..\..\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h
+..\..\output\inflash\heap_5.o: ..\..\FreeRTOS\Source\include\mpu_wrappers.h
+..\..\output\inflash\heap_5.o: ..\..\FreeRTOS\Source\include\task.h
+..\..\output\inflash\heap_5.o: ..\..\FreeRTOS\Source\include\list.h

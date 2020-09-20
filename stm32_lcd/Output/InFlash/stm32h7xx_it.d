@@ -44,3 +44,12 @@
 ..\..\output\inflash\stm32h7xx_it.o: ..\..\Libraries\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_uart.h
 ..\..\output\inflash\stm32h7xx_it.o: ..\..\Libraries\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_uart_ex.h
 ..\..\output\inflash\stm32h7xx_it.o: ..\..\User\stm32h7xx_it.h
+..\..\output\inflash\stm32h7xx_it.o: ..\..\FreeRTOS\Source\include\FreeRTOS.h
+..\..\output\inflash\stm32h7xx_it.o: ..\..\FreeRTOS\FreeRTOSConfig.h
+..\..\output\inflash\stm32h7xx_it.o: ..\..\FreeRTOS\Source\include\projdefs.h
+..\..\output\inflash\stm32h7xx_it.o: ..\..\FreeRTOS\Source\include\portable.h
+..\..\output\inflash\stm32h7xx_it.o: ..\..\FreeRTOS\Source\include\deprecated_definitions.h
+..\..\output\inflash\stm32h7xx_it.o: ..\..\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h
+..\..\output\inflash\stm32h7xx_it.o: ..\..\FreeRTOS\Source\include\mpu_wrappers.h
+..\..\output\inflash\stm32h7xx_it.o: ..\..\FreeRTOS\Source\include\task.h
+..\..\output\inflash\stm32h7xx_it.o: ..\..\FreeRTOS\Source\include\list.h

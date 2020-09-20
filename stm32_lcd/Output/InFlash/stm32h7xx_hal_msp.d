@@ -44,5 +44,3 @@
 ..\..\output\inflash\stm32h7xx_hal_msp.o: ..\..\Libraries\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_tim_ex.h
 ..\..\output\inflash\stm32h7xx_hal_msp.o: ..\..\Libraries\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_uart.h
 ..\..\output\inflash\stm32h7xx_hal_msp.o: ..\..\Libraries\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_uart_ex.h
-..\..\output\inflash\stm32h7xx_hal_msp.o: ..\..\GUI\heap_4.h
-..\..\output\inflash\stm32h7xx_hal_msp.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h

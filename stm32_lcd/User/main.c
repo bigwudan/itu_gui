@@ -17,6 +17,8 @@
 #include "stm32h7xx.h"
 #include <string.h>
 #include "main.h"
+#include "cmsis_os.h"
+
 #include "./led/bsp_led.h"
 #include "./delay/core_delay.h" 
 #include "./mpu/bsp_mpu.h" 
@@ -31,73 +33,86 @@
 #include "itu.h"
 #define ITH_RGB565(r, g, b) \
     ((((uint16_t)(r) >> 3) << 11) | (((uint16_t)(g) >> 2) << 5) | ((uint16_t)(b) >> 3))
+	
+
+
+osThreadId defaultTaskHandle;
+osThreadId myTask02Handle;
+	
+void StartDefaultTask(void const * argument);
+void StartTask02(void const * argument);	
+	
 void Delay(__IO uint32_t nCount); 
+
 
 void LCD_Test(void);
 ITUScene            theScene;
 static ITUSurface   *screenSurf;
 
-static ITUBackground* _create_background(ITURectangle *rect, ITUColor *color, char *name)
-{
-	ITUBackground* bg = (ITUBackground* )calloc(1, sizeof(ITUBackground));
-	ituBackgroundInit(bg);
-	((ITUWidget *)bg)->visible = 1;
-	ITUWidget* widget = (ITUWidget*)bg;
-	widget->effectSteps = 10;
-	memmove(&widget->rect, rect, sizeof(ITURectangle));
-	memmove(&widget->color, color, sizeof(ITUColor));
-	strcpy(widget->name, name);
-	widget->alpha = 255;
-	return bg;
-}
 
-static ITULayer* _create_layer(ITURectangle *rect, ITUColor *color, char *name)
-{
-	ITULayer* layer = NULL;
-	int len = sizeof(ITULayer);
-	printf("len=%d\n", len);
-	layer = (ITULayer* )calloc(1, sizeof(ITULayer));
-	ituLayerInit(layer);
-	((ITUWidget *)layer)->visible = 1;
-	ITUWidget* widget = (ITUWidget*)layer;
-	memmove(&widget->rect, rect, sizeof(ITURectangle));
-	memmove(&widget->color, color, sizeof(ITUColor));
-	strcpy(widget->name, name);
-	widget->alpha = 255;
-	return layer;
-}
 
-static void _test_init()
-{
-#define ADD_WIDGET(W,H,X,Y,R,G,B) do{memset(&rect, 0, sizeof(ITURectangle));memset(&color, 0, sizeof(ITUColor));\
-rect.width = W;rect.height = H; rect.x=X;rect.y=Y;color.red=R;color.green=G;color.blue=B;color.alpha=255;}while (0)
-	ITUBackground* bg1 = NULL;
-	ITUBackground* bg2 = NULL;
-	ITULayer *layer1 = NULL;
-	ITUButton* btn1 = NULL;
-	
-	
-	ITURectangle rect;
-	ITUColor color;
-	//????layer
-	ADD_WIDGET(T_WIDTH, T_HEIGHT, 0, 0, 0, 0, 0);
-	layer1 = _create_layer(&rect, &color, "layer1");
-	theScene.root = (ITUWidget *)layer1;
 
-	//????back
-	ADD_WIDGET(50, 50, 0, 0, 0, 0, 255);
-	bg1 = _create_background(&rect, &color, "bk_wudan1");
-	itcTreePushFront((ITCTree *)layer1, bg1);
+//static ITUBackground* _create_background(ITURectangle *rect, ITUColor *color, char *name)
+//{
+//	ITUBackground* bg = (ITUBackground* )calloc(1, sizeof(ITUBackground));
+//	ituBackgroundInit(bg);
+//	((ITUWidget *)bg)->visible = 1;
+//	ITUWidget* widget = (ITUWidget*)bg;
+//	widget->effectSteps = 10;
+//	memmove(&widget->rect, rect, sizeof(ITURectangle));
+//	memmove(&widget->color, color, sizeof(ITUColor));
+//	strcpy(widget->name, name);
+//	widget->alpha = 255;
+//	return bg;
+//}
 
-	//????back
-	ADD_WIDGET(80, 80, 120, 120, 255, 0, 255);
-	bg2 = _create_background(&rect, &color, "bk_wudan2");
-	itcTreePushFront((ITCTree *)layer1, bg2);
-	
-	return;
+//static ITULayer* _create_layer(ITURectangle *rect, ITUColor *color, char *name)
+//{
+//	ITULayer* layer = NULL;
+//	int len = sizeof(ITULayer);
+//	printf("len=%d\n", len);
+//	layer = (ITULayer* )calloc(1, sizeof(ITULayer));
+//	ituLayerInit(layer);
+//	((ITUWidget *)layer)->visible = 1;
+//	ITUWidget* widget = (ITUWidget*)layer;
+//	memmove(&widget->rect, rect, sizeof(ITURectangle));
+//	memmove(&widget->color, color, sizeof(ITUColor));
+//	strcpy(widget->name, name);
+//	widget->alpha = 255;
+//	return layer;
+//}
 
-#undef ADD_WIDGET(W,H,X,Y,R,G,B)
-}
+//static void _test_init()
+//{
+//#define ADD_WIDGET(W,H,X,Y,R,G,B) do{memset(&rect, 0, sizeof(ITURectangle));memset(&color, 0, sizeof(ITUColor));\
+//rect.width = W;rect.height = H; rect.x=X;rect.y=Y;color.red=R;color.green=G;color.blue=B;color.alpha=255;}while (0)
+//	ITUBackground* bg1 = NULL;
+//	ITUBackground* bg2 = NULL;
+//	ITULayer *layer1 = NULL;
+//	ITUButton* btn1 = NULL;
+//	
+//	
+//	ITURectangle rect;
+//	ITUColor color;
+//	//????layer
+//	ADD_WIDGET(T_WIDTH, T_HEIGHT, 0, 0, 0, 0, 0);
+//	layer1 = _create_layer(&rect, &color, "layer1");
+//	theScene.root = (ITUWidget *)layer1;
+
+//	//????back
+//	ADD_WIDGET(50, 50, 0, 0, 0, 0, 255);
+//	bg1 = _create_background(&rect, &color, "bk_wudan1");
+//	itcTreePushFront((ITCTree *)layer1, bg1);
+
+//	//????back
+//	ADD_WIDGET(80, 80, 120, 120, 255, 0, 255);
+//	bg2 = _create_background(&rect, &color, "bk_wudan2");
+//	itcTreePushFront((ITCTree *)layer1, bg2);
+//	
+//	return;
+
+//#undef ADD_WIDGET(W,H,X,Y,R,G,B)
+//}
 
 
 void test_event(){
@@ -138,66 +153,90 @@ int main(void)
 	
 	printf("\r\n 欢迎使用野火  STM32 H743 开发板。\r\n");		 
 	printf("\r\n野火STM32H750 LTDC液晶显示英文测试例程\r\n");
-	/*蓝灯亮*/
-	LED_BLUE;
 	
-	  /* 初始化触摸屏 */
-	GTP_Init_Panel(); 
-	
-	/* LCD 端口初始化 */ 
-	LCD_Init();
-	/* LCD 第一层初始化 */ 
-	LCD_LayerInit(0, LCD_FB_START_ADDRESS,RGB565);
-	/* LCD 第二层初始化 */ 
-	LCD_LayerInit(1, LCD_FB_START_ADDRESS+(LCD_GetXSize()*LCD_GetYSize()*4),RGB565);
-	/* 使能LCD，包括开背光 */ 
-	LCD_DisplayOn(); 
+	osThreadDef(defaultTask, StartDefaultTask, osPriorityIdle, 0, 128);
+	defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
-	/* 选择LCD第一层 */
-	LCD_SelectLayer(0);
+	printf("defaultTaskHandle=0x%02X\n", defaultTaskHandle);
 
-	/* 第一层清屏，显示全黑 */ 
-	LCD_Clear(LCD_COLOR_BLACK);  
+	/* definition and creation of myTask02 */
+	osThreadDef(myTask02, StartTask02, osPriorityIdle, 0, 128);
+	myTask02Handle = osThreadCreate(osThread(myTask02), NULL);
+	printf("myTask02Handle=0x%02X\n", myTask02Handle);
+	/* Start scheduler */
+	osKernelStart();
+	  
+	/* We should never get here as control is now taken by the scheduler */
 
-	/* 选择LCD第二层 */
-	LCD_SelectLayer(1);
+	/* Infinite loop */
+	/* USER CODE BEGIN WHILE */
+	while (1)
+	{
+		/* USER CODE END WHILE */
 
-	/* 第二层清屏，显示全黑 */ 
-	LCD_Clear(LCD_COLOR_TRANSPARENT);
-
-	/* 配置第一和第二层的透明度,最小值为0，最大值为255*/
-	LCD_SetTransparency(0, 255);
-	LCD_SetTransparency(1, 0);
-
-	ituLcdInit();
-	ituSWInit();
-	ituSceneInit(&theScene, NULL);
-	screenSurf = ituGetDisplaySurface(); 
-	_test_init();
-	uint32_t len = LCD_GetXSize()*LCD_GetYSize()*2;
-	LCD_SelectLayer(0);
-	//screenSurf->addr;
-	
-	//uint16_t *p_draw = (uint16_t *)screenSurf->addr;
-	
-
-			//clear
-	memset((void *)screenSurf->addr, 0, 800*480*2);
-	int flag = 0;
-	SDL_StartEventLoop();
-	test_event();
-	flag = SDL_PollEvent(&ev);
-	
-	
-	printf("x=%d,y=%d\n", ev.button.x, ev.button.y);
-	
-	while(1)
-	{		
-
-		
-		ituSceneDraw(&theScene, screenSurf);
-		LCD_DrawBuff((uint8_t *)screenSurf->addr,800*480*2);
+		/* USER CODE BEGIN 3 */
 	}
+	
+//	/*蓝灯亮*/
+//	LED_BLUE;
+//	
+//	  /* 初始化触摸屏 */
+//	GTP_Init_Panel(); 
+//	
+//	/* LCD 端口初始化 */ 
+//	LCD_Init();
+//	/* LCD 第一层初始化 */ 
+//	LCD_LayerInit(0, LCD_FB_START_ADDRESS,RGB565);
+//	/* LCD 第二层初始化 */ 
+//	LCD_LayerInit(1, LCD_FB_START_ADDRESS+(LCD_GetXSize()*LCD_GetYSize()*4),RGB565);
+//	/* 使能LCD，包括开背光 */ 
+//	LCD_DisplayOn(); 
+
+//	/* 选择LCD第一层 */
+//	LCD_SelectLayer(0);
+
+//	/* 第一层清屏，显示全黑 */ 
+//	LCD_Clear(LCD_COLOR_BLACK);  
+
+//	/* 选择LCD第二层 */
+//	LCD_SelectLayer(1);
+
+//	/* 第二层清屏，显示全黑 */ 
+//	LCD_Clear(LCD_COLOR_TRANSPARENT);
+
+//	/* 配置第一和第二层的透明度,最小值为0，最大值为255*/
+//	LCD_SetTransparency(0, 255);
+//	LCD_SetTransparency(1, 0);
+
+//	ituLcdInit();
+//	ituSWInit();
+//	ituSceneInit(&theScene, NULL);
+//	screenSurf = ituGetDisplaySurface(); 
+//	//_test_init();
+//	uint32_t len = LCD_GetXSize()*LCD_GetYSize()*2;
+//	LCD_SelectLayer(0);
+//	//screenSurf->addr;
+//	
+//	//uint16_t *p_draw = (uint16_t *)screenSurf->addr;
+//	
+
+//			//clear
+//	memset((void *)screenSurf->addr, 0, 800*480*2);
+//	int flag = 0;
+//	SDL_StartEventLoop();
+//	test_event();
+//	flag = SDL_PollEvent(&ev);
+//	
+//	
+//	printf("x=%d,y=%d\n", ev.button.x, ev.button.y);
+//	
+//	while(1)
+//	{		
+
+//		
+//		ituSceneDraw(&theScene, screenSurf);
+//		LCD_DrawBuff((uint8_t *)screenSurf->addr,800*480*2);
+//	}
 }
 
 /*用于测试各种液晶的函数*/
@@ -455,4 +494,46 @@ void Delay(__IO uint32_t nCount)	 //简单的延时函数
 {
 	for(; nCount != 0; nCount--);
 }
+
+/* USER CODE BEGIN Header_StartDefaultTask */
+/**
+  * @brief  Function implementing the defaultTask thread.
+  * @param  argument: Not used 
+  * @retval None
+  */
+/* USER CODE END Header_StartDefaultTask */
+void StartDefaultTask(void const * argument)
+{
+    
+    
+    
+    
+
+  /* USER CODE BEGIN 5 */
+  /* Infinite loop */
+  for(;;)
+  {
+    osDelay(1);
+  }
+  /* USER CODE END 5 */ 
+}
+
+/* USER CODE BEGIN Header_StartTask02 */
+/**
+* @brief Function implementing the myTask02 thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartTask02 */
+void StartTask02(void const * argument)
+{
+  /* USER CODE BEGIN StartTask02 */
+  /* Infinite loop */
+  for(;;)
+  {
+    osDelay(1);
+  }
+  /* USER CODE END StartTask02 */
+}
+
 /****************************END OF FILE***************************/

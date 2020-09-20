@@ -1,0 +1,12 @@
+..\..\output\inflash\list.o: ..\..\FreeRTOS\Source\list.c
+..\..\output\inflash\list.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\..\output\inflash\list.o: ..\..\FreeRTOS\Source\include\FreeRTOS.h
+..\..\output\inflash\list.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+..\..\output\inflash\list.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\..\output\inflash\list.o: ..\..\FreeRTOS\FreeRTOSConfig.h
+..\..\output\inflash\list.o: ..\..\FreeRTOS\Source\include\projdefs.h
+..\..\output\inflash\list.o: ..\..\FreeRTOS\Source\include\portable.h
+..\..\output\inflash\list.o: ..\..\FreeRTOS\Source\include\deprecated_definitions.h
+..\..\output\inflash\list.o: ..\..\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h
+..\..\output\inflash\list.o: ..\..\FreeRTOS\Source\include\mpu_wrappers.h
+..\..\output\inflash\list.o: ..\..\FreeRTOS\Source\include\list.h
