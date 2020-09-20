@@ -152,18 +152,18 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>508</LineNumber>
+          <LineNumber>509</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>0</Address>
+          <Address>134235348</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\..\FreeRTOS\Source\portable\RVDS\ARM_CM4F\port.c</Filename>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>D:\itu_gui\stm32_lcd\Project\User\main.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression></Expression>
+          <Expression>\\Fire_H7\../../User/main.c\509</Expression>
         </Bp>
       </Breakpoint>
       <Tracepoint>

@@ -154,13 +154,13 @@ int main(void)
 	printf("\r\n »¶Ó­Ê¹ÓÃÒ°»ð  STM32 H743 ¿ª·¢°å¡£\r\n");		 
 	printf("\r\nÒ°»ðSTM32H750 LTDCÒº¾§ÏÔÊ¾Ó¢ÎÄ²âÊÔÀý³Ì\r\n");
 	
-	osThreadDef(defaultTask, StartDefaultTask, osPriorityIdle, 0, 128);
+	osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
 	defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
 	printf("defaultTaskHandle=0x%02X\n", defaultTaskHandle);
 
 	/* definition and creation of myTask02 */
-	osThreadDef(myTask02, StartTask02, osPriorityIdle, 0, 128);
+	osThreadDef(myTask02, StartTask02, osPriorityNormal, 0, 128);
 	myTask02Handle = osThreadCreate(osThread(myTask02), NULL);
 	printf("myTask02Handle=0x%02X\n", myTask02Handle);
 	/* Start scheduler */
@@ -506,13 +506,14 @@ void StartDefaultTask(void const * argument)
 {
     
     
-    
+   printf("wudan start\n"); 
     
 
   /* USER CODE BEGIN 5 */
   /* Infinite loop */
   for(;;)
   {
+	   printf("<<<xxxxwudan1\n"); 
     osDelay(1);
   }
   /* USER CODE END 5 */ 
@@ -529,8 +530,10 @@ void StartTask02(void const * argument)
 {
   /* USER CODE BEGIN StartTask02 */
   /* Infinite loop */
+	printf("wudan1 start\n"); 
   for(;;)
   {
+	  printf(">>>>>>xxxwudan1\n"); 
     osDelay(1);
   }
   /* USER CODE END StartTask02 */
