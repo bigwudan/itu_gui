@@ -880,8 +880,6 @@ Section Cross References
     main.o(i.main) refers to bsp_led.o(i.LED_GPIO_Config) for LED_GPIO_Config
     main.o(i.main) refers to bsp_debug_usart.o(i.DEBUG_USART_Config) for DEBUG_USART_Config
     main.o(i.main) refers to noretval__2printf.o(.text) for __2printf
-    main.o(i.main) refers to rt_memcpy_w.o(.text) for __aeabi_memcpy4
-    main.o(i.main) refers to cmsis_os.o(i.osThreadCreate) for osThreadCreate
     main.o(i.main) refers to bsp_touch_gtxx.o(i.GTP_Init_Panel) for GTP_Init_Panel
     main.o(i.main) refers to bsp_lcd.o(i.LCD_Init) for LCD_Init
     main.o(i.main) refers to bsp_lcd.o(i.LCD_LayerInit) for LCD_LayerInit
@@ -893,6 +891,8 @@ Section Cross References
     main.o(i.main) refers to bsp_lcd.o(i.LCD_SetTransparency) for LCD_SetTransparency
     main.o(i.main) refers to itu_lcd.o(i.ituLcdInit) for ituLcdInit
     main.o(i.main) refers to itu_sw.o(i.ituSWInit) for ituSWInit
+    main.o(i.main) refers to rt_memcpy_w.o(.text) for __aeabi_memcpy4
+    main.o(i.main) refers to cmsis_os.o(i.osThreadCreate) for osThreadCreate
     main.o(i.main) refers to cmsis_os.o(i.osKernelStart) for osKernelStart
     main.o(i.main) refers to main.o(.constdata) for .constdata
     main.o(i.main) refers to main.o(.data) for defaultTaskHandle
@@ -2169,7 +2169,7 @@ Section Cross References
     tasks.o(i.xTaskResumeFromISR) refers to list.o(i.vListInsertEnd) for vListInsertEnd
     tasks.o(i.xTaskResumeFromISR) refers to tasks.o(.data) for uxSchedulerSuspended
     tasks.o(i.xTaskResumeFromISR) refers to tasks.o(.bss) for pxReadyTasksLists
-    heap_4_1.o(i.prvHeapInit) refers to heap_4_1.o(.bss) for ucHeap
+    heap_4_1.o(i.prvHeapInit) refers to heap_4_1.o(.ARM.__AT_0xD2571104) for ucHeap
     heap_4_1.o(i.prvHeapInit) refers to heap_4_1.o(.data) for xStart
     heap_4_1.o(i.prvInsertBlockIntoFreeList) refers to heap_4_1.o(.data) for xStart
     heap_4_1.o(i.pvPortMalloc) refers to tasks.o(i.vTaskSuspendAll) for vTaskSuspendAll
@@ -5416,17 +5416,17 @@ Image Symbol Table
     xPendingReadyList                        0x2400052c   Data          20  tasks.o(.bss)
     xTasksWaitingTermination                 0x24000540   Data          20  tasks.o(.bss)
     xSuspendedTaskList                       0x24000554   Data          20  tasks.o(.bss)
-    .bss                                     0x24000568   Section    15360  heap_4_1.o(.bss)
-    ucHeap                                   0x24000568   Data       15360  heap_4_1.o(.bss)
-    .bss                                     0x24004168   Section       84  stdio_streams.o(.bss)
-    .bss                                     0x240041bc   Section       84  stdio_streams.o(.bss)
-    .bss                                     0x24004210   Section       84  stdio_streams.o(.bss)
-    .bss                                     0x24004264   Section       96  libspace.o(.bss)
-    HEAP                                     0x240042c8   Section      512  startup_stm32h743xx.o(HEAP)
-    Heap_Mem                                 0x240042c8   Data         512  startup_stm32h743xx.o(HEAP)
-    STACK                                    0x240044c8   Section     1024  startup_stm32h743xx.o(STACK)
-    Stack_Mem                                0x240044c8   Data        1024  startup_stm32h743xx.o(STACK)
-    __initial_sp                             0x240048c8   Data           0  startup_stm32h743xx.o(STACK)
+    .bss                                     0x24000568   Section       84  stdio_streams.o(.bss)
+    .bss                                     0x240005bc   Section       84  stdio_streams.o(.bss)
+    .bss                                     0x24000610   Section       84  stdio_streams.o(.bss)
+    .bss                                     0x24000664   Section       96  libspace.o(.bss)
+    HEAP                                     0x240006c8   Section      512  startup_stm32h743xx.o(HEAP)
+    Heap_Mem                                 0x240006c8   Data         512  startup_stm32h743xx.o(HEAP)
+    STACK                                    0x240008c8   Section     1024  startup_stm32h743xx.o(STACK)
+    Stack_Mem                                0x240008c8   Data        1024  startup_stm32h743xx.o(STACK)
+    __initial_sp                             0x24000cc8   Data           0  startup_stm32h743xx.o(STACK)
+    .ARM.__AT_0xD2571104                     0xd2571104   Section    15360  heap_4_1.o(.ARM.__AT_0xD2571104)
+    ucHeap                                   0xd2571104   Data       15360  heap_4_1.o(.ARM.__AT_0xD2571104)
 
     Global Symbols
 
@@ -6019,11 +6019,11 @@ Image Symbol Table
     htim1                                    0x24000150   Data          64  core_delay.o(.bss)
     hsdram1                                  0x2400037c   Data          52  bsp_sdram.o(.bss)
     UartHandle                               0x240003b0   Data         140  bsp_debug_usart.o(.bss)
-    __stdin                                  0x24004168   Data          84  stdio_streams.o(.bss)
-    __stdout                                 0x240041bc   Data          84  stdio_streams.o(.bss)
-    __stderr                                 0x24004210   Data          84  stdio_streams.o(.bss)
-    __libspace_start                         0x24004264   Data          96  libspace.o(.bss)
-    __temporary_stack_top$libspace           0x240042c4   Data           0  libspace.o(.bss)
+    __stdin                                  0x24000568   Data          84  stdio_streams.o(.bss)
+    __stdout                                 0x240005bc   Data          84  stdio_streams.o(.bss)
+    __stderr                                 0x24000610   Data          84  stdio_streams.o(.bss)
+    __libspace_start                         0x24000664   Data          96  libspace.o(.bss)
+    __temporary_stack_top$libspace           0x240006c4   Data           0  libspace.o(.bss)
 
 
 
@@ -6484,7 +6484,7 @@ Memory Map of the image
     **** No section assigned to this execution region ****
 
 
-    Execution Region RW_IRAM2 (Exec base: 0x24000000, Load base: 0x080190c8, Size: 0x000048c8, Max: 0x00080000, ABSOLUTE, COMPRESSED[0x0000009c])
+    Execution Region RW_IRAM2 (Exec base: 0x24000000, Load base: 0x080190c8, Size: 0x00000cc8, Max: 0x00080000, ABSOLUTE, COMPRESSED[0x0000009c])
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -6510,14 +6510,23 @@ Memory Map of the image
     0x240003b0        -       0x0000008c   Zero   RW         7270    .bss                bsp_debug_usart.o
     0x2400043c        -       0x0000003c   Zero   RW         8826    .bss                itu_lcd.o
     0x24000478        -       0x000000f0   Zero   RW        10332    .bss                tasks.o
-    0x24000568        -       0x00003c00   Zero   RW        10594    .bss                heap_4_1.o
-    0x24004168        -       0x00000054   Zero   RW        11406    .bss                c_w.l(stdio_streams.o)
-    0x240041bc        -       0x00000054   Zero   RW        11407    .bss                c_w.l(stdio_streams.o)
-    0x24004210        -       0x00000054   Zero   RW        11408    .bss                c_w.l(stdio_streams.o)
-    0x24004264        -       0x00000060   Zero   RW        11545    .bss                c_w.l(libspace.o)
-    0x240042c4   COMPRESSED   0x00000004   PAD
-    0x240042c8        -       0x00000200   Zero   RW            2    HEAP                startup_stm32h743xx.o
-    0x240044c8        -       0x00000400   Zero   RW            1    STACK               startup_stm32h743xx.o
+    0x24000568        -       0x00000054   Zero   RW        11406    .bss                c_w.l(stdio_streams.o)
+    0x240005bc        -       0x00000054   Zero   RW        11407    .bss                c_w.l(stdio_streams.o)
+    0x24000610        -       0x00000054   Zero   RW        11408    .bss                c_w.l(stdio_streams.o)
+    0x24000664        -       0x00000060   Zero   RW        11545    .bss                c_w.l(libspace.o)
+    0x240006c4   COMPRESSED   0x00000004   PAD
+    0x240006c8        -       0x00000200   Zero   RW            2    HEAP                startup_stm32h743xx.o
+    0x240008c8        -       0x00000400   Zero   RW            1    STACK               startup_stm32h743xx.o
+
+
+
+  Load Region LR$$.ARM.__AT_0xD2571104 (Base: 0xd2571104, Size: 0x00000000, Max: 0x00003c00, ABSOLUTE)
+
+    Execution Region ER$$.ARM.__AT_0xD2571104 (Exec base: 0xd2571104, Load base: 0xd2571104, Size: 0x00003c00, Max: 0x00003c00, ABSOLUTE, UNINIT)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0xd2571104        -       0x00003c00   Zero   RW        10594    .ARM.__AT_0xD2571104  heap_4_1.o
 
 
 ==============================================================================

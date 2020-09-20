@@ -154,16 +154,7 @@ int main(void)
 	printf("\r\n »¶Ó­Ê¹ÓÃÒ°»ğ  STM32 H743 ¿ª·¢°å¡£\r\n");		 
 	printf("\r\nÒ°»ğSTM32H750 LTDCÒº¾§ÏÔÊ¾Ó¢ÎÄ²âÊÔÀı³Ì\r\n");
 	
-	osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
-	defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
-	printf("defaultTaskHandle=0x%02X\n", defaultTaskHandle);
-
-	/* definition and creation of myTask02 */
-	osThreadDef(myTask02, StartTask02, osPriorityNormal, 0, 128);
-	myTask02Handle = osThreadCreate(osThread(myTask02), NULL);
-	printf("myTask02Handle=0x%02X\n", myTask02Handle);
-	/* Start scheduler */
 
 	
 	/*À¶µÆÁÁ*/
@@ -202,7 +193,16 @@ int main(void)
 //	while(1){
 //		LCD_Test();
 //	}
+	osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
+	defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
+	printf("defaultTaskHandle=0x%02X\n", defaultTaskHandle);
+
+	/* definition and creation of myTask02 */
+	osThreadDef(myTask02, StartTask02, osPriorityNormal, 0, 128);
+	myTask02Handle = osThreadCreate(osThread(myTask02), NULL);
+	printf("myTask02Handle=0x%02X\n", myTask02Handle);
+	/* Start scheduler */
 	osKernelStart();
 	  
 	/* We should never get here as control is now taken by the scheduler */
