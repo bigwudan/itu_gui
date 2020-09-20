@@ -164,6 +164,45 @@ int main(void)
 	myTask02Handle = osThreadCreate(osThread(myTask02), NULL);
 	printf("myTask02Handle=0x%02X\n", myTask02Handle);
 	/* Start scheduler */
+
+	
+	/*蓝灯亮*/
+	LED_BLUE;
+	
+	  /* 初始化触摸屏 */
+	GTP_Init_Panel(); 
+	
+	/* LCD 端口初始化 */ 
+	LCD_Init();
+	/* LCD 第一层初始化 */ 
+	LCD_LayerInit(0, LCD_FB_START_ADDRESS,RGB565);
+	/* LCD 第二层初始化 */ 
+	LCD_LayerInit(1, LCD_FB_START_ADDRESS+(LCD_GetXSize()*LCD_GetYSize()*4),RGB565);
+	/* 使能LCD，包括开背光 */ 
+	LCD_DisplayOn(); 
+
+	/* 选择LCD第一层 */
+	LCD_SelectLayer(0);
+
+	/* 第一层清屏，显示全黑 */ 
+	LCD_Clear(LCD_COLOR_BLACK);  
+
+	/* 选择LCD第二层 */
+	LCD_SelectLayer(1);
+
+	/* 第二层清屏，显示全黑 */ 
+	LCD_Clear(LCD_COLOR_TRANSPARENT);
+
+	/* 配置第一和第二层的透明度,最小值为0，最大值为255*/
+	LCD_SetTransparency(0, 255);
+	LCD_SetTransparency(1, 0);
+
+	ituLcdInit();
+	ituSWInit();
+//	while(1){
+//		LCD_Test();
+//	}
+
 	osKernelStart();
 	  
 	/* We should never get here as control is now taken by the scheduler */
@@ -176,40 +215,6 @@ int main(void)
 
 		/* USER CODE BEGIN 3 */
 	}
-	
-//	/*蓝灯亮*/
-//	LED_BLUE;
-//	
-//	  /* 初始化触摸屏 */
-//	GTP_Init_Panel(); 
-//	
-//	/* LCD 端口初始化 */ 
-//	LCD_Init();
-//	/* LCD 第一层初始化 */ 
-//	LCD_LayerInit(0, LCD_FB_START_ADDRESS,RGB565);
-//	/* LCD 第二层初始化 */ 
-//	LCD_LayerInit(1, LCD_FB_START_ADDRESS+(LCD_GetXSize()*LCD_GetYSize()*4),RGB565);
-//	/* 使能LCD，包括开背光 */ 
-//	LCD_DisplayOn(); 
-
-//	/* 选择LCD第一层 */
-//	LCD_SelectLayer(0);
-
-//	/* 第一层清屏，显示全黑 */ 
-//	LCD_Clear(LCD_COLOR_BLACK);  
-
-//	/* 选择LCD第二层 */
-//	LCD_SelectLayer(1);
-
-//	/* 第二层清屏，显示全黑 */ 
-//	LCD_Clear(LCD_COLOR_TRANSPARENT);
-
-//	/* 配置第一和第二层的透明度,最小值为0，最大值为255*/
-//	LCD_SetTransparency(0, 255);
-//	LCD_SetTransparency(1, 0);
-
-//	ituLcdInit();
-//	ituSWInit();
 //	ituSceneInit(&theScene, NULL);
 //	screenSurf = ituGetDisplaySurface(); 
 //	//_test_init();
@@ -513,7 +518,7 @@ void StartDefaultTask(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-	   printf("<<<xxxxwudan1\n"); 
+	   LCD_Test();
     osDelay(1);
   }
   /* USER CODE END 5 */ 
