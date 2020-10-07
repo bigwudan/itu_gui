@@ -136,15 +136,15 @@ int main(void)
 	SystemClock_Config();
   
   /* 配置 MPU */
-  Board_MPU_Config(0, MPU_Normal_WT, 0xD0000000, MPU_32MB);
-  Board_MPU_Config(1, MPU_Normal_WT, 0x24000000, MPU_512KB);
+	Board_MPU_Config(0, MPU_Normal_WT, 0xD0000000, MPU_32MB);
+	Board_MPU_Config(1, MPU_Normal_WT, 0x24000000, MPU_512KB);
   
-  SCB_EnableICache();    // 使能指令 Cache
-  SCB_EnableDCache();    // 使能数据 Cache
+	SCB_EnableICache();    // 使能指令 Cache
+	SCB_EnableDCache();    // 使能数据 Cache
 	
 	/* H750XBH6的ADC3_CH1使用的是PC3_C，与PC3是两个不同的引脚，通过一个模拟开关连接，使用时需要切换 */
   /* PC3_C ------> ADC3_INP1  */
-  HAL_SYSCFG_AnalogSwitchConfig(SYSCFG_SWITCH_PA0, SYSCFG_SWITCH_PA0_CLOSE);  
+	HAL_SYSCFG_AnalogSwitchConfig(SYSCFG_SWITCH_PA0, SYSCFG_SWITCH_PA0_CLOSE);  
 	
 	/* LED 端口初始化 */
 	LED_GPIO_Config();
@@ -205,43 +205,12 @@ int main(void)
 	/* Start scheduler */
 	osKernelStart();
 	  
-	/* We should never get here as control is now taken by the scheduler */
 
-	/* Infinite loop */
-	/* USER CODE BEGIN WHILE */
 	while (1)
 	{
-		/* USER CODE END WHILE */
 
-		/* USER CODE BEGIN 3 */
 	}
-//	ituSceneInit(&theScene, NULL);
-//	screenSurf = ituGetDisplaySurface(); 
-//	//_test_init();
-//	uint32_t len = LCD_GetXSize()*LCD_GetYSize()*2;
-//	LCD_SelectLayer(0);
-//	//screenSurf->addr;
-//	
-//	//uint16_t *p_draw = (uint16_t *)screenSurf->addr;
-//	
 
-//			//clear
-//	memset((void *)screenSurf->addr, 0, 800*480*2);
-//	int flag = 0;
-//	SDL_StartEventLoop();
-//	test_event();
-//	flag = SDL_PollEvent(&ev);
-//	
-//	
-//	printf("x=%d,y=%d\n", ev.button.x, ev.button.y);
-//	
-//	while(1)
-//	{		
-
-//		
-//		ituSceneDraw(&theScene, screenSurf);
-//		LCD_DrawBuff((uint8_t *)screenSurf->addr,800*480*2);
-//	}
 }
 
 /*用于测试各种液晶的函数*/
@@ -510,17 +479,30 @@ void Delay(__IO uint32_t nCount)	 //简单的延时函数
 void StartDefaultTask(void const * argument)
 {
     
-    
-   printf("wudan start\n"); 
-    
+	SDL_Event ev;
+	int flag = 0;
+	printf("wudan start\n"); 
+	//初始化事件循环
+	flag = SDL_StartEventLoop();
 
   /* USER CODE BEGIN 5 */
   /* Infinite loop */
-  for(;;)
-  {
-	   LCD_Test();
-    osDelay(1);
-  }
+	for(;;)
+	{
+		flag = SDL_PollEvent(&ev);
+		if(flag >0){
+			printf("flag=%d\n", flag);
+			printf("type=%d,x=%d,y=%d\n", ev.type,ev.button.x,ev.button.y);
+		}else{
+			printf("flag=%d\n", flag);
+		}
+		ev.type = SDL_MOUSEMOTION;
+		ev.button.x = 1;
+		ev.button.y = 2;
+		SDL_PushEvent(&ev);
+		
+		osDelay(1);
+	}
   /* USER CODE END 5 */ 
 }
 
@@ -535,10 +517,8 @@ void StartTask02(void const * argument)
 {
   /* USER CODE BEGIN StartTask02 */
   /* Infinite loop */
-	printf("wudan1 start\n"); 
   for(;;)
   {
-	  printf(">>>>>>xxxwudan1\n"); 
     osDelay(1);
   }
   /* USER CODE END StartTask02 */

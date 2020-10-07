@@ -541,6 +541,7 @@ static void Goodix_TS_Work_Func(void)
             input_w  = coor_data[5] | (coor_data[6] << 8);	//size
         
             {
+				printf("<<===id=%d,x=%d,y=%d,w=%d\n", id, input_x, input_y, input_w);
                 GTP_Touch_Down( id, input_x, input_y, input_w);//数据处理
             }
         }
@@ -549,6 +550,7 @@ static void Goodix_TS_Work_Func(void)
     {
       for(i=0;i<pre_touch;i++)
       {
+		  printf("Touch id[%2d] release!\n", pre_id[i]);
           GTP_Touch_Up(pre_id[i]);
       }
     }
