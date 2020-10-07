@@ -30,6 +30,7 @@
 #include "./touch/bsp_touch_gtxx.h"
 
 #include "SDL_events.h"
+#include "SDL_touch.h"
 #include "itu.h"
 #define ITH_RGB565(r, g, b) \
     ((((uint16_t)(r) >> 3) << 11) | (((uint16_t)(g) >> 2) << 5) | ((uint16_t)(b) >> 3))
@@ -489,17 +490,15 @@ void StartDefaultTask(void const * argument)
   /* Infinite loop */
 	for(;;)
 	{
+		//LCD_Test();
+		Castor3_PumpTouchEvent();
 		flag = SDL_PollEvent(&ev);
 		if(flag >0){
-			printf("flag=%d\n", flag);
-			printf("type=%d,x=%d,y=%d\n", ev.type,ev.button.x,ev.button.y);
+		
+		
 		}else{
-			printf("flag=%d\n", flag);
+		
 		}
-		ev.type = SDL_MOUSEMOTION;
-		ev.button.x = 1;
-		ev.button.y = 2;
-		SDL_PushEvent(&ev);
 		
 		osDelay(1);
 	}

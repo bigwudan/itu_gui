@@ -1197,6 +1197,16 @@
               <FileType>5</FileType>
               <FilePath>..\..\GUI\stdbool.h</FilePath>
             </File>
+            <File>
+              <FileName>SDL_touch.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\GUI\SDL_touch.c</FilePath>
+            </File>
+            <File>
+              <FileName>SDL_touch.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\GUI\SDL_touch.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

@@ -145,6 +145,7 @@
 "..\..\output\inflash\itu_wipeeffect.o"
 "..\..\output\inflash\sdl_events.o"
 "..\..\output\inflash\sdl_systimer.o"
+"..\..\output\inflash\sdl_touch.o"
 "..\..\output\inflash\croutine.o"
 "..\..\output\inflash\event_groups.o"
 "..\..\output\inflash\list.o"

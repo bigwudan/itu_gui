@@ -23,6 +23,12 @@
 #include "./touch/palette.h"
 #include "./delay/core_delay.h"   
 
+#include "SDL_touch.h"
+
+//记录坐标
+struct ts_sample touch_samp;
+
+
 // 5寸屏GT9157驱动配置
 const uint8_t CTP_CFG_GT9157[] ={ 
 	0x00,0x20,0x03,0xE0,0x01,0x05,0x3C,0x00,0x01,0x08,
@@ -539,9 +545,12 @@ static void Goodix_TS_Work_Func(void)
             input_x  = coor_data[1] | (coor_data[2] << 8);	//x坐标
             input_y  = coor_data[3] | (coor_data[4] << 8);	//y坐标
             input_w  = coor_data[5] | (coor_data[6] << 8);	//size
-        
             {
-				printf("<<===id=%d,x=%d,y=%d,w=%d\n", id, input_x, input_y, input_w);
+				touch_samp.id = id;
+				touch_samp.x = input_x;
+				touch_samp.y = input_y;
+				touch_samp.pressure = 1;
+				touch_samp.finger = 1;
                 GTP_Touch_Down( id, input_x, input_y, input_w);//数据处理
             }
         }
@@ -550,7 +559,7 @@ static void Goodix_TS_Work_Func(void)
     {
       for(i=0;i<pre_touch;i++)
       {
-		  printf("Touch id[%2d] release!\n", pre_id[i]);
+		  touch_samp.pressure = 0;
           GTP_Touch_Up(pre_id[i]);
       }
     }

@@ -53,3 +53,4 @@
 ..\..\output\inflash\bsp_touch_gtxx.o: ..\..\User\./fonts/fonts.h
 ..\..\output\inflash\bsp_touch_gtxx.o: ..\..\User\./touch/palette.h
 ..\..\output\inflash\bsp_touch_gtxx.o: ..\..\User\./delay/core_delay.h
+..\..\output\inflash\bsp_touch_gtxx.o: ..\..\GUI\SDL_touch.h
