@@ -18,7 +18,13 @@ struct ts_sample {
 	void *next;
 };
 
-
+typedef struct 
+{
+	int p;
+	int x;
+	int y;
+	int fn;
+}ts_last_samp;
 void Castor3_PumpTouchEvent(void);
 
 

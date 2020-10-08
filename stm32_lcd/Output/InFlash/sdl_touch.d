@@ -51,3 +51,4 @@
 ..\..\output\inflash\sdl_touch.o: ..\..\Libraries\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_tim_ex.h
 ..\..\output\inflash\sdl_touch.o: ..\..\Libraries\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_uart.h
 ..\..\output\inflash\sdl_touch.o: ..\..\Libraries\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_uart_ex.h
+..\..\output\inflash\sdl_touch.o: ..\..\GUI\SDL_timer.h

@@ -1192,9 +1192,6 @@ int GTP_TouchProcess_read(void *inf, struct ts_sample *samp, int nr){
 	int res = 0;
 	if(is_intr == 1){
 		res = _Goodix_TS_Work_Func(inf, samp, res);
-		if(res > 0 ){
-			printf("res=%d\n", res);
-		}
 		is_intr = 0;
 		return res;
 	}else{
