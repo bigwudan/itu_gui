@@ -520,7 +520,7 @@ void StartDefaultTask(void const * argument)
 
 				printf("cur_tick=%d,dblclk=%d\n", SDL_GetTicks(),dblclk );
 			
-				if (  1  || SDL_GetTicks() - dblclk <= 200){
+				if (SDL_GetTicks() - dblclk <= 200){
 				    int xdiff   = abs(ev.tfinger.x - lastx);
                     int ydiff   = abs(ev.tfinger.y - lasty);
 				    if (xdiff >= GESTURE_THRESHOLD && xdiff > ydiff)
@@ -574,8 +574,10 @@ void StartTask02(void const * argument)
 {
   /* USER CODE BEGIN StartTask02 */
   /* Infinite loop */
+  uint32_t time = 0;			
   for(;;)
   {
+
     osDelay(1);
   }
   /* USER CODE END StartTask02 */

@@ -27,7 +27,34 @@ Project File Date:  10/07/2020
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'd:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'Fire_H7'
-"..\..\Output\InFlash\Fire_H7.axf" - 0 Error(s), 0 Warning(s).
+compiling main.c...
+..\..\GUI\itu.h(329): warning:  #1295-D: Deprecated declaration ituFrameFuncGetSurfWidth - give arg types
+  	int ituFrameFuncGetSurfWidth();
+..\..\GUI\itu.h(330): warning:  #1295-D: Deprecated declaration ituFrameFuncGetSurfHeight - give arg types
+  	int ituFrameFuncGetSurfHeight();
+..\..\User\main.c(136): warning:  #177-D: variable "ev"  was declared but never referenced
+  	SDL_Event ev;
+..\..\User\main.c(524): warning:  #223-D: function "abs" declared implicitly
+  				    int xdiff   = abs(ev.tfinger.x - lastx);
+..\..\User\main.c(483): warning:  #177-D: variable "tick"  was declared but never referenced
+      uint32_t  tick, dblclk, lasttick, mouseDownTick;
+..\..\User\main.c(483): warning:  #550-D: variable "lasttick"  was set but never used
+      uint32_t  tick, dblclk, lasttick, mouseDownTick;
+..\..\User\main.c(484): warning:  #177-D: variable "delay"  was declared but never referenced
+      int       delay, frames, lastx, lasty;
+..\..\User\main.c(484): warning:  #550-D: variable "frames"  was set but never used
+      int       delay, frames, lastx, lasty;
+..\..\User\main.c(486): warning:  #550-D: variable "flag"  was set but never used
+  	int flag = 0;
+..\..\User\main.c(577): warning:  #177-D: variable "time"  was declared but never referenced
+    uint32_t time = 0;			
+..\..\User\main.c(52): warning:  #177-D: variable "screenSurf"  was declared but never referenced
+  static ITUSurface   *screenSurf;
+..\..\User\main.c: 11 warnings, 0 errors
+linking...
+Program Size: Code=81938 RO-data=18294 RW-data=372 ZI-data=21964  
+FromELF: creating hex file...
+"..\..\Output\InFlash\Fire_H7.axf" - 0 Error(s), 11 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -41,7 +68,7 @@ Package Vendor: Keil
   d:\Keil_v5\ARM\PACK\Keil\STM32H7xx_DFP\2.5.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:08
 </pre>
 </body>
 </html>

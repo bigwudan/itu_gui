@@ -44,3 +44,10 @@
 ..\..\output\inflash\sdl_systimer.o: ..\..\Libraries\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_tim_ex.h
 ..\..\output\inflash\sdl_systimer.o: ..\..\Libraries\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_uart.h
 ..\..\output\inflash\sdl_systimer.o: ..\..\Libraries\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_uart_ex.h
+..\..\output\inflash\sdl_systimer.o: ..\..\FreeRTOS\Source\include\FreeRTOS.h
+..\..\output\inflash\sdl_systimer.o: ..\..\FreeRTOS\FreeRTOSConfig.h
+..\..\output\inflash\sdl_systimer.o: ..\..\FreeRTOS\Source\include\projdefs.h
+..\..\output\inflash\sdl_systimer.o: ..\..\FreeRTOS\Source\include\portable.h
+..\..\output\inflash\sdl_systimer.o: ..\..\FreeRTOS\Source\include\deprecated_definitions.h
+..\..\output\inflash\sdl_systimer.o: ..\..\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h
+..\..\output\inflash\sdl_systimer.o: ..\..\FreeRTOS\Source\include\mpu_wrappers.h
