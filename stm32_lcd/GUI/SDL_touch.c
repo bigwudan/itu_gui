@@ -10,6 +10,8 @@
 static bool down[MAX_FINGER_NUM];
 struct ts_sample c3samp[MAX_FINGER_NUM];
 static ts_last_samp lstSmp;
+static struct ts_sample OriSmp[1] = {0};
+
 int ts_read(void *ts, struct ts_sample *samp, int nr)
 {
 	
@@ -188,13 +190,19 @@ void Castor3_PumpTouchEvent(void){
 			}
 		
 		} else{
-		
-		
+			if(down[c3samp[0].id]==true)
+	    	{
+				SDL_SendFingerDown(c3samp[0].id, c3samp[0].id, false, (float)c3samp[0].x, (float)c3samp[0].y, 1);	
+				down[c3samp[0].id] = false;
+				if(!c3samp[0].pressure)
+				{
+					c3samp[0].x = 0;
+					c3samp[0].y = 0;
+					c3samp[0].finger = 0;
+				}
+				update_last_sample((int)c3samp[0].id, &OriSmp[0]);
+	    	}
 		}
-		
-	
 	}
-	
-	
 	return ;
 }
