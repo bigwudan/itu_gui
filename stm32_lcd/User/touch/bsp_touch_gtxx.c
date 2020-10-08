@@ -487,6 +487,10 @@ static int _Goodix_TS_Work_Func(void *inf, struct ts_sample *samp, int nr)
     
     finger = point_data[GTP_ADDR_LENGTH];//状态寄存器数据
 
+	if(finger == 0xc0){
+		return 0;
+	}
+	
     if (finger == 0x00)		//没有数据，退出
     {
 		return 0;
@@ -673,6 +677,7 @@ static void Goodix_TS_Work_Func(void)
 
               if(j >= touch_num-1)											//遍历当前所有id都找不到pre_id[i]，表示已释放
               {
+				  printf("<<<<==up\n");
                  GTP_Touch_Up( pre_id[i]);
               }
            }
@@ -702,7 +707,7 @@ static void Goodix_TS_Work_Func(void)
     {
       for(i=0;i<pre_touch;i++)
       {
-
+			printf("<<<<==up\n");
           GTP_Touch_Up(pre_id[i]);
       }
     }

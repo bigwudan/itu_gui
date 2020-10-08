@@ -509,8 +509,8 @@ void StartDefaultTask(void const * argument)
 				{
 					mouseDownTick = SDL_GetTicks();
 				    dblclk  = mouseDownTick;
-                    lastx   = ev.button.x;
-                    lasty   = ev.button.y;
+                    lastx   = ev.tfinger.x;
+                    lasty   = ev.tfinger.y;
 				
 				}
 			
@@ -520,12 +520,12 @@ void StartDefaultTask(void const * argument)
 
 				printf("cur_tick=%d,dblclk=%d\n", SDL_GetTicks(),dblclk );
 			
-				if (SDL_GetTicks() - dblclk <= 200){
-				    int xdiff   = abs(ev.button.x - lastx);
-                    int ydiff   = abs(ev.button.y - lasty);
+				if (  1  || SDL_GetTicks() - dblclk <= 200){
+				    int xdiff   = abs(ev.tfinger.x - lastx);
+                    int ydiff   = abs(ev.tfinger.y - lasty);
 				    if (xdiff >= GESTURE_THRESHOLD && xdiff > ydiff)
                     {
-                        if (ev.button.x > lastx)
+                        if (ev.tfinger.x > lastx)
                         {
                             printf("touch: slide to right\n");
                         }
@@ -536,7 +536,7 @@ void StartDefaultTask(void const * argument)
                     }
                     else if (ydiff >= GESTURE_THRESHOLD)
                     {
-                        if (ev.button.y > lasty)
+                        if (ev.tfinger.y > lasty)
                         {
                             printf("touch: slide to down\n");
                         }
