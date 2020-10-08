@@ -47,10 +47,10 @@
 ..\..\output\inflash\bsp_touch_gtxx.o: ..\..\Libraries\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_tim_ex.h
 ..\..\output\inflash\bsp_touch_gtxx.o: ..\..\Libraries\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_uart.h
 ..\..\output\inflash\bsp_touch_gtxx.o: ..\..\Libraries\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_uart_ex.h
+..\..\output\inflash\bsp_touch_gtxx.o: ..\..\GUI\SDL_touch.h
 ..\..\output\inflash\bsp_touch_gtxx.o: ..\..\User\./touch/bsp_i2c_touch.h
 ..\..\output\inflash\bsp_touch_gtxx.o: ..\..\User\./lcd/bsp_lcd.h
 ..\..\output\inflash\bsp_touch_gtxx.o: ..\..\User\./sdram/bsp_sdram.h
 ..\..\output\inflash\bsp_touch_gtxx.o: ..\..\User\./fonts/fonts.h
 ..\..\output\inflash\bsp_touch_gtxx.o: ..\..\User\./touch/palette.h
 ..\..\output\inflash\bsp_touch_gtxx.o: ..\..\User\./delay/core_delay.h
-..\..\output\inflash\bsp_touch_gtxx.o: ..\..\GUI\SDL_touch.h

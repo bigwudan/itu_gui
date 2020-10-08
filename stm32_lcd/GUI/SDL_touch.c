@@ -2,6 +2,7 @@
 #include "SDL_events.h"
 #include "itu.h"
 #include "SDL_touch.h"
+#include "./touch/bsp_touch_gtxx.h"
 #include <stdbool.h>
 
 #define MAX_FINGER_NUM 1
@@ -12,13 +13,13 @@ static struct ts_sample c3samp[MAX_FINGER_NUM];
 int ts_read(void *ts, struct ts_sample *samp, int nr)
 {
 	int result;
-	
+	GTP_TouchProcess_read(NULL, samp, nr);
 	//memcpy(samp, &touch_samp, sizeof(struct ts_sample));
 	//printf("");
 	
-	printf("x=%d,y=%d,press=%d\n",touch_samp.x, touch_samp.y, touch_samp.pressure );
+	//printf("x=%d,y=%d,press=%d\n",samp->x, samp->y, samp->pressure );
 	
-	
+	//printf("result=%d\n", result);
 	return result;
 
 }

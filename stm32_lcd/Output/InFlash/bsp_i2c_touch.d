@@ -45,6 +45,7 @@
 ..\..\output\inflash\bsp_i2c_touch.o: ..\..\Libraries\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_uart.h
 ..\..\output\inflash\bsp_i2c_touch.o: ..\..\Libraries\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_uart_ex.h
 ..\..\output\inflash\bsp_i2c_touch.o: ..\..\User\./touch/bsp_touch_gtxx.h
+..\..\output\inflash\bsp_i2c_touch.o: ..\..\GUI\SDL_touch.h
 ..\..\output\inflash\bsp_i2c_touch.o: ..\..\User\./usart/bsp_debug_usart.h
 ..\..\output\inflash\bsp_i2c_touch.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 ..\..\output\inflash\bsp_i2c_touch.o: ..\..\User\./delay/core_delay.h

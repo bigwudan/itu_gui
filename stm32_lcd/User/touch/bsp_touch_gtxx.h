@@ -19,7 +19,7 @@
 #define _GOODIX_GTXX_H
 
 #include "stm32h7xx.h"
-
+#include "SDL_touch.h"
 #ifndef NULL
   #define NULL        0
 #endif
@@ -259,4 +259,9 @@ int32_t GTP_Init_Panel(void);
 int8_t GTP_Send_Command(uint8_t command);
 int	GTP_Execu( int *x,int *y);                                       
 
+//检测到触摸中断时调用，
+void GTP_TouchProcess(void);
+									   
+int GTP_TouchProcess_read(void *inf, struct ts_sample *samp, int nr);
+									   
 #endif /* _GOODIX_GT9XX_H_ */

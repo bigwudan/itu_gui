@@ -23,11 +23,12 @@
 #include "./touch/palette.h"
 #include "./delay/core_delay.h"   
 
-#include "SDL_touch.h"
 
-//记录坐标
-struct ts_sample touch_samp;
 
+
+
+//是否有数据 0 未数据 1是有数据
+static int is_intr;
 
 // 5寸屏GT9157驱动配置
 const uint8_t CTP_CFG_GT9157[] ={ 
@@ -403,7 +404,7 @@ static void GTP_Touch_Down(int32_t id,int32_t x,int32_t y,int32_t w)
 	GTP_DEBUG_FUNC();
 
 	/*取x、y初始值大于屏幕像素值*/
-    GTP_DEBUG("ID:%d, X:%d, Y:%d, W:%d", id, x, y, w);
+    printf("ID:%d, X:%d, Y:%d, W:%d\n", id, x, y, w);
 	
     /* 处理触摸按钮，用于触摸画板 */
     //Touch_Button_Down(x,y); 
@@ -446,8 +447,152 @@ static void GTP_Touch_Up( int32_t id)
 	  pre_x[id] = -1;
 	  pre_y[id] = -1;		
   
-    GTP_DEBUG("Touch id[%2d] release!", id);
+    printf("Touch id[%2d] release!\n", id);
 }
+
+
+/**
+  * @brief   触屏处理函数，轮询或者在触摸中断调用
+  * @param 无
+  * @retval 无
+  */
+static void _Goodix_TS_Work_Func(void *inf, struct ts_sample *samp, int nr)
+{
+    uint8_t  end_cmd[3] = {GTP_READ_COOR_ADDR >> 8, GTP_READ_COOR_ADDR & 0xFF, 0};
+    uint8_t  point_data[2 + 1 + 8 * GTP_MAX_TOUCH + 1]={GTP_READ_COOR_ADDR >> 8, GTP_READ_COOR_ADDR & 0xFF};
+    uint8_t  touch_num = 0;
+    uint8_t  finger = 0;
+    static uint16_t pre_touch = 0;
+    static uint8_t pre_id[GTP_MAX_TOUCH] = {0};
+
+    uint8_t client_addr=GTP_ADDRESS;
+    uint8_t* coor_data = NULL;
+    int32_t input_x = 0;
+    int32_t input_y = 0;
+    int32_t input_w = 0;
+    uint8_t id = 0;
+ 
+    int32_t i  = 0;
+    int32_t ret = -1;
+
+    GTP_DEBUG_FUNC();
+
+    ret = GTP_I2C_Read(client_addr, point_data, 12);//10字节寄存器加2字节地址
+    if (ret < 0)
+    {
+        GTP_ERROR("I2C transfer error. errno:%d\n ", ret);
+
+        return;
+    }
+    
+    finger = point_data[GTP_ADDR_LENGTH];//状态寄存器数据
+
+    if (finger == 0x00)		//没有数据，退出
+    {
+        return;
+    }
+
+    if((finger & 0x80) == 0)//判断buffer status位
+    {
+        goto exit_work_func;//坐标未就绪，数据无效
+    }
+
+    touch_num = finger & 0x0f;//坐标点数
+    if (touch_num > GTP_MAX_TOUCH)
+    {
+        goto exit_work_func;//大于最大支持点数，错误退出
+    }
+
+    if (touch_num > 1)//不止一个点
+    {
+        uint8_t buf[8 * GTP_MAX_TOUCH] = {(GTP_READ_COOR_ADDR + 10) >> 8, (GTP_READ_COOR_ADDR + 10) & 0xff};
+
+        ret = GTP_I2C_Read(client_addr, buf, 2 + 8 * (touch_num - 1));
+        memcpy(&point_data[12], &buf[2], 8 * (touch_num - 1));			//复制其余点数的数据到point_data
+    }
+
+    
+    
+    if (pre_touch>touch_num)				//pre_touch>touch_num,表示有的点释放了
+    {
+        for (i = 0; i < pre_touch; i++)						//一个点一个点处理
+         {
+            uint8_t j;
+           for(j=0; j<touch_num; j++)
+           {
+               coor_data = &point_data[j * 8 + 3];
+               id = coor_data[0] & 0x0F;									//track id
+              if(pre_id[i] == id)
+                break;
+
+              if(j >= touch_num-1)											//遍历当前所有id都找不到pre_id[i]，表示已释放
+              {
+				samp->finger = 1;
+				samp->id = id;
+				samp->pressure = 0;
+				samp->x = 0;
+				samp->y = 0;				  
+                 GTP_Touch_Up( pre_id[i]);
+              }
+           }
+       }
+    }
+
+
+    if (touch_num)
+    {
+        for (i = 0; i < touch_num; i++)						//一个点一个点处理
+        {
+            coor_data = &point_data[i * 8 + 3];
+
+            id = coor_data[0] & 0x0F;									//track id
+            pre_id[i] = id;
+
+            input_x  = coor_data[1] | (coor_data[2] << 8);	//x坐标
+            input_y  = coor_data[3] | (coor_data[4] << 8);	//y坐标
+            input_w  = coor_data[5] | (coor_data[6] << 8);	//size
+            {
+				if(input_x >= 4000 || input_y >= 4000 || input_w >= 4000){
+					return ;
+				}
+				samp->finger = 1;
+				samp->id = id;
+				samp->pressure = 1;
+				samp->x = input_x;
+				samp->y = input_y;
+				
+                GTP_Touch_Down( id, input_x, input_y, input_w);//数据处理
+            }
+        }
+    }
+    else if (pre_touch)		//touch_ num=0 且pre_touch！=0
+    {
+      for(i=0;i<pre_touch;i++)
+      {
+			samp->finger = 1;
+			samp->id = id;
+			samp->pressure = 0;
+			samp->x = 0;
+			samp->y = 0;
+            GTP_Touch_Up(pre_id[i]);
+      }
+    }
+
+
+    pre_touch = touch_num;
+
+
+exit_work_func:
+    {
+        ret = GTP_I2C_Write(client_addr, end_cmd, 3);
+        if (ret < 0)
+        {
+            GTP_INFO("I2C write end_cmd error!");
+        }
+    }
+
+}
+
 
 
 /**
@@ -546,11 +691,7 @@ static void Goodix_TS_Work_Func(void)
             input_y  = coor_data[3] | (coor_data[4] << 8);	//y坐标
             input_w  = coor_data[5] | (coor_data[6] << 8);	//size
             {
-				touch_samp.id = id;
-				touch_samp.x = input_x;
-				touch_samp.y = input_y;
-				touch_samp.pressure = 1;
-				touch_samp.finger = 1;
+
                 GTP_Touch_Down( id, input_x, input_y, input_w);//数据处理
             }
         }
@@ -559,7 +700,7 @@ static void Goodix_TS_Work_Func(void)
     {
       for(i=0;i<pre_touch;i++)
       {
-		  touch_samp.pressure = 0;
+
           GTP_Touch_Up(pre_id[i]);
       }
     }
@@ -1044,11 +1185,27 @@ static int8_t GTP_I2C_Test( void)
     return ret;
 }
 
+
+int GTP_TouchProcess_read(void *inf, struct ts_sample *samp, int nr){
+	int res = 0;
+	if(is_intr == 1){
+		_Goodix_TS_Work_Func(inf, samp, nr);
+		is_intr = 0;
+		return res;
+	}else{
+		return 0;
+	}
+	
+}
+
 //检测到触摸中断时调用，
 void GTP_TouchProcess(void)
 {
-  GTP_DEBUG_FUNC();
-  Goodix_TS_Work_Func();
+
+	GTP_DEBUG_FUNC();
+	Goodix_TS_Work_Func();
+
+	
 
 }
 
@@ -1160,8 +1317,10 @@ void GTP_IRQHandler(void)
 {
 	if(__HAL_GPIO_EXTI_GET_IT(GTP_INT_GPIO_PIN) != RESET) //确保是否产生了EXTI Line中断
 	{
+
 		//LED2_TOGGLE;
-        GTP_TouchProcess();    
+        //GTP_TouchProcess();
+		is_intr = 1;		
         __HAL_GPIO_EXTI_CLEAR_IT(GTP_INT_GPIO_PIN);     //清除中断标志位
 	}  
 }
