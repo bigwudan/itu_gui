@@ -494,7 +494,7 @@ void StartDefaultTask(void const * argument)
 		Castor3_PumpTouchEvent();
 		flag = SDL_PollEvent(&ev);
 		if(flag >0){
-		
+			printf("flag=%d,x=%d,y=%d,type=%d\n",flag, ev.tfinger.x, ev.tfinger.y, ev.tfinger.type);
 		
 		}else{
 		

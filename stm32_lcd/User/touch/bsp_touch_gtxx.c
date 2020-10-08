@@ -404,7 +404,7 @@ static void GTP_Touch_Down(int32_t id,int32_t x,int32_t y,int32_t w)
 	GTP_DEBUG_FUNC();
 
 	/*取x、y初始值大于屏幕像素值*/
-    printf("ID:%d, X:%d, Y:%d, W:%d\n", id, x, y, w);
+   // printf("ID:%d, X:%d, Y:%d, W:%d\n", id, x, y, w);
 	
     /* 处理触摸按钮，用于触摸画板 */
     //Touch_Button_Down(x,y); 
@@ -447,7 +447,7 @@ static void GTP_Touch_Up( int32_t id)
 	  pre_x[id] = -1;
 	  pre_y[id] = -1;		
   
-    printf("Touch id[%2d] release!\n", id);
+   // printf("Touch id[%2d] release!\n", id);
 }
 
 
@@ -456,7 +456,7 @@ static void GTP_Touch_Up( int32_t id)
   * @param 无
   * @retval 无
   */
-static void _Goodix_TS_Work_Func(void *inf, struct ts_sample *samp, int nr)
+static int _Goodix_TS_Work_Func(void *inf, struct ts_sample *samp, int nr)
 {
     uint8_t  end_cmd[3] = {GTP_READ_COOR_ADDR >> 8, GTP_READ_COOR_ADDR & 0xFF, 0};
     uint8_t  point_data[2 + 1 + 8 * GTP_MAX_TOUCH + 1]={GTP_READ_COOR_ADDR >> 8, GTP_READ_COOR_ADDR & 0xFF};
@@ -482,14 +482,14 @@ static void _Goodix_TS_Work_Func(void *inf, struct ts_sample *samp, int nr)
     {
         GTP_ERROR("I2C transfer error. errno:%d\n ", ret);
 
-        return;
+        return 0;
     }
     
     finger = point_data[GTP_ADDR_LENGTH];//状态寄存器数据
 
     if (finger == 0x00)		//没有数据，退出
     {
-        return;
+		return 0;
     }
 
     if((finger & 0x80) == 0)//判断buffer status位
@@ -527,12 +527,12 @@ static void _Goodix_TS_Work_Func(void *inf, struct ts_sample *samp, int nr)
 
               if(j >= touch_num-1)											//遍历当前所有id都找不到pre_id[i]，表示已释放
               {
-				samp->finger = 1;
-				samp->id = id;
-				samp->pressure = 0;
-				samp->x = 0;
-				samp->y = 0;				  
-                 GTP_Touch_Up( pre_id[i]);
+					samp->finger = 1;
+					samp->id = id;
+					samp->pressure = 0;
+					samp->x = 0;
+					samp->y = 0;
+					GTP_Touch_Up( pre_id[i]);
               }
            }
        }
@@ -553,14 +553,13 @@ static void _Goodix_TS_Work_Func(void *inf, struct ts_sample *samp, int nr)
             input_w  = coor_data[5] | (coor_data[6] << 8);	//size
             {
 				if(input_x >= 4000 || input_y >= 4000 || input_w >= 4000){
-					return ;
+					return 0;
 				}
 				samp->finger = 1;
 				samp->id = id;
 				samp->pressure = 1;
 				samp->x = input_x;
 				samp->y = input_y;
-				
                 GTP_Touch_Down( id, input_x, input_y, input_w);//数据处理
             }
         }
@@ -569,18 +568,19 @@ static void _Goodix_TS_Work_Func(void *inf, struct ts_sample *samp, int nr)
     {
       for(i=0;i<pre_touch;i++)
       {
+
 			samp->finger = 1;
 			samp->id = id;
 			samp->pressure = 0;
 			samp->x = 0;
-			samp->y = 0;
-            GTP_Touch_Up(pre_id[i]);
+			samp->y = 0;		  
+          GTP_Touch_Up(pre_id[i]);
       }
     }
 
 
     pre_touch = touch_num;
-
+	
 
 exit_work_func:
     {
@@ -588,9 +588,11 @@ exit_work_func:
         if (ret < 0)
         {
             GTP_INFO("I2C write end_cmd error!");
+			return 0;
         }
+		
     }
-
+	return 1;
 }
 
 
@@ -1189,7 +1191,10 @@ static int8_t GTP_I2C_Test( void)
 int GTP_TouchProcess_read(void *inf, struct ts_sample *samp, int nr){
 	int res = 0;
 	if(is_intr == 1){
-		_Goodix_TS_Work_Func(inf, samp, nr);
+		res = _Goodix_TS_Work_Func(inf, samp, res);
+		if(res > 0 ){
+			printf("res=%d\n", res);
+		}
 		is_intr = 0;
 		return res;
 	}else{
