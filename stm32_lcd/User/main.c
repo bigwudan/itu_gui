@@ -29,13 +29,14 @@
 #include "./touch/bsp_i2c_touch.h"
 #include "./touch/bsp_touch_gtxx.h"
 
+#include "SDL_timer.h"
 #include "SDL_events.h"
 #include "SDL_touch.h"
 #include "itu.h"
 #define ITH_RGB565(r, g, b) \
     ((((uint16_t)(r) >> 3) << 11) | (((uint16_t)(g) >> 2) << 5) | ((uint16_t)(b) >> 3))
 	
-
+#define GESTURE_THRESHOLD           40
 
 osThreadId defaultTaskHandle;
 osThreadId myTask02Handle;
@@ -479,26 +480,83 @@ void Delay(__IO uint32_t nCount)	 //简单的延时函数
 /* USER CODE END Header_StartDefaultTask */
 void StartDefaultTask(void const * argument)
 {
-    
+    uint32_t  tick, dblclk, lasttick, mouseDownTick;
+    int       delay, frames, lastx, lasty;
 	SDL_Event ev;
 	int flag = 0;
 	printf("wudan start\n"); 
 	//初始化事件循环
 	flag = SDL_StartEventLoop();
 
+	dblclk = frames = lasttick = lastx = lasty = mouseDownTick = 0;
+	
   /* USER CODE BEGIN 5 */
   /* Infinite loop */
 	for(;;)
 	{
 		//LCD_Test();
 		Castor3_PumpTouchEvent();
-		flag = SDL_PollEvent(&ev);
-		if(flag >0){
-			printf("flag=%d,x=%d,y=%d,type=%d\n",flag, ev.tfinger.x, ev.tfinger.y, ev.tfinger.type);
 		
-		}else{
+		while(SDL_PollEvent(&ev)){
+			switch (ev.type)
+			{
+			case SDL_FINGERMOTION:
+                printf("touch: move %d, %d\n", ev.tfinger.x, ev.tfinger.y);
+                
+                break;
+            case SDL_FINGERDOWN:	
+				printf("touch: down %d, %d\n", ev.tfinger.x, ev.tfinger.y);			
+				{
+					mouseDownTick = SDL_GetTicks();
+				    dblclk  = mouseDownTick;
+                    lastx   = ev.button.x;
+                    lasty   = ev.button.y;
+				
+				}
+			
+				break;
+            case SDL_FINGERUP:
+				printf("touch: up %d, %d\n", ev.tfinger.x, ev.tfinger.y);	
+
+				printf("cur_tick=%d,dblclk=%d\n", SDL_GetTicks(),dblclk );
+			
+				if (SDL_GetTicks() - dblclk <= 200){
+				    int xdiff   = abs(ev.button.x - lastx);
+                    int ydiff   = abs(ev.button.y - lasty);
+				    if (xdiff >= GESTURE_THRESHOLD && xdiff > ydiff)
+                    {
+                        if (ev.button.x > lastx)
+                        {
+                            printf("touch: slide to right\n");
+                        }
+                        else
+                        {
+                            printf("touch: slide to left\n");
+                        }
+                    }
+                    else if (ydiff >= GESTURE_THRESHOLD)
+                    {
+                        if (ev.button.y > lasty)
+                        {
+                            printf("touch: slide to down\n");
+                        }
+                        else
+                        {
+                            printf("touch: slide to up\n");
+                        }
+                    }
+				}
+				mouseDownTick   = 0;
+				break;
+			default:
+				break;		
+			}
 		
 		}
+		
+		
+		
+		
 		
 		osDelay(1);
 	}

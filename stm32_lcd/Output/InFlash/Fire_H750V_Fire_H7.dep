@@ -3764,7 +3764,7 @@ I (..\..\Libraries\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_tim.h)(0x5EFEAE19)
 I (..\..\Libraries\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_tim_ex.h)(0x5EFEAE19)
 I (..\..\Libraries\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_uart.h)(0x5EFEAE19)
 I (..\..\Libraries\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_uart_ex.h)(0x5EFEAE19)
-F (..\..\User\main.c)(0x5F7E8200)(--c99 -c --cpu Cortex-M7.fp.dp -g -O0 --apcs=interwork --split_sections -I ..\..\Libraries\CMSIS\Include -I ..\..\Libraries\CMSIS\Device\ST\STM32H7xx\Include -I ..\..\Libraries\STM32H7xx_HAL_Driver\Inc -I ..\..\User -I ..\..\GUI -I ..\..\FreeRTOS -I ..\..\FreeRTOS\Source\CMSIS_RTOS -I ..\..\FreeRTOS\Source\include -I ..\..\FreeRTOS\Source\portable\RVDS\ARM_CM4F-I.\RTE\_Fire_H7-Id:\Keil_v5\ARM\PACK\Keil\STM32H7xx_DFP\2.5.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-Id:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="527" -DSTM32H743xx -DUSE_HAL_DRIVER -DSTM32H743x-o ..\..\output\inflash\main.o --omf_browse ..\..\output\inflash\main.crf --depend ..\..\output\inflash\main.d)
+F (..\..\User\main.c)(0x5F7ECBDE)(--c99 -c --cpu Cortex-M7.fp.dp -g -O0 --apcs=interwork --split_sections -I ..\..\Libraries\CMSIS\Include -I ..\..\Libraries\CMSIS\Device\ST\STM32H7xx\Include -I ..\..\Libraries\STM32H7xx_HAL_Driver\Inc -I ..\..\User -I ..\..\GUI -I ..\..\FreeRTOS -I ..\..\FreeRTOS\Source\CMSIS_RTOS -I ..\..\FreeRTOS\Source\include -I ..\..\FreeRTOS\Source\portable\RVDS\ARM_CM4F-I.\RTE\_Fire_H7-Id:\Keil_v5\ARM\PACK\Keil\STM32H7xx_DFP\2.5.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-Id:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="527" -DSTM32H743xx -DUSE_HAL_DRIVER -DSTM32H743x-o ..\..\output\inflash\main.o --omf_browse ..\..\output\inflash\main.crf --depend ..\..\output\inflash\main.d)
 I (..\..\Libraries\CMSIS\Device\ST\STM32H7xx\Include\stm32h7xx.h)(0x5EFEAE19)
 I (..\..\Libraries\CMSIS\Device\ST\STM32H7xx\Include\stm32h743xx.h)(0x5EFEAE19)
 I (..\..\Libraries\CMSIS\Include\core_cm7.h)(0x5EFEAE19)
@@ -3835,6 +3835,7 @@ I (..\..\User\./fonts/fonts.h)(0x5EFEAE1A)
 I (..\..\User\./touch/bsp_i2c_touch.h)(0x5F2554B2)
 I (..\..\User\./touch/bsp_touch_gtxx.h)(0x5F7E65D6)
 I (..\..\GUI\SDL_touch.h)(0x5F7E83B6)
+I (..\..\GUI\SDL_timer.h)(0x5F60BF85)
 I (..\..\GUI\SDL_events.h)(0x5F1D7D0F)
 I (..\..\GUI\itu.h)(0x5F671D0F)
 I (..\..\GUI\itc.h)(0x5F219C5B)
@@ -4620,7 +4621,7 @@ I (..\..\Libraries\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_uart.h)(0x5EFEAE19)
 I (..\..\Libraries\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_uart_ex.h)(0x5EFEAE19)
 F (..\..\GUI\SDL_timer.h)(0x5F60BF85)()
 F (..\..\GUI\stdbool.h)(0x5F1D7D0D)()
-F (..\..\GUI\SDL_touch.c)(0x5F7E8C43)(--c99 -c --cpu Cortex-M7.fp.dp -g -O0 --apcs=interwork --split_sections -I ..\..\Libraries\CMSIS\Include -I ..\..\Libraries\CMSIS\Device\ST\STM32H7xx\Include -I ..\..\Libraries\STM32H7xx_HAL_Driver\Inc -I ..\..\User -I ..\..\GUI -I ..\..\FreeRTOS -I ..\..\FreeRTOS\Source\CMSIS_RTOS -I ..\..\FreeRTOS\Source\include -I ..\..\FreeRTOS\Source\portable\RVDS\ARM_CM4F-I.\RTE\_Fire_H7-Id:\Keil_v5\ARM\PACK\Keil\STM32H7xx_DFP\2.5.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-Id:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="527" -DSTM32H743xx -DUSE_HAL_DRIVER -DSTM32H743x-o ..\..\output\inflash\sdl_touch.o --omf_browse ..\..\output\inflash\sdl_touch.crf --depend ..\..\output\inflash\sdl_touch.d)
+F (..\..\GUI\SDL_touch.c)(0x5F7EC8D8)(--c99 -c --cpu Cortex-M7.fp.dp -g -O0 --apcs=interwork --split_sections -I ..\..\Libraries\CMSIS\Include -I ..\..\Libraries\CMSIS\Device\ST\STM32H7xx\Include -I ..\..\Libraries\STM32H7xx_HAL_Driver\Inc -I ..\..\User -I ..\..\GUI -I ..\..\FreeRTOS -I ..\..\FreeRTOS\Source\CMSIS_RTOS -I ..\..\FreeRTOS\Source\include -I ..\..\FreeRTOS\Source\portable\RVDS\ARM_CM4F-I.\RTE\_Fire_H7-Id:\Keil_v5\ARM\PACK\Keil\STM32H7xx_DFP\2.5.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-Id:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="527" -DSTM32H743xx -DUSE_HAL_DRIVER -DSTM32H743x-o ..\..\output\inflash\sdl_touch.o --omf_browse ..\..\output\inflash\sdl_touch.crf --depend ..\..\output\inflash\sdl_touch.d)
 I (..\..\GUI\SDL_events.h)(0x5F1D7D0F)
 I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
 I (..\..\GUI\itu.h)(0x5F671D0F)

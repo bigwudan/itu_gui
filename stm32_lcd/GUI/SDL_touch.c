@@ -96,8 +96,8 @@ SDL_SendFingerDown(int id, int fingerid, bool down,
 		event.tfinger.windowID = id;
 		event.tfinger.fingerId = fingerid;
 		//I don't trust the coordinates passed on fingerUp
-		event.tfinger.x = 0; 
-		event.tfinger.y = 0;
+		event.tfinger.x = lstSmp.x; 
+		event.tfinger.y = lstSmp.y;
 		event.tfinger.dx = 0;
 		event.tfinger.dy = 0;
 		event.tfinger.pressure = pressure;
@@ -183,7 +183,6 @@ void Castor3_PumpTouchEvent(void){
 	        	{
 	        		SDL_SendTouchMotion(c3samp[0].id, c3samp[0].id, false, (float)c3samp[0].x, (float)c3samp[0].y, 1);
 	        		update_last_sample((int)c3samp[0].id, &c3samp[0]);
-					printf("move.....\n");
 	        	}
 				
 				

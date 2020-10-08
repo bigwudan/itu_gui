@@ -70,6 +70,7 @@
 ..\..\output\inflash\main.o: ..\..\User\./touch/bsp_i2c_touch.h
 ..\..\output\inflash\main.o: ..\..\User\./touch/bsp_touch_gtxx.h
 ..\..\output\inflash\main.o: ..\..\GUI\SDL_touch.h
+..\..\output\inflash\main.o: ..\..\GUI\SDL_timer.h
 ..\..\output\inflash\main.o: ..\..\GUI\SDL_events.h
 ..\..\output\inflash\main.o: ..\..\GUI\itu.h
 ..\..\output\inflash\main.o: ..\..\GUI\itc.h
