@@ -195,14 +195,14 @@ int main(void)
 	ituLcdInit();
 	ituSWInit();
 	
+	
+	ituSceneInit(&theScene, NULL);
+	screenSurf = ituGetDisplaySurface(); 
+
 	_test_init();
-	void *p_test = NULL;
-	p_test = malloc(10);
-	free(p_test);
-	p_test = calloc(1, 200);
-//	while(1){
-//		LCD_Test();
-//	}
+	LCD_SelectLayer(0);
+	memset((void *)screenSurf->addr, 0, 800*480*2);
+	
 	osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
 	defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
@@ -563,7 +563,8 @@ void StartDefaultTask(void const * argument)
 		}
 		
 		
-		
+		ituSceneDraw(&theScene, screenSurf);
+		LCD_DrawBuff((uint8_t *)screenSurf->addr,800*480*2);
 		
 		
 		osDelay(1);
