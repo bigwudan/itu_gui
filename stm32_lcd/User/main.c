@@ -118,6 +118,102 @@ rect.width = W;rect.height = H; rect.x=X;rect.y=Y;color.red=R;color.green=G;colo
 #undef ADD_WIDGET(W,H,X,Y,R,G,B)
 }
 
+//建立icon
+static ITUIcon* _create_icon_color(ITURectangle *rect, ITUColor *color, char *name)
+{
+	ITUIcon* icon = calloc(1, sizeof(ITUIcon));
+	ituIconInit(icon);
+	((ITUWidget *)icon)->visible = 1;
+	ITUWidget* widget = (ITUWidget*)icon;
+	memmove(&widget->rect, rect, sizeof(ITURectangle));
+	memmove(&widget->color, color, sizeof(ITUColor));
+	strcpy(widget->name, name);
+	widget->alpha = 255;
+	icon->surf = calloc(1, sizeof(ITUSurface));
+
+	//生成内存空间
+	icon->surf->width = 16;
+	icon->surf->height = 16;
+	icon->surf->size = 2 * (icon->surf->width) * (icon->surf->height);
+
+	void *buf = calloc(1, icon->surf->size);
+	icon->surf->addr = (uint32_t)buf;
+
+	uint16_t data = 0;
+	uint16_t *p_data = (uint16_t *)(icon->surf->addr);
+	for (int i = 0; i < (icon->surf->width) * (icon->surf->height); i++){
+		p_data[i] = ITH_RGB565(color->red, color->green, color->blue);
+	}
+
+
+
+	return icon;
+}
+
+//建立一个meter
+static ITUMeter* _create_meter(ITURectangle *rect, ITUColor *color, char *name, ITUIcon* icon)
+{
+	ITUMeter* meter = calloc(1, sizeof(ITUMeter));
+	ituMeterInit(meter);
+	((ITUWidget *)meter)->visible = 1;
+	ITUWidget* widget = (ITUWidget*)meter;
+	memmove(&widget->rect, rect, sizeof(ITURectangle));
+	memmove(&widget->color, color, sizeof(ITUColor));
+	strcpy(widget->name, name);
+	widget->alpha = 255;
+	meter->pointerX = 83;
+	meter->pointerY = -59;
+	meter->startAngle = 0;
+	meter->endAngle = 360;
+	meter->maxValue = 100;
+	meter->anifitcount = 1;
+	meter->pointerIcon = icon;
+
+	strcpy(meter->pointerName, "icon_1");
+
+
+
+	return meter;
+}
+//初始化头结点
+static void _test_meter(){
+#define ADD_WIDGET(W,H,X,Y,R,G,B) do{memset(&rect, 0, sizeof(ITURectangle));memset(&color, 0, sizeof(ITUColor));\
+rect.width = W;rect.height = H; rect.x=X;rect.y=Y;color.red=R;color.green=G;color.blue=B;color.alpha=255;}while (0)
+	ITURectangle rect;
+	ITUColor color;
+	
+	ITUBackground* bg1 = NULL;
+	ITULayer *layer1 = NULL;
+	ITUIcon *icon_1 = NULL;
+	ITUMeter *meter_1 = NULL;
+	
+	//建立layer
+	ADD_WIDGET(T_WIDTH, T_HEIGHT, 0, 0, 0, 0, 0);
+	layer1 = _create_layer(&rect, &color, "layer1");
+	theScene.root = (ITUWidget *)layer1;
+
+	//建立back
+	ADD_WIDGET(T_WIDTH, T_HEIGHT, 0, 0, 255, 0, 0);
+	bg1 = _create_background(&rect, &color, "bk_wudan1");
+	itcTreePushFront((ITCTree*)layer1, bg1);
+
+	//建立一个icon
+	ADD_WIDGET(16, 16, 36, 179, 255, 255, 0);
+	icon_1 = _create_icon_color(&rect, &color, "icon_1");
+	//建立一个meter
+	ADD_WIDGET(242, 242, 0, 0, 125, 125, 125);
+	meter_1 = _create_meter(&rect, &color, "meter", icon_1);
+	itcTreePushFront((ITCTree*)meter_1, icon_1);
+	itcTreePushFront((ITCTree*)bg1, meter_1);
+
+	
+	
+
+	return;
+#undef ADD_WIDGET(W,H,X,Y,R,G,B)
+}
+
+
 
 void test_event(){
 	SDL_Event event_ev;
@@ -199,7 +295,7 @@ int main(void)
 	ituSceneInit(&theScene, NULL);
 	screenSurf = ituGetDisplaySurface(); 
 
-	_test_init();
+	_test_meter();
 	LCD_SelectLayer(0);
 	memset((void *)screenSurf->addr, 0, 800*480*2);
 	
@@ -497,7 +593,7 @@ void StartDefaultTask(void const * argument)
 	flag = SDL_StartEventLoop();
 
 	dblclk = frames = lasttick = lastx = lasty = mouseDownTick = 0;
-	
+	bool result = false;
   /* USER CODE BEGIN 5 */
   /* Infinite loop */
 	for(;;)
@@ -521,7 +617,7 @@ void StartDefaultTask(void const * argument)
                     lasty   = ev.tfinger.y;
 				
 				}
-			
+				result = ituSceneUpdate(&theScene, ITU_EVENT_MOUSEDOWN, ev.button.button, ev.button.x, ev.button.y);
 				break;
             case SDL_FINGERUP:
 				printf("touch: up %d, %d\n", ev.tfinger.x, ev.tfinger.y);	

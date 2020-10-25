@@ -412,7 +412,7 @@ rect.width = W;rect.height = H; rect.x=X;rect.y=Y;color.red=R;color.green=G;colo
 	ITULayer *layer1 = NULL;
 	ITUIcon *icon_1 = NULL;
 	ITUMeter *meter_1 = NULL;
-	test_readfile();
+	//test_readfile();
 	//建立layer
 	ADD_WIDGET(T_WIDTH, T_HEIGHT, 0, 0, 0, 0, 0);
 	layer1 = _create_layer(&rect, &color, "layer1");
@@ -427,10 +427,14 @@ rect.width = W;rect.height = H; rect.x=X;rect.y=Y;color.red=R;color.green=G;colo
 	ADD_WIDGET(16, 16, 36, 179, 255, 255, 0);
 	icon_1 = _create_icon_color(&rect, &color, "icon_1");
 	//建立一个meter
-	ADD_WIDGET(242, 242, 0, 0, 255, 0, 0);
+	ADD_WIDGET(242, 242, 0, 0, 125, 125, 125);
 	meter_1 = _create_meter(&rect, &color, "meter", icon_1);
 	itcTreePushFront(meter_1, icon_1);
 	itcTreePushFront(bg1, meter_1);
+
+	
+
+
 
 	
 
