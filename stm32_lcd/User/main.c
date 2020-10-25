@@ -18,6 +18,8 @@
 #include <string.h>
 #include "main.h"
 #include "cmsis_os.h"
+#include "portable.h"
+
 
 #include "./led/bsp_led.h"
 #include "./delay/core_delay.h" 
@@ -54,67 +56,67 @@ static ITUSurface   *screenSurf;
 
 
 
-//static ITUBackground* _create_background(ITURectangle *rect, ITUColor *color, char *name)
-//{
-//	ITUBackground* bg = (ITUBackground* )calloc(1, sizeof(ITUBackground));
-//	ituBackgroundInit(bg);
-//	((ITUWidget *)bg)->visible = 1;
-//	ITUWidget* widget = (ITUWidget*)bg;
-//	widget->effectSteps = 10;
-//	memmove(&widget->rect, rect, sizeof(ITURectangle));
-//	memmove(&widget->color, color, sizeof(ITUColor));
-//	strcpy(widget->name, name);
-//	widget->alpha = 255;
-//	return bg;
-//}
+static ITUBackground* _create_background(ITURectangle *rect, ITUColor *color, char *name)
+{
+	ITUBackground* bg = (ITUBackground* )calloc(1, sizeof(ITUBackground));
+	ituBackgroundInit(bg);
+	((ITUWidget *)bg)->visible = 1;
+	ITUWidget* widget = (ITUWidget*)bg;
+	widget->effectSteps = 10;
+	memmove(&widget->rect, rect, sizeof(ITURectangle));
+	memmove(&widget->color, color, sizeof(ITUColor));
+	strcpy(widget->name, name);
+	widget->alpha = 255;
+	return bg;
+}
 
-//static ITULayer* _create_layer(ITURectangle *rect, ITUColor *color, char *name)
-//{
-//	ITULayer* layer = NULL;
-//	int len = sizeof(ITULayer);
-//	printf("len=%d\n", len);
-//	layer = (ITULayer* )calloc(1, sizeof(ITULayer));
-//	ituLayerInit(layer);
-//	((ITUWidget *)layer)->visible = 1;
-//	ITUWidget* widget = (ITUWidget*)layer;
-//	memmove(&widget->rect, rect, sizeof(ITURectangle));
-//	memmove(&widget->color, color, sizeof(ITUColor));
-//	strcpy(widget->name, name);
-//	widget->alpha = 255;
-//	return layer;
-//}
+static ITULayer* _create_layer(ITURectangle *rect, ITUColor *color, char *name)
+{
+	ITULayer* layer = NULL;
+	int len = sizeof(ITULayer);
+	printf("len=%d\n", len);
+	layer = (ITULayer* )calloc(1, sizeof(ITULayer));
+	ituLayerInit(layer);
+	((ITUWidget *)layer)->visible = 1;
+	ITUWidget* widget = (ITUWidget*)layer;
+	memmove(&widget->rect, rect, sizeof(ITURectangle));
+	memmove(&widget->color, color, sizeof(ITUColor));
+	strcpy(widget->name, name);
+	widget->alpha = 255;
+	return layer;
+}
 
-//static void _test_init()
-//{
-//#define ADD_WIDGET(W,H,X,Y,R,G,B) do{memset(&rect, 0, sizeof(ITURectangle));memset(&color, 0, sizeof(ITUColor));\
-//rect.width = W;rect.height = H; rect.x=X;rect.y=Y;color.red=R;color.green=G;color.blue=B;color.alpha=255;}while (0)
-//	ITUBackground* bg1 = NULL;
-//	ITUBackground* bg2 = NULL;
-//	ITULayer *layer1 = NULL;
-//	ITUButton* btn1 = NULL;
-//	
-//	
-//	ITURectangle rect;
-//	ITUColor color;
-//	//????layer
-//	ADD_WIDGET(T_WIDTH, T_HEIGHT, 0, 0, 0, 0, 0);
-//	layer1 = _create_layer(&rect, &color, "layer1");
-//	theScene.root = (ITUWidget *)layer1;
+static void _test_init()
+{
+#define ADD_WIDGET(W,H,X,Y,R,G,B) do{memset(&rect, 0, sizeof(ITURectangle));memset(&color, 0, sizeof(ITUColor));\
+rect.width = W;rect.height = H; rect.x=X;rect.y=Y;color.red=R;color.green=G;color.blue=B;color.alpha=255;}while (0)
+	ITUBackground* bg1 = NULL;
+	ITUBackground* bg2 = NULL;
+	ITULayer *layer1 = NULL;
+	ITUButton* btn1 = NULL;
+	
+	
+	ITURectangle rect;
+	ITUColor color;
+	//????layer
+	ADD_WIDGET(T_WIDTH, T_HEIGHT, 0, 0, 0, 0, 0);
+	layer1 = _create_layer(&rect, &color, "layer1");
+	theScene.root = (ITUWidget *)layer1;
 
-//	//????back
-//	ADD_WIDGET(50, 50, 0, 0, 0, 0, 255);
-//	bg1 = _create_background(&rect, &color, "bk_wudan1");
-//	itcTreePushFront((ITCTree *)layer1, bg1);
+	//????back
+	ADD_WIDGET(50, 50, 0, 0, 0, 0, 255);
+	bg1 = _create_background(&rect, &color, "bk_wudan1");
+	itcTreePushFront((ITCTree *)layer1, bg1);
 
-//	//????back
-//	ADD_WIDGET(80, 80, 120, 120, 255, 0, 255);
-//	bg2 = _create_background(&rect, &color, "bk_wudan2");
-//	itcTreePushFront((ITCTree *)layer1, bg2);
-//	
-//	return;
+	//????back
+	ADD_WIDGET(80, 80, 120, 120, 255, 0, 255);
+	bg2 = _create_background(&rect, &color, "bk_wudan2");
+	itcTreePushFront((ITCTree *)layer1, bg2);
+	
+	return;
 
-//#undef ADD_WIDGET(W,H,X,Y,R,G,B)
-//}
+#undef ADD_WIDGET(W,H,X,Y,R,G,B)
+}
 
 
 void test_event(){
@@ -192,6 +194,12 @@ int main(void)
 
 	ituLcdInit();
 	ituSWInit();
+	
+	_test_init();
+	void *p_test = NULL;
+	p_test = malloc(10);
+	free(p_test);
+	p_test = calloc(1, 200);
 //	while(1){
 //		LCD_Test();
 //	}
@@ -210,7 +218,7 @@ int main(void)
 
 	while (1)
 	{
-
+		
 	}
 
 }

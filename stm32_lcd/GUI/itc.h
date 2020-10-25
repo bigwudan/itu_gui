@@ -535,6 +535,14 @@ char *itcUrlDecode(char *str);
 */
 uint16_t itcCrc16(const uint8_t* data, uint16_t size);
 
+//freertos
+extern void *pvPortMalloc( size_t xSize );
+extern void vPortFree( void *pv );
+
+#define malloc pvPortMalloc
+#define free vPortFree
+
+extern void *calloc(size_t numitems, size_t size);
 
 #define assert(x) (x)
 /** @} */ // end of itc_crc

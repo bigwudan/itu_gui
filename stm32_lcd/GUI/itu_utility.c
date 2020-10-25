@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+
+
 #include "itu.h"
 #include "itu_cfg.h"
 #include "itu_private.h"
@@ -518,4 +520,16 @@ void* ituMalloc(size_t size)
 void ituFree(void* ptr)
 {
     free(ptr);
+}
+
+void *calloc(size_t numitems, size_t size)
+{
+    size_t *new;
+    size_t s, i;
+    new = malloc(numitems * size);
+    if(new)
+    {
+		memset(new, 0, size);
+    }
+    return new;
 }
