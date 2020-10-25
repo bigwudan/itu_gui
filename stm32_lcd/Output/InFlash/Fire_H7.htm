@@ -3,7 +3,7 @@
 <title>Static Call Graph - [..\..\Output\InFlash\Fire_H7.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image ..\..\Output\InFlash\Fire_H7.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sun Oct 25 18:01:39 2020
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sun Oct 25 18:48:01 2020
 <BR><P>
 <H3>Maximum Stack Usage =       4264 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -19,8 +19,8 @@ Functions with no stack information
 <H3>
 Mutually Recursive functions
 </H3> <LI><a href="#[a6]">ADC3_IRQHandler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[a6]">ADC3_IRQHandler</a><BR>
- <LI><a href="#[245]">ituFindWidgetChildImpl</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[245]">ituFindWidgetChildImpl</a><BR>
  <LI><a href="#[247]">ituFlushActionQueue</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[208]">ituSceneUpdate</a><BR>
+ <LI><a href="#[245]">ituFindWidgetChildImpl</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[245]">ituFindWidgetChildImpl</a><BR>
  <LI><a href="#[241]">ituExecDelayQueue</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[208]">ituSceneUpdate</a><BR>
  <LI><a href="#[23f]">ituDirtyWidgetImpl</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[23f]">ituDirtyWidgetImpl</a><BR>
  <LI><a href="#[181]">FadeEffectFindLoopAlphaFix</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[181]">FadeEffectFindLoopAlphaFix</a><BR>
@@ -949,12 +949,12 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_char_file
 </UL>
-<BR>[Called By]<UL><LI><a href="#[f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituWidgetOnActionImpl
-<LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituIconDraw
-<LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GTP_Init_Panel
+<BR>[Called By]<UL><LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GTP_Init_Panel
 <LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StartDefaultTask
 <LI><a href="#[230]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_create_layer
+<LI><a href="#[f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituWidgetOnActionImpl
+<LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituIconDraw
 <LI><a href="#[18d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GTP_Read_Version
 <LI><a href="#[190]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_Goodix_TS_Work_Func
 <LI><a href="#[188]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GTP_I2C_Write
@@ -1050,15 +1050,15 @@ Global Symbols
 <P><STRONG><a name="[22d]"></a>strcpy</STRONG> (Thumb, 72 bytes, Stack size 12 bytes, strcpy.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = strcpy
 </UL>
-<BR>[Called By]<UL><LI><a href="#[24b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituWidgetInit
+<BR>[Called By]<UL><LI><a href="#[232]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_create_meter
+<LI><a href="#[230]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_create_layer
+<LI><a href="#[22e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_create_icon_color
+<LI><a href="#[22a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_create_background
+<LI><a href="#[24b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituWidgetInit
 <LI><a href="#[f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituWidgetOnActionImpl
 <LI><a href="#[247]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituFlushActionQueue
 <LI><a href="#[1e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituExecActions
 <LI><a href="#[24c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituLayerGoto
-<LI><a href="#[232]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_create_meter
-<LI><a href="#[230]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_create_layer
-<LI><a href="#[22e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_create_icon_color
-<LI><a href="#[22a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_create_background
 </UL>
 
 <P><STRONG><a name="[13b]"></a>__aeabi_memcpy</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_memcpy_v6.o(.text))
@@ -1091,12 +1091,12 @@ Global Symbols
 <P><STRONG><a name="[139]"></a>__aeabi_memcpy4</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, rt_memcpy_w.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = __aeabi_memcpy4
 </UL>
-<BR>[Called By]<UL><LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituWidgetCloneImpl
+<BR>[Called By]<UL><LI><a href="#[19c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_LTDC_ConfigLayer
+<LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituWidgetCloneImpl
 <LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SWFlipSync
 <LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituLayerClone
 <LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituIconClone
-<LI><a href="#[19c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_LTDC_ConfigLayer
-<LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[1f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SDL_PeepEvents
 <LI><a href="#[1f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SDL_CutEvent
 <LI><a href="#[1ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SDL_AddEvent
@@ -1145,14 +1145,7 @@ Global Symbols
 <P><STRONG><a name="[14a]"></a>__aeabi_memclr4</STRONG> (Thumb, 0 bytes, Stack size 4 bytes, rt_memclr_w.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = __aeabi_memclr4
 </UL>
-<BR>[Called By]<UL><LI><a href="#[24b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituWidgetInit
-<LI><a href="#[25a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituScrollFadeEffectInit
-<LI><a href="#[259]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituScrollEffectInit
-<LI><a href="#[257]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituScaleFadeEffectInit
-<LI><a href="#[255]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituScaleEffectInit
-<LI><a href="#[244]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituFadeEffectInit
-<LI><a href="#[240]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituEffectInit
-<LI><a href="#[258]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituSceneInit
+<BR>[Called By]<UL><LI><a href="#[258]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituSceneInit
 <LI><a href="#[233]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituMeterInit
 <LI><a href="#[252]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituLcdInit
 <LI><a href="#[231]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituLayerInit
@@ -1160,6 +1153,13 @@ Global Symbols
 <LI><a href="#[22b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituBackgroundInit
 <LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calloc
 <LI><a href="#[20c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
+<LI><a href="#[24b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituWidgetInit
+<LI><a href="#[25a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituScrollFadeEffectInit
+<LI><a href="#[259]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituScrollEffectInit
+<LI><a href="#[257]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituScaleFadeEffectInit
+<LI><a href="#[255]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituScaleEffectInit
+<LI><a href="#[244]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituFadeEffectInit
+<LI><a href="#[240]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituEffectInit
 <LI><a href="#[190]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_Goodix_TS_Work_Func
 <LI><a href="#[25d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituWipeEffectInit
 <LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_initio
@@ -1705,8 +1705,8 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[17f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriority
 <LI><a href="#[17d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_Init
 <LI><a href="#[180]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_EnableIRQ
-<LI><a href="#[17c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCCEx_PeriphCLKConfig
 <LI><a href="#[17e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Init
+<LI><a href="#[17c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCCEx_PeriphCLKConfig
 </UL>
 <BR>[Called By]<UL><LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -1863,12 +1863,12 @@ Global Symbols
 <LI><a href="#[1a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_ClockConfig
 <LI><a href="#[1a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_PWREx_ConfigSupply
 <LI><a href="#[193]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA2D_PollForTransfer
-<LI><a href="#[17c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCCEx_PeriphCLKConfig
-<LI><a href="#[1a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCCEx_PLL3_Config
-<LI><a href="#[1a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCCEx_PLL2_Config
 <LI><a href="#[1c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_WaitOnFlagUntilTimeout
 <LI><a href="#[1c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_CheckIdleState
 <LI><a href="#[1c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Transmit
+<LI><a href="#[17c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCCEx_PeriphCLKConfig
+<LI><a href="#[1a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCCEx_PLL3_Config
+<LI><a href="#[1a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCCEx_PLL2_Config
 </UL>
 
 <P><STRONG><a name="[197]"></a>HAL_InitTick</STRONG> (Thumb, 146 bytes, Stack size 56 bytes, core_delay.o(i.HAL_InitTick))
@@ -2034,8 +2034,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetHCLKFreq
 </UL>
-<BR>[Called By]<UL><LI><a href="#[197]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
-<LI><a href="#[1c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SetConfig
+<BR>[Called By]<UL><LI><a href="#[1c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SetConfig
+<LI><a href="#[197]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
 </UL>
 
 <P><STRONG><a name="[173]"></a>HAL_RCC_GetSysClockFreq</STRONG> (Thumb, 524 bytes, Stack size 20 bytes, stm32h7xx_hal_rcc.o(i.HAL_RCC_GetSysClockFreq))
@@ -2104,8 +2104,8 @@ Global Symbols
 <P><STRONG><a name="[19a]"></a>HAL_TIM_Base_Init</STRONG> (Thumb, 52 bytes, Stack size 8 bytes, stm32h7xx_hal_tim.o(i.HAL_TIM_Base_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = HAL_TIM_Base_Init &rArr; TIM_Base_SetConfig
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Base_SetConfig
-<LI><a href="#[1b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_MspInit
+<BR>[Calls]<UL><LI><a href="#[1b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_MspInit
+<LI><a href="#[1b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Base_SetConfig
 </UL>
 <BR>[Called By]<UL><LI><a href="#[197]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
 </UL>
@@ -2171,8 +2171,8 @@ Global Symbols
 <P><STRONG><a name="[1c4]"></a>HAL_UART_Transmit</STRONG> (Thumb, 212 bytes, Stack size 40 bytes, stm32h7xx_hal_uart.o(i.HAL_UART_Transmit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = HAL_UART_Transmit &rArr; UART_WaitOnFlagUntilTimeout
 </UL>
-<BR>[Calls]<UL><LI><a href="#[194]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
-<LI><a href="#[1c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_WaitOnFlagUntilTimeout
+<BR>[Calls]<UL><LI><a href="#[1c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_WaitOnFlagUntilTimeout
+<LI><a href="#[194]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
 </UL>
 <BR>[Called By]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fputc
 </UL>
@@ -2524,8 +2524,8 @@ Global Symbols
 <P><STRONG><a name="[1c3]"></a>UART_CheckIdleState</STRONG> (Thumb, 116 bytes, Stack size 16 bytes, stm32h7xx_hal_uart.o(i.UART_CheckIdleState))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = UART_CheckIdleState &rArr; UART_WaitOnFlagUntilTimeout
 </UL>
-<BR>[Calls]<UL><LI><a href="#[194]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
-<LI><a href="#[1c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_WaitOnFlagUntilTimeout
+<BR>[Calls]<UL><LI><a href="#[1c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_WaitOnFlagUntilTimeout
+<LI><a href="#[194]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
 </UL>
 <BR>[Called By]<UL><LI><a href="#[17e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Init
 </UL>
@@ -2761,11 +2761,11 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[236]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pvPortMalloc
 <LI><a href="#[14a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SWCreateSurface
-<LI><a href="#[232]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_create_meter
+<BR>[Called By]<UL><LI><a href="#[232]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_create_meter
 <LI><a href="#[230]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_create_layer
 <LI><a href="#[22e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_create_icon_color
 <LI><a href="#[22a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_create_background
+<LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SWCreateSurface
 <LI><a href="#[1f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SDL_EventState
 </UL>
 
@@ -2872,7 +2872,13 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[183]"></a>ituAssertThread</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, itu_utility.o(i.ituAssertThread))
-<BR><BR>[Called By]<UL><LI><a href="#[243]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituSceneFindWidget
+<BR><BR>[Called By]<UL><LI><a href="#[208]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituSceneUpdate
+<LI><a href="#[209]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituSceneDraw
+<LI><a href="#[233]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituMeterInit
+<LI><a href="#[231]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituLayerInit
+<LI><a href="#[22f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituIconInit
+<LI><a href="#[22b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituBackgroundInit
+<LI><a href="#[243]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituSceneFindWidget
 <LI><a href="#[25a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituScrollFadeEffectInit
 <LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ScrollFadeEffectStop
 <LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ScrollFadeEffectStart
@@ -2898,12 +2904,6 @@ Global Symbols
 <LI><a href="#[244]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituFadeEffectInit
 <LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FadeEffectStop
 <LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FadeEffectStart
-<LI><a href="#[208]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituSceneUpdate
-<LI><a href="#[209]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituSceneDraw
-<LI><a href="#[233]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituMeterInit
-<LI><a href="#[231]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituLayerInit
-<LI><a href="#[22f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituIconInit
-<LI><a href="#[22b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituBackgroundInit
 <LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituWipeEffectStop
 <LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituWipeEffectStart
 <LI><a href="#[25d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituWipeEffectInit
@@ -2929,9 +2929,9 @@ Global Symbols
 <P><STRONG><a name="[22b]"></a>ituBackgroundInit</STRONG> (Thumb, 50 bytes, Stack size 8 bytes, itu_background.o(i.ituBackgroundInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = ituBackgroundInit &rArr; ituIconInit &rArr; ituWidgetSetNameImpl &rArr; strncpy
 </UL>
-<BR>[Calls]<UL><LI><a href="#[23e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituWidgetSetNameImpl
+<BR>[Calls]<UL><LI><a href="#[22f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituIconInit
+<LI><a href="#[23e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituWidgetSetNameImpl
 <LI><a href="#[183]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituAssertThread
-<LI><a href="#[22f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituIconInit
 <LI><a href="#[14a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
 <BR>[Called By]<UL><LI><a href="#[233]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituMeterInit
@@ -3009,9 +3009,9 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 128 + In Cycle
 <LI>Call Chain = ituExecDelayQueue &rArr;  ituSceneUpdate (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[243]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituSceneFindWidget
+<BR>[Calls]<UL><LI><a href="#[208]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituSceneUpdate
+<LI><a href="#[243]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituSceneFindWidget
 <LI><a href="#[242]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituSceneFindFunction
-<LI><a href="#[208]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituSceneUpdate
 <LI><a href="#[133]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atoi
 <LI><a href="#[127]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_ctype_table
 </UL>
@@ -3043,9 +3043,9 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 144 + In Cycle
 <LI>Call Chain = ituFlushActionQueue &rArr;  ituSceneUpdate (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[243]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituSceneFindWidget
+<BR>[Calls]<UL><LI><a href="#[208]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituSceneUpdate
+<LI><a href="#[243]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituSceneFindWidget
 <LI><a href="#[242]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituSceneFindFunction
-<LI><a href="#[208]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituSceneUpdate
 <LI><a href="#[22d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strcpy
 <LI><a href="#[133]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atoi
 <LI><a href="#[127]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_ctype_table
@@ -3230,9 +3230,9 @@ Global Symbols
 <P><STRONG><a name="[233]"></a>ituMeterInit</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, itu_meter.o(i.ituMeterInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = ituMeterInit &rArr; ituBackgroundInit &rArr; ituIconInit &rArr; ituWidgetSetNameImpl &rArr; strncpy
 </UL>
-<BR>[Calls]<UL><LI><a href="#[23e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituWidgetSetNameImpl
+<BR>[Calls]<UL><LI><a href="#[22b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituBackgroundInit
+<LI><a href="#[23e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituWidgetSetNameImpl
 <LI><a href="#[183]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituAssertThread
-<LI><a href="#[22b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituBackgroundInit
 <LI><a href="#[14a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
 <BR>[Called By]<UL><LI><a href="#[232]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_create_meter
@@ -3375,9 +3375,9 @@ Global Symbols
 <LI><a href="#[247]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituFlushActionQueue
 <LI><a href="#[241]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituExecDelayQueue
 </UL>
-<BR>[Called By]<UL><LI><a href="#[247]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituFlushActionQueue
+<BR>[Called By]<UL><LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StartDefaultTask
+<LI><a href="#[247]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituFlushActionQueue
 <LI><a href="#[241]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituExecDelayQueue
-<LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StartDefaultTask
 </UL>
 
 <P><STRONG><a name="[259]"></a>ituScrollEffectInit</STRONG> (Thumb, 42 bytes, Stack size 16 bytes, itu_scrolleffect.o(i.ituScrollEffectInit))
@@ -3718,11 +3718,11 @@ Global Symbols
 <LI><a href="#[279]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvInsertBlockIntoFreeList
 <LI><a href="#[278]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvHeapInit
 </UL>
-<BR>[Called By]<UL><LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituWidgetCloneImpl
+<BR>[Called By]<UL><LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calloc
+<LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituWidgetCloneImpl
 <LI><a href="#[1e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituWidgetSetVisibleImpl
 <LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituLayerClone
 <LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituIconClone
-<LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calloc
 <LI><a href="#[268]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskCreate
 </UL>
 
@@ -4494,16 +4494,16 @@ Local Symbols
 <P><STRONG><a name="[d7]"></a>SWCreateSurface</STRONG> (Thumb, 192 bytes, Stack size 40 bytes, itu_sw.o(i.SWCreateSurface))
 <BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = SWCreateSurface &rArr; calloc &rArr; pvPortMalloc &rArr; xTaskResumeAll &rArr; xTaskIncrementTick
 </UL>
-<BR>[Calls]<UL><LI><a href="#[203]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituFormat2Bpp
+<BR>[Calls]<UL><LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calloc
+<LI><a href="#[203]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ituFormat2Bpp
 <LI><a href="#[1fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vPortFree
-<LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calloc
 <LI><a href="#[13b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
 <BR>[Called By]<UL><LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SWRotate
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> itu_sw.o(i.ituSWInit)
 </UL>
-<P><STRONG><a name="[d8]"></a>SWDestroySurface</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, itu_sw.o(i.SWDestroySurface))
+<P><STRONG><a name="[d8]"></a>SWDestroySurface</STRONG> (Thumb, 28 bytes, Stack size 8 bytes, itu_sw.o(i.SWDestroySurface))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = SWDestroySurface &rArr; vPortFree &rArr; xTaskResumeAll &rArr; xTaskIncrementTick
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vPortFree

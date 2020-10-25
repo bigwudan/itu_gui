@@ -111,6 +111,7 @@ static void SWDestroySurface(ITUSurface *surf)
         if (!(surf->flags & ITU_STATIC))
 #endif
       //  itpVmemFree(surf->addr);
+		free((void *)surf->addr);
         free(surf);
     }
 }
